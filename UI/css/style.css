@@ -105,7 +105,7 @@ main h1 {
 }
 
 .buy-car {
-    height: 250px;
+    height: 300px;
     margin: 0 auto;
     padding-top: 1em;
     background: #d8ced5;
@@ -117,7 +117,6 @@ main h1 {
     text-align: center;
     text-transform: capitalize;
     font-size: 2em;
-    padding: 0.3em;
     margin: 0;
 }
 
@@ -127,7 +126,7 @@ main h1 {
 }
 
 .sell-car {
-    height: 250px;
+    height: 300px;
     margin: 0 auto;
     padding-top: 1em;
     background: #caa9c0;
@@ -139,7 +138,6 @@ main h1 {
     text-align: center;
     text-transform: capitalize;
     font-size: 2em;
-    padding: 0.3em;
     margin: 0;
 }
 
@@ -194,6 +192,22 @@ main h1 {
 }
 
 @media screen and (min-width: 700px) {
+    .buy-car {
+        height: 200px;
+        margin: 0 auto;
+        padding-top: 1em;
+        background: #d8ced5;
+        border-radius: 5px;
+        padding: 0em 0.5em 1.5em 0.5em;
+    }
+    .sell-car {
+        height: 200px;
+        margin: 0 auto;
+        padding-top: 1em;
+        background: #caa9c0;
+        border-radius: 5px;
+        padding: 0em 0.5em 1.5em 0.5em;
+    }
     .testimonial {
         display: flex;
         flex-direction: row;
