@@ -42,6 +42,10 @@ body {
     padding-right: 0.5em;
 }
 
+.nav a:hover {
+    background-color: rgb(14, 2, 2);
+}
+
 li {
     list-style: none;
     text-transform: capitalize;
