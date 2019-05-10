@@ -85,6 +85,10 @@ main h1 {
     margin: 0 auto;
 }
 
+.column img {
+    width: 100%;
+}
+
 .price {
     margin: 0 auto;
     font-size: 1.3em;
