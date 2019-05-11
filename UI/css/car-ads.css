@@ -126,10 +126,29 @@ main h1 {
     background: #8a1162;
 }
 
+#filterContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Filter {
+    padding: 0.5em;
+    margin: 0 auto;
+    background: rgb(245, 224, 236);
+    margin-left: 1em;
+    font-size: 1em;
+    align-content: center;
+    margin-top: 0.5em;
+}
+
+option {
+    background: rgb(219, 142, 187)
+}
+
 .menu-container {
     display: flex;
     flex-direction: column;
-    margin: 1.5em;
+    margin: 1em;
 }
 
 .menu-items {
