@@ -110,7 +110,7 @@ main h1 {
 
 .search-button input[type="text"] {
     padding: 1em;
-    margin-right: 0.5em;
+    margin-right: 0.3em;
     margin-left: 0;
 }
 
@@ -200,11 +200,10 @@ input::-webkit-input-placeholder {
     margin: 0em auto;
     background: rgb(219, 142, 187);
     color: #000;
-    font-size: 1.2em;
+    font-size: 1.4em;
     font-weight: bold;
     border-radius: 5px;
-    padding: 5px;
-    width: 100%;
+    padding: 10px;
 }
 
 .menu-button button:hover {
@@ -249,9 +248,7 @@ input::-webkit-input-placeholder {
         background: rgb(219, 142, 187);
         color: #000;
         padding: 10px;
-        border-radius: 10px;
-        width: 100%;
         font-weight: bold;
-        font-size: 1.3em
+        font-size: 1.4em
     }
 }
