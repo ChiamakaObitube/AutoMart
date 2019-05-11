@@ -102,6 +102,30 @@ main h1 {
     text-align: center;
 }
 
+.search-button {
+    display: flex;
+    justify-content: center;
+    margin: 0.5em 0;
+}
+
+.search-button input[type="text"] {
+    padding: 1em;
+    margin-right: 0.5em;
+    margin-left: 0;
+}
+
+.search-button button {
+    background: rgb(219, 142, 187);
+    color: #000;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 1.3em
+}
+
+.search-button button:hover {
+    background: #8a1162;
+}
+
 .menu-container {
     display: flex;
     flex-direction: column;
@@ -168,7 +192,7 @@ input[type="number"] {
 
 input::-webkit-input-placeholder {
     color: #c1c1c1;
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 
 .menu-button button {
