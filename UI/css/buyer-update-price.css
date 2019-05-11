@@ -118,7 +118,11 @@ main h1 {
     margin-bottom: 1.5em;
 }
 
-.car-name {
+#car-name {
+    background: #ccc
+}
+
+.car-details {
     flex-wrap: nowrap;
     font-size: 1.3em;
     font-weight: bold;
@@ -126,9 +130,13 @@ main h1 {
     background: #fff;
     text-transform: capitalize;
     padding-bottom: 5px;
-    border-radius: 5%;
+    width: 100%;
     text-align: center;
-    margin: 0 auto;
+}
+
+input::-webkit-input-placeholder {
+    color: #c1c1c1;
+    font-size: 1.2em;
 }
 
 .column img {
@@ -146,6 +154,16 @@ main h1 {
     color: #110c0c;
     font-weight: bold;
     text-align: center;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .menu-button button {
@@ -206,5 +224,14 @@ main h1 {
         width: 100%;
         font-weight: bold;
         font-size: 1.3em
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
     }
 }
