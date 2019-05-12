@@ -75,7 +75,7 @@ main {
     flex-direction: column;
     background: rgb(245, 224, 236);
     width: 80%;
-    height: 90%;
+    height: 100%;
     margin: 0 auto;
     margin-top: 2em;
     padding: 0em 1em 1em 1em;
@@ -109,7 +109,7 @@ main {
     flex-direction: column;
     background: rgb(245, 224, 236);
     width: 80%;
-    height: 50vh;
+    height: 100%;
     margin: 0 auto;
     margin-top: 5em;
     padding: 0em 1em 1em 1em;
@@ -182,8 +182,6 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #f07ec4;
 }
-
-input[type=submit] a {}
 
 .footer-main {
     margin: 0;
