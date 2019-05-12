@@ -183,6 +183,8 @@ input[type=submit]:hover {
     background-color: #f07ec4;
 }
 
+input[type=submit] a {}
+
 .footer-main {
     margin: 0;
 }
