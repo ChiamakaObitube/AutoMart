@@ -54,7 +54,7 @@ li {
 
 main {
     flex: 1;
-    background: url('/UI/images/black-car-car-fancy-104401.jpg');
+    background: url('images/black-car-car-fancy-104401.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -109,7 +109,7 @@ main {
     flex-direction: column;
     background: rgb(245, 224, 236);
     width: 80%;
-    height: 100vh;
+    height: 50vh;
     margin: 0 auto;
     margin-top: 5em;
     padding: 0em 1em 1em 1em;
