@@ -233,6 +233,7 @@ input::-webkit-input-placeholder {
 .footer-main {
     margin: 0;
     background: #8a1162;
+    display: flex;
 }
 
 .footer-main p {
@@ -271,5 +272,10 @@ input::-webkit-input-placeholder {
         padding: 10px;
         font-weight: bold;
         font-size: 1.4em
+    }
+    li {
+        list-style: none;
+        text-transform: capitalize;
+        font-size: 2em;
     }
 }

@@ -23,7 +23,7 @@ body {
 
 .nav #logo {
     float: left;
-    font-size: 1.8em;
+    font-size: 2em;
 }
 
 .navbar a {
@@ -76,6 +76,11 @@ svg {
 
 .side-nav a:hover {
     color: #fff;
+}
+
+.side-nav a:hover {
+    color: #fff;
+    background: rgb(119, 22, 95);
 }
 
 .side-nav .btn-close {
@@ -233,5 +238,10 @@ input[type="number"] {
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+    }
+    li {
+        list-style: none;
+        text-transform: capitalize;
+        font-size: 2em;
     }
 }

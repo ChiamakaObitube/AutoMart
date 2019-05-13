@@ -179,6 +179,7 @@ input[type=submit]:hover {
 .footer-main {
     margin: 0;
     background: #8a1162;
+    display: flex;
 }
 
 .footer-main p {
@@ -186,6 +187,7 @@ input[type=submit]:hover {
     color: white;
     text-align: center;
     padding: 1em;
+    font-size: 1.4em
 }
 
 @media(max-width: 568px) {
@@ -211,5 +213,10 @@ input[type=submit]:hover {
         margin-top: 2em;
         padding: 1em 1em 1em 1em;
         border-radius: 10px;
+    }
+    li {
+        list-style: none;
+        text-transform: capitalize;
+        font-size: 2em;
     }
 }

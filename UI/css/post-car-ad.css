@@ -80,6 +80,7 @@ svg {
 
 .side-nav a:hover {
     color: #fff;
+    background: rgb(119, 22, 95);
 }
 
 .side-nav .btn-close {
@@ -183,6 +184,7 @@ input[type=submit]:hover {
 .footer-main {
     margin: 0;
     background: #8a1162;
+    display: flex;
 }
 
 .footer-main p {
