@@ -131,9 +131,7 @@ main h1 {
 .footer-main p {
     margin: 0 auto;
     color: white;
-    text-align: center;
     padding: 1em;
-    font-size: 1em;
 }
 
 @media(min-width: 600px) {
