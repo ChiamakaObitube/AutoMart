@@ -180,8 +180,8 @@ main h1 {
 
 .footer-main {
     margin: 0;
+    background: #8a1162;
     display: flex;
-    padding: 0
 }
 
 .footer-main p {
