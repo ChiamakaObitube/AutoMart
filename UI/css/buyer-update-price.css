@@ -1,5 +1,5 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin: 0 !important;
 }
@@ -23,7 +23,7 @@ body {
 
 .nav #logo {
     float: left;
-    font-size: 1.8em;
+    font-size: 2em;
 }
 
 .navbar a {
@@ -76,6 +76,11 @@ svg {
 
 .side-nav a:hover {
     color: #fff;
+}
+
+.side-nav a:hover {
+    color: #fff;
+    background: rgb(119, 22, 95);
 }
 
 .side-nav .btn-close {
@@ -190,7 +195,6 @@ input[type="number"] {
 .footer-main p {
     margin: 0 auto;
     color: white;
-    text-align: center;
     padding: 1em;
 }
 
@@ -233,5 +237,19 @@ input[type="number"] {
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
+    }
+    li {
+        list-style: none;
+        text-transform: capitalize;
+        font-size: 1.5em;
+    }
+    .menu {
+        border: 1px solid #434348;
+        background: rgb(226, 127, 193);
+        margin: 0.2em;
+        padding-left: 0.5em;
+        padding-top: 0.2em;
+        border-radius: 5px;
+        ;
     }
 }

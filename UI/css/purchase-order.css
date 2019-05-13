@@ -1,5 +1,6 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana;
+    font-family: 'Open Sans', sans-serif;
+    ;
     font-weight: 300;
     margin: 0 !important;
 }
@@ -178,13 +179,14 @@ input[type=submit]:hover {
 .footer-main {
     margin: 0;
     background: #8a1162;
+    display: flex;
 }
 
 .footer-main p {
     margin: 0 auto;
     color: white;
-    text-align: center;
     padding: 1em;
+    font-size: 1em
 }
 
 @media(max-width: 568px) {
@@ -210,5 +212,19 @@ input[type=submit]:hover {
         margin-top: 2em;
         padding: 1em 1em 1em 1em;
         border-radius: 10px;
+    }
+    li {
+        list-style: none;
+        text-transform: capitalize;
+        font-size: 1.5em;
+    }
+    .menu {
+        border: 1px solid #434348;
+        background: rgb(226, 127, 193);
+        margin: 0.2em;
+        padding-left: 0.5em;
+        padding-top: 0.2em;
+        border-radius: 5px;
+        ;
     }
 }

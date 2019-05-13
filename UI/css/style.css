@@ -1,5 +1,5 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin: 0 !important;
 }
@@ -31,25 +31,26 @@ body {
 
 .nav #logo {
     float: left;
-    font-size: 1.8em;
+    font-size: 2em;
 }
 
 .nav a {
     text-decoration: none;
     color: #fff;
     margin-right: 10px;
-    font-size: 90%;
-    padding-right: 0.5em;
+    font-size: 80%;
 }
 
 li {
     list-style: none;
     text-transform: capitalize;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 main {
     background: #e9e0e8;
+    flex: 1;
+    height: 80vh
 }
 
 main h1 {
@@ -105,12 +106,10 @@ main h1 {
 }
 
 .buy-car {
-    height: 300px;
     margin: 0 auto;
     padding-top: 1em;
-    background: #d8ced5;
     border-radius: 5px;
-    padding: 0em 0.5em 1.5em 0.5em;
+    margin-bottom: 1em;
 }
 
 .buy-car h2 {
@@ -121,7 +120,7 @@ main h1 {
 }
 
 .buycar span {
-    font-size: 1em;
+    font-size: 1.4em;
     font-weight: bold;
 }
 
@@ -166,8 +165,7 @@ main h1 {
     background: white;
     padding: 10px;
     margin: 0 auto;
-    margin-top: 2em;
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
 }
 
 .testimony-items img {
@@ -182,13 +180,15 @@ main h1 {
 
 .footer-main {
     margin: 0;
+    background: #8a1162;
+    display: flex;
 }
 
 .footer-main p {
     margin: 0 auto;
     color: white;
-    text-align: center;
     padding: 1em;
+    font-size: 1em;
 }
 
 @media screen and (min-width: 700px) {
@@ -213,5 +213,15 @@ main h1 {
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-around;
+    }
+    #slider img {
+        height: 650px;
+        width: 300px
+    }
+    .nav a {
+        text-decoration: none;
+        color: #fff;
+        margin-right: 2em;
+        font-size: 80%;
     }
 }

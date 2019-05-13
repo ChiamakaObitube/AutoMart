@@ -1,5 +1,5 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 300;
     margin: 0 !important;
 }
@@ -131,7 +131,6 @@ main h1 {
 .footer-main p {
     margin: 0 auto;
     color: white;
-    text-align: center;
     padding: 1em;
 }
 
