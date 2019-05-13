@@ -32,16 +32,13 @@ body {
 
 .nav #logo {
     float: left;
-    font-size: 2em;
     margin: 0 auto;
 }
 
 .nav a {
     text-decoration: none;
     color: #fff;
-    margin: 0 auto;
     font-size: 90%;
-    padding-right: 0.5em;
 }
 
 .nav a:hover {
@@ -51,7 +48,7 @@ body {
 li {
     list-style: none;
     text-transform: capitalize;
-    font-size: 1.3em;
+    font-size: 1.7em;
     margin-right: 10px;
 }
 
@@ -220,5 +217,8 @@ input[type=submit]:hover {
         margin-top: 6em;
         padding: 1em 1em 1em 1em;
         border-radius: 10px;
+    }
+    nav a {
+        margin-right: 2em;
     }
 }

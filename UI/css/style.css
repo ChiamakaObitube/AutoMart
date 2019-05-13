@@ -218,4 +218,10 @@ main h1 {
         height: 650px;
         width: 300px
     }
+    .nav a {
+        text-decoration: none;
+        color: #fff;
+        margin-right: 2em;
+        font-size: 80%;
+    }
 }
