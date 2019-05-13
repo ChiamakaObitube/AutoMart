@@ -49,7 +49,8 @@ li {
 
 main {
     background: #e9e0e8;
-    flex: 1
+    flex: 1;
+    height: 80vh
 }
 
 main h1 {
@@ -165,8 +166,7 @@ main h1 {
     background: white;
     padding: 10px;
     margin: 0 auto;
-    margin-top: 2em;
-    margin-bottom: 1.5em;
+    margin-bottom: 1em;
 }
 
 .testimony-items img {
@@ -188,7 +188,7 @@ main h1 {
     margin: 0 auto;
     color: white;
     text-align: center;
-    padding: 1em;
+    padding: 0.7em;
     font-size: 1.4em;
 }
 
