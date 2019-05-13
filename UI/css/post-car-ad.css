@@ -41,6 +41,10 @@ body {
     padding: 0.5em;
 }
 
+.navbar a:active {
+    background: #434348;
+}
+
 li {
     list-style: none;
     text-transform: capitalize;
@@ -159,7 +163,7 @@ label {
 input[type=submit] {
     width: 100%;
     background-color: rgb(121, 25, 89);
-    color: black;
+    color: #fff;
     padding: 0.5em;
     margin: 0 auto;
     border: none;
@@ -186,6 +190,7 @@ input[type=submit]:hover {
     color: white;
     text-align: center;
     padding: 1em;
+    font-size: 1.3em;
 }
 
 @media(max-width: 650px) {
