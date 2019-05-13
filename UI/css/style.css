@@ -181,6 +181,7 @@ main h1 {
 .footer-main {
     margin: 0;
     display: flex;
+    padding: 0
 }
 
 .footer-main p {
@@ -188,7 +189,7 @@ main h1 {
     color: white;
     text-align: center;
     padding: 0.5em;
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 
 @media screen and (min-width: 700px) {
