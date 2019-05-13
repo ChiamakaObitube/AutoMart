@@ -33,12 +33,13 @@ body {
 .nav #logo {
     float: left;
     font-size: 2em;
+    margin: 0 auto;
 }
 
 .nav a {
     text-decoration: none;
     color: #fff;
-    margin-right: 10px;
+    margin: 0 auto;
     font-size: 90%;
     padding-right: 0.5em;
 }
@@ -51,6 +52,7 @@ li {
     list-style: none;
     text-transform: capitalize;
     font-size: 1.3em;
+    margin-right: 10px;
 }
 
 main {
@@ -85,7 +87,7 @@ main {
 
 .signup-container p {
     margin: 0 auto;
-    padding: 0.3em 1em 0.3em 1em;
+    padding: 0.3em 0 0.3em 0;
     font-size: 1em;
 }
 
@@ -125,7 +127,7 @@ main {
 
 .signin-container p {
     margin: 0 auto;
-    padding: 1em;
+    padding-bottom: 0.5em;
 }
 
 .signin-container p a {
@@ -185,6 +187,7 @@ input[type=submit]:hover {
 
 .footer-main {
     margin: 0;
+    display: flex;
 }
 
 .footer-main p {

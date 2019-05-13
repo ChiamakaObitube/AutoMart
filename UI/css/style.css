@@ -215,7 +215,8 @@ main h1 {
         flex-wrap: nowrap;
         justify-content: space-around;
     }
-    #slider {
-        height: 100%;
+    #slider img {
+        height: 650px;
+        width: 300px
     }
 }
