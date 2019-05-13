@@ -50,7 +50,7 @@ body {
 li {
     list-style: none;
     text-transform: capitalize;
-    font-size: 1.5em;
+    font-size: 1.3em;
 }
 
 main {
@@ -185,7 +185,6 @@ input[type=submit]:hover {
 
 .footer-main {
     margin: 0;
-    display: flex;
 }
 
 .footer-main p {
@@ -193,7 +192,7 @@ input[type=submit]:hover {
     color: white;
     text-align: center;
     padding: 1em;
-    font-size: 1.3em;
+    font-size: 1.2em;
 }
 
 @media screen and (min-width: 500px) {

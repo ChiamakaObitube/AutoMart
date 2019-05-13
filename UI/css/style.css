@@ -31,7 +31,7 @@ body {
 
 .nav #logo {
     float: left;
-    font-size: 1.8em;
+    font-size: 2em;
 }
 
 .nav a {
@@ -45,7 +45,7 @@ body {
 li {
     list-style: none;
     text-transform: capitalize;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 main {
@@ -121,7 +121,7 @@ main h1 {
 }
 
 .buycar span {
-    font-size: 1em;
+    font-size: 1.4em;
     font-weight: bold;
 }
 
@@ -189,6 +189,7 @@ main h1 {
     color: white;
     text-align: center;
     padding: 1em;
+    font-size: 1.4em;
 }
 
 @media screen and (min-width: 700px) {
@@ -213,5 +214,8 @@ main h1 {
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-around;
+    }
+    #slider {
+        height: 100%;
     }
 }
