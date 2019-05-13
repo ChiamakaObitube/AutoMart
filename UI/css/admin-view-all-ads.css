@@ -132,7 +132,7 @@ main h1 {
     margin: 0 auto;
     color: white;
     text-align: center;
-    padding: 1em;
+    padding: 0.5em;
 }
 
 @media(min-width: 600px) {

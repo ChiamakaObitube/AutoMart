@@ -186,7 +186,7 @@ input[type=submit]:hover {
     margin: 0 auto;
     color: white;
     text-align: center;
-    padding: 1em;
+    padding: 0.5em;
     font-size: 1.4em
 }
 
