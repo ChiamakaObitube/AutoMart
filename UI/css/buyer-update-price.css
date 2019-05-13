@@ -241,6 +241,15 @@ input[type="number"] {
     li {
         list-style: none;
         text-transform: capitalize;
-        font-size: 2em;
+        font-size: 1.5em;
+    }
+    .menu {
+        border: 1px solid #434348;
+        background: rgb(226, 127, 193);
+        margin: 0.2em;
+        padding-left: 0.5em;
+        padding-top: 0.2em;
+        border-radius: 5px;
+        ;
     }
 }

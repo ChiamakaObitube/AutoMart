@@ -275,6 +275,14 @@ input::-webkit-input-placeholder {
     li {
         list-style: none;
         text-transform: capitalize;
-        font-size: 2em;
+        font-size: 1.7em;
+    }
+    .menu {
+        border: 1px solid #434348;
+        background: rgb(226, 127, 193);
+        margin-left: 0.2em;
+        padding-left: 0.5em;
+        border-radius: 5px;
+        ;
     }
 }
