@@ -49,6 +49,7 @@ li {
 
 main {
     background: #e9e0e8;
+    flex: 1
 }
 
 main h1 {
@@ -107,9 +108,8 @@ main h1 {
     height: 300px;
     margin: 0 auto;
     padding-top: 1em;
-    background: #d8ced5;
     border-radius: 5px;
-    padding: 0em 0.5em 1.5em 0.5em;
+    margin-bottom: 1em;
 }
 
 .buy-car h2 {
@@ -181,6 +181,7 @@ main h1 {
 
 .footer-main {
     margin: 0;
+    display: flex;
 }
 
 .footer-main p {
