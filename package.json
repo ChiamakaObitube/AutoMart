@@ -1,0 +1,38 @@
+{
+    "name": "auto-mart",
+    "version": "1.0.0",
+    "description": "an online marketplace for cars",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon --exec babel-node server/index"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ChiamakaObitube/Auto-Mart.git"
+    },
+    "keywords": [
+        "cars"
+    ],
+    "author": "Chiamaka Obitube",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ChiamakaObitube/Auto-Mart/issues"
+    },
+    "homepage": "https://github.com/ChiamakaObitube/Auto-Mart#readme",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "express": "^4.16.4"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.4.4",
+        "@babel/core": "^7.4.4",
+        "@babel/node": "^7.2.2",
+        "@babel/preset-env": "^7.4.4",
+        "@babel/register": "^7.4.4",
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.17.2",
+        "nodemon": "^1.19.0"
+    }
+}
