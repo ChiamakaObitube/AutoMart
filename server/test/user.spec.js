@@ -24,7 +24,23 @@ describe('POST auth/signup', () => {
       .end((err, res) => {
         expect(res).to.have.status(201);
         res.body.should.be.a('object');
-        expect(res.body.message).to.equal('Account created successfully');
+        expect(res.body.message).to.equal('Account created successfully.');
+        done();
+      });
+  });
+
+  it('should signin an existing user', (done) => {
+    const existingUser = {
+      email: 'chiomab@yahoo.com',
+      password: '12345'
+    };
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send(existingUser)
+      .end((err, res) => {
+        expect(res).to.have.status(201);
+        res.body.should.be.a('object');
+        expect(res.body.message).to.equal('user logged in successfully');
         done();
       });
   });

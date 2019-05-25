@@ -15,6 +15,16 @@ class User {
     this.users.push(newUser);
     return newUser;
   }
+
+  signin(data) {
+    const existingUser = {
+      id: this.users.length + 1,
+      email: data.email,
+      passowrd: data.password
+    };
+    this.users.push(existingUser);
+    return existingUser;
+  }
 }
 
 export default new User();
