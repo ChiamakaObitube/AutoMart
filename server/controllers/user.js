@@ -12,6 +12,18 @@ class userController {
       data: signUpInfo
     });
   }
+
+  static loginUser(req, res) {
+    if (!req.body.email || !req.body.password) {
+      return res.status(400).json({ message: 'Enter your Email or Password' });
+    }
+    const SigninInfo = UserModel.signin(req.body);
+    return res.status(201).json({
+      status: 201,
+      message: 'user logged in successfully',
+      data: SigninInfo
+    });
+  }
 }
 
 export default userController;
