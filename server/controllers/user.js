@@ -8,7 +8,7 @@ class userController {
     const signUpInfo = UserModel.signup(req.body);
     return res.status(201).json({
       status: 201,
-      message: 'Account created successfully',
+      message: 'Account created successfully.',
       data: signUpInfo
     });
   }
