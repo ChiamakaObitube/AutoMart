@@ -28,7 +28,8 @@ describe('POST auth/signup', () => {
         done();
       });
   });
-
+});
+describe('POST auth/signin', () => {
   it('should signin an existing user', (done) => {
     const existingUser = {
       email: 'chiomab@yahoo.com',
