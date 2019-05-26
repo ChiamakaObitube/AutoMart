@@ -8,11 +8,13 @@ chai.use(chaiHttp);
 
 const { should, expect } = chai;
 should();
+
+
 describe('POST api/v1/order', () => {
   it('user(buyer) can make a purchase order', (done) => {
     const validOrder = {
       car_id: 1,
-      buyer: 2,
+      buyer: Number,
       created_on: Date(),
       status: 'pending',
       state: 'new',
@@ -27,6 +29,18 @@ describe('POST api/v1/order', () => {
         expect(res).to.have.status(201);
         res.body.should.be.a('object');
         expect(res.body.message).to.equal('Purchase order created successfully.');
+        done();
+      });
+  });
+});
+
+describe('/GET /api/v1/order', () => {
+  it('it should get all orders whether accepted or pending', (done) => {
+    chai.request(app)
+      .get('/api/v1/order')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).be.an('object');
         done();
       });
   });
