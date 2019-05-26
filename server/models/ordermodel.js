@@ -6,8 +6,8 @@ class Order {
   postNewOrder(data) {
     const newOrder = {
       id: this.orders.length + 1,
-      carId: 1,
-      buyer: 2,
+      carId: data.carId,
+      buyer: data.buyer,
       createdOn: Date(),
       status: data.status,
       price: parseFloat(data.price),
@@ -15,6 +15,10 @@ class Order {
     };
     this.orders.push(newOrder);
     return newOrder;
+  }
+
+  getOrders() {
+    return this.orders;
   }
 }
 export default new Order();
