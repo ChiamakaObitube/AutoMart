@@ -20,5 +20,9 @@ class Order {
   getOrders() {
     return this.orders;
   }
+
+  viewOrder(id) {
+    return this.orders.find(order => order.id === id);
+  }
 }
 export default new Order();
