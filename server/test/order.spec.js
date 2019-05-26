@@ -45,3 +45,15 @@ describe('/GET /api/v1/order', () => {
       });
   });
 });
+describe('/GET /api/v1/order/<order:id>', () => {
+  it('it should get a specific order by their id', (done) => {
+    const id = 1;
+    chai.request(app)
+      .get(`/api/v1/order/${id}`)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).be.an('object');
+        done();
+      });
+  });
+});

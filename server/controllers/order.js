@@ -32,5 +32,20 @@ class orderController {
       data: orders
     });
   }
+
+  static getOrder(req, res) {
+    const order = OrderModel.viewOrder(Number(req.params.id));
+    if (!order) {
+      return res.status(404).json({
+        status: 404,
+        message: 'purchase order does not exist'
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      message: 'purchase order found',
+      data: order
+    });
+  }
 }
 export default orderController;
