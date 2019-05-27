@@ -34,5 +34,23 @@ class carController {
     });
     // }
   }
+
+  static getAllCars(req, res) {
+    const allCars = CarModel.getAllCars();
+
+    // if (allCars.length === 0) return res.status(404).send('There are no users');
+    if (!allCars) {
+      return res.status(404).send({
+        status: 404,
+        error: 'There are no cars in this database',
+      });
+    }
+
+    return res.status(200).send({
+      status: 200,
+      message: 'All Car Ads retrieved successfully',
+      data: allCars,
+    });
+  }
 }
 export default carController;

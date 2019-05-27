@@ -29,8 +29,8 @@ class Car {
     return specificCar;
   }
 
-  deleteOneCar(email) {
-    const specificCar = cars.find(car => car.email === email);
+  deleteOneCar(id) {
+    const specificCar = cars.find(car => car.id === id);
 
     const index = cars.indexOf(specificCar);
     cars.splice(index, 1);
