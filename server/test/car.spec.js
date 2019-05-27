@@ -32,4 +32,16 @@ describe('/GET /api/v1/car', () => {
         done();
       });
   });
+
+  it('it should get a specific car by their id', (done) => {
+    const id = 1;
+    chai.request(app)
+      .get(`/api/v1/car/${id}`)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).be.an('object');
+        expect(res.body.message).to.equal('Car Ad retrieved successfully');
+        done();
+      });
+  });
 });

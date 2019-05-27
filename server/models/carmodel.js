@@ -8,7 +8,7 @@ class Car {
       owner: users[users.length - 1].id,
       email: users[users.length - 1].email,
       address: users[users.length - 1].address,
-      createdOn: new Date(),
+      createdOn: Date(),
       state: data.state,
       status: 'available',
       price: 1000000.00,

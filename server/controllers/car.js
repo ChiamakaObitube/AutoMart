@@ -52,5 +52,21 @@ class carController {
       data: allCars,
     });
   }
+
+  static getSpecificCar(req, res) {
+    const { id } = req.params;
+    const car = CarModel.getSpecificCar(Number(id));
+    if (!car) {
+      return res.status(404).json({
+        status: 404,
+        message: 'car does not exist',
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      message: 'Car Ad retrieved successfully',
+      data: car,
+    });
+  }
 }
 export default carController;
