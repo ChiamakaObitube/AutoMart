@@ -21,3 +21,15 @@ describe('POST /api/v1/car', () => {
       });
   });
 });
+describe('/GET /api/v1/car', () => {
+  it('it should get all cars whether sold or available', (done) => {
+    chai.request(app)
+      .get('/api/v1/car')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).be.an('object');
+        expect(res.body.message).to.equal('All Car Ads retrieved successfully');
+        done();
+      });
+  });
+});
