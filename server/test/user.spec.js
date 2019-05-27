@@ -45,3 +45,14 @@ describe('POST auth/signin', () => {
       });
   });
 });
+describe('/GET /api/v1/users', () => {
+  it('it should get all users whether buyer or seller', (done) => {
+    chai.request(app)
+      .get('/api/v1/users')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).be.an('object');
+        done();
+      });
+  });
+});
