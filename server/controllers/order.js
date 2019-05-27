@@ -7,14 +7,14 @@ class orderController {
             && !req.body.priceOffered) {
       return res.status(400).json({
         status: 400,
-        error: 'input all fields'
+        error: 'input all fields',
       });
     }
     const newPurchaseOrder = OrderModel.postNewOrder(req.body);
     return res.status(201).json({
       status: 201,
       message: 'Purchase order created successfully.',
-      data: newPurchaseOrder
+      data: newPurchaseOrder,
     });
   }
 
@@ -29,7 +29,7 @@ class orderController {
     return res.status(200).json({
       status: 200,
       message: 'all orders',
-      data: orders
+      data: orders,
     });
   }
 
@@ -38,13 +38,13 @@ class orderController {
     if (!order) {
       return res.status(404).json({
         status: 404,
-        message: 'purchase order does not exist'
+        message: 'purchase order does not exist',
       });
     }
     return res.status(200).json({
       status: 200,
       message: 'purchase order found',
-      data: order
+      data: order,
     });
   }
 }

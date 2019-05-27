@@ -1,30 +1,30 @@
-class User {
-  constructor() {
-    this.users = [];
-  }
+import users from '../database/user';
+// const users = [];
 
+class User {
   signup(data) {
     const newUser = {
-      id: this.users.length + 1,
+      id: users.length + 1,
       email: data.email,
       firstName: data.firstName,
       lastName: data.lastName,
       address: data.address,
-      password: data.password
+      password: data.password,
     };
-    this.users.push(newUser);
+    users.push(newUser);
     return newUser;
   }
 
-  signin(data) {
-    const existingUser = {
-      id: this.users.length + 1,
-      email: data.email,
-      passowrd: data.password
-    };
-    this.users.push(existingUser);
-    return existingUser;
+
+  getAllUsers() {
+    return users;
+  }
+
+  getSpecificUser(email) {
+    const specificUser = users.find(user => user.email === email);
+    return specificUser;
   }
 }
+
 
 export default new User();

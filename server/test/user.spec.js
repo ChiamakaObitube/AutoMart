@@ -1,6 +1,5 @@
 import chai from 'chai';
 import 'chai/register-should';
-
 import chaiHttp from 'chai-http';
 import app from '../app';
 
@@ -16,7 +15,7 @@ describe('POST auth/signup', () => {
       lastName: 'Umeh',
       email: 'chiomab@yahoo.com',
       address: '23 Broad Street, Lagos',
-      password: '12345'
+      password: '12345',
     };
     chai.request(app)
       .post('/api/v1/auth/signup')
@@ -33,7 +32,7 @@ describe('POST auth/signin', () => {
   it('should signin an existing user', (done) => {
     const existingUser = {
       email: 'chiomab@yahoo.com',
-      password: '12345'
+      password: '12345',
     };
     chai.request(app)
       .post('/api/v1/auth/signin')
