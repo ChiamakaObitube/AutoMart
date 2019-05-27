@@ -68,5 +68,22 @@ class carController {
       data: car,
     });
   }
+
+  static deleteCar(req, res) {
+    const { id } = req.params;
+    const car = CarModel.getSpecificCar(Number(id));
+    if (!car) {
+      return res.status(404).json({
+        status: 404,
+        message: 'car does not exist',
+      });
+    }
+    const deletedCar = CarModel.deleteOneCar(Number(id));
+    return res.status(202).json({
+      status: 202,
+      message: 'Car Ad deleted successfully',
+      data: deletedCar,
+    });
+  }
 }
 export default carController;

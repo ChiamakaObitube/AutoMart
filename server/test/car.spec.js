@@ -45,3 +45,15 @@ describe('/GET /api/v1/car', () => {
       });
   });
 });
+describe('/DELETE a car by their id', () => {
+  it('it should delete a car by their id', (done) => {
+    const id = 1;
+    chai.request(app)
+      .delete(`/api/v1/car/${id}`)
+      .end((err, res) => {
+        expect(res).to.have.status(202);
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
