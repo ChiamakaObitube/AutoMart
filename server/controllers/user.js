@@ -51,6 +51,23 @@ class userController {
       data: SigninInfo,
     });
   }
+
+  static getAllUsers(req, res) {
+    const allUsers = UserModel.getAllUsers();
+
+    // if (allUsers.length === 0) return res.status(404).send('There are no users');
+    if (!allUsers) {
+      return res.status(404).send({
+        status: 404,
+        error: 'There are no users',
+      });
+    }
+
+    return res.status(200).send({
+      status: 200,
+      data: allUsers,
+    });
+  }
 }
 
 export default userController;
