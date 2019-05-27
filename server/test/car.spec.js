@@ -51,7 +51,7 @@ describe('/DELETE a car by their id', () => {
     chai.request(app)
       .delete(`/api/v1/car/${id}`)
       .end((err, res) => {
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(202);
         expect(res.body).to.be.an('object');
         done();
       });

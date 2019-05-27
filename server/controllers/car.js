@@ -79,8 +79,8 @@ class carController {
       });
     }
     const deletedCar = CarModel.deleteOneCar(Number(id));
-    return res.status(200).json({
-      status: 200,
+    return res.status(202).json({
+      status: 202,
       message: 'Car Ad deleted successfully',
       data: deletedCar,
     });
