@@ -24,10 +24,10 @@ class Car {
     return cars;
   }
 
-  getSpecificCar(id) {
-    const specificCar = cars.find(car => car.id === id);
-    return specificCar;
-  }
+  // getSpecificCar(id) {
+  //   const specificCar = cars.find(car => car.id === id);
+  //   return specificCar;
+  // }
 
   deleteOneCar(email) {
     const specificCar = cars.find(car => car.email === email);
