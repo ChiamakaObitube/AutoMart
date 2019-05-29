@@ -1,28 +1,29 @@
-class Order {
-  constructor() {
-    this.orders = [];
-  }
+import cars from '../database/car';
+import users from '../database/user';
+import orders from '../database/order';
 
+class Order {
   postNewOrder(data) {
     const newOrder = {
-      id: this.orders.length + 1,
-      carId: data.carId,
-      buyer: data.buyer,
+      id: orders.length + 1,
+      carId: cars[cars.length - 1].id,
+      buyer: users[users.length - 1].email,
       createdOn: Date(),
-      status: data.status,
-      price: parseFloat(data.price),
+      status: 'pending',
+      price: cars[cars.length - 1].price,
       priceOffered: parseFloat(data.priceOffered),
     };
-    this.orders.push(newOrder);
+    orders.push(newOrder);
     return newOrder;
   }
 
+
   getOrders() {
-    return this.orders;
+    return orders;
   }
 
-  viewOrder(id) {
-    return this.orders.find(order => order.id === id);
+  getSpecificOrder(id) {
+    return orders.find(order => order.id === id);
   }
 }
 export default new Order();
