@@ -71,34 +71,53 @@ class carController {
 
   static updateAdStatus(req, res) {
     const { id } = req.params;
-
-    const retrievedCar = CarModel.getSpecificCar(Number(id));
-
-    if (!retrievedCar) {
+    const car = CarModel.getSpecificCar(Number(id));
+    if (!car) {
+      return res.status(404).json({
+        status: 404,
+        message: 'car does not exist',
+      });
+    } if (!req.body.status) {
       return res.status(400).json({
+        status: 400,
+        message: 'car status is required',
+      });
+    }
+
+    car.status = req.body.status;
+    return res.status(200).json({
+      status: 200,
+      message: 'car successfully marked as sold',
+      data: {
+        id: car.id,
+        updatedOn: Date(),
+        status: car.status,
+      },
+    });
+  }
+
+  static updateAdPrice(req, res) {
+    const { id } = req.params;
+    const car = CarModel.getSpecificCar(Number(id));
+    if (!car) {
+      return res.status(404).json({
         status: 404,
         message: 'car does not exist',
       });
     }
-
-    retrievedCar.status = req.body.status;
-
-    if (!req.body.status) {
-      return res.status(404).json({
+    car.price = req.body.price;
+    if (!req.body.price) {
+      return res.status(400).json({
         status: 400,
-        error: 'car status is required',
+        error: 'car price is required',
       });
     }
 
 
     return res.status(200).json({
       status: 200,
-      message: 'car successfully marked as sold',
-      data: {
-        id: retrievedCar.id,
-        updatedOn: Date(),
-        status: retrievedCar.status,
-      },
+      message: 'car price updated successfully',
+      data: car,
     });
   }
 
