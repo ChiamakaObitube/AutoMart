@@ -3,8 +3,8 @@ import OrderModel from '../models/ordermodel';
 
 class orderController {
   static postOrder(req, res) {
-    if (!req.body.carId && !req.body.buyer && !req.body.status && req.body.price
-            && !req.body.priceOffered) {
+    if (!req.body.carId && !req.body.buyer && !req.body.status
+    && req.body.price && !req.body.priceOffered) {
       return res.status(400).json({
         status: 400,
         error: 'input all fields',
@@ -34,7 +34,7 @@ class orderController {
   }
 
   static getOrder(req, res) {
-    const order = OrderModel.viewOrder(Number(req.params.id));
+    const order = OrderModel.getSpecificOrder(Number(req.params.id));
     if (!order) {
       return res.status(404).json({
         status: 404,
