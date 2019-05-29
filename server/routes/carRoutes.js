@@ -8,7 +8,7 @@ router.post('/car', carcontroller.createNewAd);
 router.get('/car', carcontroller.getAllCars);
 router.get('/car/:id', carcontroller.getSpecificCar);
 router.patch('/car/:id/status', carcontroller.updateAdStatus);
-// router.get('/car', carcontroller.availableCars);
+router.patch('/car/:id/price', carcontroller.updateAdPrice);
 router.delete('/car/:id', carcontroller.deleteCar);
 
 export default router;
