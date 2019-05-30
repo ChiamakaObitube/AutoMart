@@ -1,10 +1,11 @@
 import { Router } from 'express';
-import ordercontroller from '../controllers/order';
+import orderController from '../controllers/order';
 
 const router = Router();
 
-router.post('/order', ordercontroller.postOrder);
-router.get('/order', ordercontroller.getAllOrders);
-router.get('/order/:id', ordercontroller.getOrder);
+router.post('/order', orderController.postOrder);
+router.get('/order', orderController.getAllOrders);
+router.get('/order/:id', orderController.getOrder);
+router.patch('/order/:id/price', orderController.updatePurchasePriceOrder);
 
 export default router;

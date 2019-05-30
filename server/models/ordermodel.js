@@ -25,5 +25,7 @@ class Order {
   getSpecificOrder(id) {
     return orders.find(order => order.id === id);
   }
+
+  
 }
 export default new Order();
