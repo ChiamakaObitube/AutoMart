@@ -1,8 +1,8 @@
 import CarModel from '../models/carmodel';
 
-import UserModel from '../models/usermodel';
-import users from '../database/user';
-import cars from '../database/car';
+// import UserModel from '../models/usermodel';
+// import users from '../database/user';
+// import cars from '../database/car';
 
 class carController {
   static createNewAd(req, res) {
@@ -37,7 +37,7 @@ class carController {
 
   static getAllCars(req, res) {
     const allCars = CarModel.getAllCars();
-    req.query.status = 'available';
+    // console.log(req.query.status);
     // if (allCars.length === 0) return res.status(404).send('There are no users');
     if (!allCars) {
       return res.status(404).send({
@@ -77,11 +77,11 @@ class carController {
         status: 404,
         message: 'car does not exist',
       });
-    } if (!req.body.status) {
-      return res.status(400).json({
-        status: 400,
-        message: 'car status is required',
-      });
+    // } if (!req.body.status) {
+    //   return res.status(400).json({
+    //     status: 400,
+    //     message: 'car status is required',
+    //   });
     }
 
     car.status = req.body.status;
@@ -106,12 +106,12 @@ class carController {
       });
     }
     car.price = req.body.price;
-    if (!req.body.price) {
-      return res.status(400).json({
-        status: 400,
-        error: 'car price is required',
-      });
-    }
+    // if (!req.body.price) {
+    //   return res.status(400).json({
+    //     status: 400,
+    //     error: 'car price is required',
+    //   });
+    // }
 
 
     return res.status(200).json({
@@ -121,22 +121,30 @@ class carController {
     });
   }
 
-  // static availableCars(req, res) {
-  //   const { status } = req.query;
-  //   if (cars.length === 0) {
-  //     let responseObject;
-  //     if (status && status === 'available') {
-  //       responseObject = { available: 0 };
-  //     }
-  //     res.status(404).send(responseObject);
-  //   } else {
-  //     const responseObject = CarModel.getAvailableCars();
-  //     if (status && status === 'available') {
-  //       responseObject = cars.length;
-  //     }
-  //     return res.send(responseObject);
-  //   }
-  // }
+  static availableCars(req, res) {
+    // const { status } = req.params;
+    const allAvailableCars = CarModel.getAvailableCars();
+    // console.log(allAvailableCars);
+    if (!allAvailableCars) {
+      res.status(404).json({ status: 404, message: 'no available cars' });
+    } return res.status(200).json({
+      status: 200,
+      data: allAvailableCars,
+    });
+    // if (cars.length === 0) {
+    //   let responseObject;
+    //   if (status && status === 'available') {
+    //     responseObject = { available: 0 };
+    //   }
+    //   res.status(404).send(responseObject);
+    // } else {
+    //   const responseObject = CarModel.getAvailableCars();
+    //   if (status && status === 'available') {
+    //     responseObject = cars.length;
+    //   }
+    //   return res.send(responseObject);
+    // }
+  }
 
 
   static deleteCar(req, res) {

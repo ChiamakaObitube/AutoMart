@@ -6,6 +6,7 @@ const router = Router();
 
 router.post('/car', carcontroller.createNewAd);
 router.get('/car', carcontroller.getAllCars);
+router.get('/car/status/available', carcontroller.availableCars);
 router.get('/car/:id', carcontroller.getSpecificCar);
 router.patch('/car/:id/status', carcontroller.updateAdStatus);
 router.patch('/car/:id/price', carcontroller.updateAdPrice);
