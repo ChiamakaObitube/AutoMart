@@ -47,5 +47,41 @@ class orderController {
       data: order,
     });
   }
+
+  static updatePurchasePriceOrder(req, res) {
+    const { id } = req.params;
+
+    const order = OrderModel.getSpecificOrder(Number(id));
+
+    if (!order) {
+      res.status(404).json({
+        status: 404,
+        message: 'purchase order does not exist',
+      });
+    }
+    if (!order.priceOffered) {
+      res.status(400).json({
+        status: 400,
+        message: 'price offered is required',
+      });
+    }
+
+    if (order.status !== 'pending') {
+      res.status(400).json({
+        status: 400,
+        message: 'you cannot update purchase order price offered',
+      });
+    }
+
+    order.priceOffered = req.body.priceOffered;
+
+    return res.status(200).json({
+      status: 200,
+      message: 'order price updated successfully',
+      data: order,
+    });
+  }
 }
+
+
 export default orderController;

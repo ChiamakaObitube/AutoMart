@@ -77,22 +77,24 @@ class carController {
         status: 404,
         message: 'car does not exist',
       });
-    // } if (!req.body.status) {
-    //   return res.status(400).json({
-    //     status: 400,
-    //     message: 'car status is required',
-    //   });
+    } if (!car.status) {
+      return res.status(400).json({
+        status: 400,
+        message: 'car status is required',
+      });
     }
 
     car.status = req.body.status;
     return res.status(200).json({
       status: 200,
       message: 'car successfully marked as sold',
-      data: {
-        id: car.id,
-        updatedOn: Date(),
-        status: car.status,
-      },
+      data: car,
+      // {
+      //     id: car.id,
+      //     updatedOn: Date(),
+      //     status: car.status,
+
+    //   },
     });
   }
 
@@ -105,14 +107,15 @@ class carController {
         message: 'car does not exist',
       });
     }
-    car.price = req.body.price;
-    // if (!req.body.price) {
-    //   return res.status(400).json({
-    //     status: 400,
-    //     error: 'car price is required',
-    //   });
-    // }
+    if (!car.price) {
+      return res.status(400).json({
+        status: 400,
+        error: 'car price is required',
+      });
+    }
 
+    car.price = req.body.price;
+    
 
     return res.status(200).json({
       status: 200,

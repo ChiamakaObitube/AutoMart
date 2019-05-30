@@ -57,3 +57,17 @@ describe('/GET /api/v1/order/<order:id>', () => {
       });
   });
 });
+
+describe('/PATCH update a order price offered', () => {
+  it('it should update a specific order price offered', (done) => {
+    const updateUrl = '/api/v1/order/1/price';
+    chai.request(app)
+      .patch(updateUrl)
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.equal('order price updated successfully');
+        done();
+      });
+  });
+});
