@@ -29,10 +29,13 @@ class Car {
     return specificCar;
   }
 
-  // getAvailableCars() {
-  //   const availableCars = cars.filter(car => car.status === 'available');
-  //   return availableCars;
-  // }
+  getAvailableCars() {
+    const availableCars = cars.filter(car => car.status === 'available');
+    // console.log(availableCars);
+    return availableCars;
+  }
+
+
   deleteOneCar(id) {
     const specificCar = cars.find(car => car.id === id);
 

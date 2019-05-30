@@ -53,7 +53,7 @@ describe('/PATCH update a car price', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('car price successfully updated');
+        expect(res.body.message).to.equal('car price updated successfully');
         done();
       });
   });
@@ -67,6 +67,17 @@ describe('/PATCH update a car status', () => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a('object');
         expect(res.body.message).to.equal('car successfully marked as sold');
+        done();
+      });
+  });
+});
+describe('/GET all available cars', () => {
+  it('it should get all unsold cars', (done) => {  
+    chai.request(app)
+      .get('/api/v1/car/status/available')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.a('object');
         done();
       });
   });
