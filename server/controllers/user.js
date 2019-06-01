@@ -1,4 +1,5 @@
 import UserModel from '../models/usermodel';
+import Helper from '../middleware/helper';
 
 
 class userController {
@@ -19,7 +20,12 @@ class userController {
       });
     }
 
+    const hashedPassword = Helper.hashPassword(req.body.password);
+    req.body.password = hashedPassword;
+
+
     const signUpInfo = UserModel.signup(req.body);
+
     return res.status(201).json({
       status: 201,
       message: 'Account created successfully.',
@@ -35,7 +41,7 @@ class userController {
     }
 
     const userEmailExist = UserModel.getSpecificUser(req.body.email);
-    const userPasswordExist = UserModel.getSpecificUser(req.body.email);
+    const userPasswordExist = UserModel.getSpecificUser(req.body.password);
 
     if (!userEmailExist || !userPasswordExist) {
       return res.status(400).send({
@@ -44,13 +50,14 @@ class userController {
       });
     }
 
-    const SigninInfo = req.body;
-    return res.status(201).json({
-      status: 201,
+    const signInInfo = req.body;
+    return res.status(200).json({
+      status: 200,
       message: 'user logged in successfully',
-      data: SigninInfo,
+      data: signInInfo,
     });
   }
+
 
   static getAllUsers(req, res) {
     const allUsers = UserModel.getAllUsers();

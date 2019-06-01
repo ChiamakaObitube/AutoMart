@@ -10,6 +10,7 @@ class User {
       lastName: data.lastName,
       address: data.address,
       password: data.password,
+      isAdmin: false,
     };
     users.push(newUser);
     return newUser;
