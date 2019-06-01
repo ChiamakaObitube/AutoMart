@@ -1,34 +1,57 @@
 import chai from 'chai';
 import 'chai/register-should';
-
 import chaiHttp from 'chai-http';
 import app from '../app';
+import {
+  validOrder,
+
+  nonPendingStatus,
+  nonStringStatus,
+  undefinedPrice,
+
+  undefinedPriceOfferred,
+
+} from './mockData/orderMock';
 
 chai.use(chaiHttp);
-
-const { should, expect } = chai;
+const {
+  should,
+  expect,
+} = chai;
 should();
 
-
-describe('POST api/v1/order', () => {
-  it('user(buyer) can make a purchase order', (done) => {
-    const validOrder = {
-      car_id: 1,
-      buyer: Number,
-      created_on: Date(),
-      status: 'pending',
-      state: 'new',
-      price: 400000.00,
-      priceOffered: 30000000.00,
-
-    };
+describe('POST /api/v1/order', () => {
+  it('should create a purchase order', (done) => {
     chai.request(app)
       .post('/api/v1/order')
       .send(validOrder)
       .end((err, res) => {
         expect(res).to.have.status(201);
         res.body.should.be.a('object');
-        expect(res.body.message).to.equal('Purchase order created successfully.');
+        done();
+      });
+  });
+
+  it('it should return 400 status if order status is not pending', (done) => {
+    chai.request(app)
+      .post('/api/v1/order')
+      .send(nonPendingStatus)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body).be.an('object');
+        expect(res.body.message).to.equal('order status must be pending');
+        done();
+      });
+  });
+  
+  it('it should return 400 status if order price offered is undefined', (done) => {
+    chai.request(app)
+      .post('/api/v1/order')
+      .send(undefinedPriceOfferred)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body).be.an('object');
+        expect(res.body.message).to.equal('order price offered is required');
         done();
       });
   });

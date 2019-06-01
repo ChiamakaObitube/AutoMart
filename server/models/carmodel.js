@@ -35,6 +35,13 @@ class Car {
     return availableCars;
   }
 
+  // getAvailableCarsWithPriceRange(minPrice, maxPrice) {
+  //   cars.forEach((car) => {
+  //     if ((car.status === 'available') && (car.price >= minPrice && car.price <= maxPrice)) cars.push(car);
+  //   });
+  //   return cars;
+  // }
+
 
   deleteOneCar(id) {
     const specificCar = cars.find(car => car.id === id);

@@ -10,7 +10,7 @@ app.use(Routes);
 
 app.get('/', (req, res) => {
   res.status(200).send({
-    message: 'Welcome to AutoMart, your marketplace for cars.'
+    message: 'Welcome to AutoMart',
   });
 });
 

@@ -115,7 +115,7 @@ class carController {
     }
 
     car.price = req.body.price;
-    
+
 
     return res.status(200).json({
       status: 200,
