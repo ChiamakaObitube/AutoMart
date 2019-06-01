@@ -6,38 +6,32 @@ import app from '../app';
 import {
   validUser,
   undefinedFirstName,
-  emptyFirstName,
   nonStringFirstName,
   invalidFirstNameCharacter,
   invalidFirstNameLength,
   undefinedLastName,
-  emptyLastName,
   nonStringLastName,
   invalidLastNameCharacter,
   invalidLastNameLength,
   undefinedEmail,
-  emptyEmail,
   nonStringEmail,
   undefinedAddress,
   nonStringAddress,
   undefinedPassword,
-  emptyPassword,
   nonStringPassword,
   invalidPasswordLength,
   whitespacePassword,
   validSignIn,
   undefinedEmailSignin,
   nonStringEmailSignin,
-  nonExistingEmail,
   undefinedPasswordSignin,
   nonStringPasswordSignin,
-  validEmailInvalidPassword
 } from './mockData/userMock';
 
 chai.use(chaiHttp);
 const {
   should,
-  expect
+  expect,
 } = chai;
 should();
 
