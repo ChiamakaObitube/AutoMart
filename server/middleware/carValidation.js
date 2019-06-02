@@ -83,7 +83,7 @@ class CarValidators {
       return res.status(400)
         .send({
           status: 400,
-          message: 'your email is required',
+          message: 'car image is required',
         });
     }
 
