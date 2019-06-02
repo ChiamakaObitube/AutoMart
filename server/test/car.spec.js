@@ -5,7 +5,7 @@ import chaiHttp from 'chai-http';
 import app from '../app';
 import {
   validAd,
- 
+
   undefinedManufacturer,
   nonStringManufacturer,
   undefinedModel,
@@ -17,15 +17,15 @@ import {
   undefinedStatus,
   nonStringStatus,
   undefinedBodyType,
-  
-  nonStringBodyType
+
+  nonStringBodyType,
 } from './mockData/carMock';
 
 
 chai.use(chaiHttp);
 const {
   should,
-  expect
+  expect,
 } = chai;
 chai.should();
 
@@ -49,11 +49,11 @@ describe('POST /api/v1/car', () => {
       .end((err, res) => {
         expect(res).to.have.status(201);
         expect(res.body).be.an('object');
-        expect(res.body.message).to.equal('Car Ad posted successfully')
+        expect(res.body.message).to.equal('Car Ad posted successfully');
         done();
       });
   });
-  
+
   it('it should return 400 status if manufacturer is undefined', (done) => {
     chai.request(app)
       .post('/api/v1/car')
@@ -158,13 +158,22 @@ describe('POST /api/v1/car', () => {
         done();
       });
   });
+  // it('it should return 400 status if car image is not uploaded', (done) => {
+  //   chai.request(app)
+  //     .post('/api/v1/car')
+  //     .end((err, res) => {
+  //       expect(res).to.have.status(400);
+  //       expect(res.body).be.an('object');
+  //       expect(res.body.message).to.equal('car image is required');
+  //       done();
+  //     });
+  // });
 });
 describe('/GET a car by their id', () => {
   it('it should get a specific car by the given id', (done) => {
     const id = 1;
     chai.request(app)
       .get(`/api/v1/car/${id}`)
-
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a('object');
@@ -224,7 +233,7 @@ describe('/PATCH update a car status', () => {
   });
 });
 describe('/GET all available cars', () => {
-  it('it should get all unsold cars', (done) => {  
+  it('it should get all unsold cars', (done) => {
     chai.request(app)
       .get('/api/v1/car/status/available')
       .end((err, res) => {
