@@ -43,7 +43,7 @@ describe('POST /api/v1/order', () => {
         done();
       });
   });
-  
+
   it('it should return 400 status if order price offered is undefined', (done) => {
     chai.request(app)
       .post('/api/v1/order')
