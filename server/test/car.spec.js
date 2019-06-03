@@ -27,7 +27,7 @@ const {
   should,
   expect,
 } = chai;
-chai.should();
+should();
 
 describe('/GET /api/v1/car', () => {
   it('it should get all cars whether sold or unsold', (done) => {
