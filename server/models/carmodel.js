@@ -37,7 +37,8 @@ class Car {
 
   // getAvailableCarsWithPriceRange(minPrice, maxPrice) {
   //   cars.forEach((car) => {
-  //     if ((car.status === 'available') && (car.price >= minPrice && car.price <= maxPrice)) cars.push(car);
+  //     if ((car.status === 'available')
+  // && (car.price >= minPrice && car.price <= maxPrice)) cars.push(car);
   //   });
   //   return cars;
   // }
