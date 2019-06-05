@@ -10,5 +10,6 @@ router.post('/order', Authentication, postOrderValidator, orderController.postOr
 router.get('/order', Authentication, orderController.getAllOrders);
 router.get('/order/:id', Authentication, orderController.getOrder);
 router.patch('/order/:id/price', Authentication, updateOrderPriceValidator, orderController.updatePurchasePriceOrder);
+router.delete('/order/:id', orderController.deleteOrder);
 
 export default router;

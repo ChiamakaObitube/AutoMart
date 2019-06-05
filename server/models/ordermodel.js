@@ -25,5 +25,13 @@ class Order {
   getSpecificOrder(id) {
     return orders.find(order => order.id === id);
   }
+
+  deleteOnePurchaseOrder(id) {
+    const specificOrder = orders.find(order => order.id === id);
+
+    const index = orders.indexOf(specificOrder);
+    orders.splice(index, 1);
+    return specificOrder;
+  }
 }
 export default new Order();

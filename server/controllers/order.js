@@ -3,7 +3,7 @@ import OrderModel from '../models/ordermodel';
 
 class orderController {
   static postOrder(req, res) {
-    if (!req.body.carId && !req.body.buyer && !req.body.status
+    if (!req.body.orderId && !req.body.buyer && !req.body.status
     && req.body.price && !req.body.priceOffered) {
       return res.status(400).json({
         status: 400,
@@ -79,6 +79,23 @@ class orderController {
       status: 200,
       message: 'order price updated successfully',
       data: order,
+    });
+  }
+
+  static deleteOrder(req, res) {
+    const { id } = req.params;
+    const order = OrderModel.getSpecificOrder(Number(id));
+    if (!order) {
+      return res.status(404).json({
+        status: 404,
+        message: 'order does not exist',
+      });
+    }
+    const deletedOrder = OrderModel.deleteOnePurchaseOrder(Number(id));
+    return res.status(202).json({
+      status: 202,
+      message: 'Purchase order deleted successfully',
+      data: deletedOrder,
     });
   }
 }
