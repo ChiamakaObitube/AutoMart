@@ -241,7 +241,18 @@ describe('/GET all available cars', () => {
 describe('/GET all new available cars', () => {
   it('it should get all new available cars', (done) => {
     chai.request(app)
-      .get('/api/v1/car/status/:available/:new')
+      .get('/api/v1/car/status/available/new')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+describe('/GET all used available cars', () => {
+  it('it should get all used available cars', (done) => {
+    chai.request(app)
+      .get('/api/v1/car/status/available/used')
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
