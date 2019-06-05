@@ -1,8 +1,5 @@
 import CarModel from '../models/carmodel';
-
-// import UserModel from '../models/usermodel';
-// import users from '../database/user';
-// import cars from '../database/car';
+import cars from '../database/car';
 
 class carController {
   static createNewAd(req, res) {
@@ -37,8 +34,9 @@ class carController {
 
   static getAllCars(req, res) {
     const allCars = CarModel.getAllCars();
-    // console.log(req.query.status);
-    // if (allCars.length === 0) return res.status(404).send('There are no users');
+
+    if (allCars.length === 0) return res.status(404).send('There are no users');
+
     if (!allCars) {
       return res.status(404).send({
         status: 404,
@@ -52,6 +50,7 @@ class carController {
       data: allCars,
     });
   }
+
 
   static getSpecificCar(req, res) {
     const { id } = req.params;
@@ -134,21 +133,24 @@ class carController {
       status: 200,
       data: allAvailableCars,
     });
-    // if (cars.length === 0) {
-    //   let responseObject;
-    //   if (status && status === 'available') {
-    //     responseObject = { available: 0 };
-    //   }
-    //   res.status(404).send(responseObject);
-    // } else {
-    //   const responseObject = CarModel.getAvailableCars();
-    //   if (status && status === 'available') {
-    //     responseObject = cars.length;
-    //   }
-    //   return res.send(responseObject);
-    // }
   }
 
+  static getAllNewAvailableCars(request, response) {
+    const newAvailableCars = cars.filter(car => car.status === 'available' && car.state === 'new');
+
+    if (!newAvailableCars) {
+      response.status(404).json({
+        status: 404,
+        message: 'No New and Avaliable cars',
+      });
+    }
+
+    return response.status(200).json({
+      status: 200,
+      message: 'New and Avaliable cars retrieved successfully',
+      data: newAvailableCars,
+    });
+  }
 
   static deleteCar(req, res) {
     const { id } = req.params;

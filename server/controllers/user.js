@@ -4,7 +4,7 @@ import users from '../database/user';
 
 
 class userController {
-  static postNewUser(req, res) {
+  static userSignup(req, res) {
     if (!req.body.email || !req.body.firstName || !req.body.lastName
      || !req.body.address || !req.body.password) {
       return res.status(400).json({
