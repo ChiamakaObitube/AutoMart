@@ -31,17 +31,8 @@ class Car {
 
   getAvailableCars() {
     const availableCars = cars.filter(car => car.status === 'available');
-    // console.log(availableCars);
     return availableCars;
   }
-
-  // getAvailableCarsWithPriceRange(minPrice, maxPrice) {
-  //   cars.forEach((car) => {
-  //     if ((car.status === 'available')
-  // && (car.price >= minPrice && car.price <= maxPrice)) cars.push(car);
-  //   });
-  //   return cars;
-  // }
 
 
   deleteOneCar(id) {
