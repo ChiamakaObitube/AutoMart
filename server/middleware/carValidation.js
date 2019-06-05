@@ -14,7 +14,7 @@ class CarValidators {
 
     if (!manufacturer) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car manufacturer is required',
         });
@@ -22,14 +22,14 @@ class CarValidators {
 
     if (typeof manufacturer !== 'string') {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car manufacturer must be a string',
         });
     }
     if (!model) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car model is required',
         });
@@ -37,7 +37,7 @@ class CarValidators {
 
     if (typeof model !== 'string') {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car model must be a string',
         });
@@ -45,7 +45,7 @@ class CarValidators {
 
     if (!price) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car price is required',
         });
@@ -53,35 +53,35 @@ class CarValidators {
 
     if (!state) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car state is required',
         });
     }
     if (typeof state !== 'string') {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car state must be a string',
         });
     }
     if (!status) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car status is required',
         });
     }
     if (typeof status !== 'string') {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car status must be a string',
         });
     }
     if (!imageUrl) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car image is required',
         });
@@ -89,14 +89,14 @@ class CarValidators {
 
     if (typeof imageUrl !== 'string') {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'email must be a string',
         });
     }
     if (!bodyType) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'your email is required',
         });
@@ -104,7 +104,7 @@ class CarValidators {
 
     if (typeof bodyType !== 'string') {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'email must be a string',
         });
@@ -119,7 +119,7 @@ class CarValidators {
     } = req.body;
     if (!price) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car price is required',
         });
@@ -133,9 +133,39 @@ class CarValidators {
     } = req.body;
     if (!status) {
       return res.status(400)
-        .send({
+        .json({
           status: 400,
           message: 'car status is required',
+        });
+    }
+    next();
+  }
+
+  static getAvailableCarsWithinPriceRangeValidator(req, res, next) {
+    const {
+      minPrice,
+      maxPrice,
+    } = req.body;
+    if (!minPrice && !maxPrice) {
+      return res.status(400)
+        .json({
+          status: 400,
+          message: 'car max price and min price is required',
+        });
+    }
+    if (typeof minPrice !== 'number') {
+      return res.status(400)
+        .json({
+          status: 400,
+          message: 'car min price must be a number',
+        });
+    }
+
+    if (typeof maxPrice !== 'number') {
+      return res.status(400)
+        .json({
+          status: 400,
+          message: 'car max price must be a number',
         });
     }
     next();
@@ -143,10 +173,11 @@ class CarValidators {
 }
 
 const {
-  postAdValidator, updateAdPriceValidator, updateAdStatusValidator,
+  postAdValidator, updateAdPriceValidator, updateAdStatusValidator, getAvailableCarsWithinPriceRangeValidator,
 } = CarValidators;
 export {
   postAdValidator,
   updateAdPriceValidator,
   updateAdStatusValidator,
+  getAvailableCarsWithinPriceRangeValidator,
 };

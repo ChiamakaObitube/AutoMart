@@ -152,6 +152,31 @@ class carController {
     });
   }
 
+  static getAvailableCarsMinMaxPrice(request, response) {
+    const {
+      minPrice,
+      maxPrice,
+    } = request.body;
+
+    const availableCars = cars.filter(car => car.status === 'available');
+
+    const carsWithinPriceRange = availableCars.find(car => car.price >= minPrice
+    && car.price <= maxPrice);
+
+    if (!carsWithinPriceRange) {
+      response.status(404).json({
+        status: 404,
+        message: 'No Avaliable cars within the price range',
+      });
+    }
+
+    return response.status(200).json({
+      status: 200,
+      message: 'Avaliable cars within price range retrieved successfully',
+      data: carsWithinPriceRange,
+    });
+  }
+
   static deleteCar(req, res) {
     const { id } = req.params;
     const car = CarModel.getSpecificCar(Number(id));
