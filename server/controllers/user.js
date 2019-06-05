@@ -89,6 +89,23 @@ class userController {
       data: allUsers,
     });
   }
+
+  static deleteUser(req, res) {
+    const { email } = req.params;
+    const userExist = UserModel.getSpecificUser(email);
+    if (!userExist) {
+      return res.status(404).json({
+        status: 404,
+        message: 'user does not exist',
+      });
+    }
+    const deletedUser = UserModel.getSpecificUser(email);
+    return res.status(202).json({
+      status: 202,
+      message: 'User deleted successfully',
+      data: deletedUser,
+    });
+  }
 }
 
 export default userController;

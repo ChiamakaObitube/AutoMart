@@ -326,3 +326,15 @@ describe('/GET ALL USERS', () => {
       });
   });
 });
+describe('/DELETE a user by their email', () => {
+  it('it should delete a user by their email', (done) => {
+    chai.request(app)
+      .delete('/api/v1/users/:email')
+      .end((err, res) => {
+        expect(res).to.have.status(202);
+        expect(res.body).to.be.an('object');
+        expect(res.body.message).to.equal('User deleted successfully');
+        done();
+      });
+  });
+});
