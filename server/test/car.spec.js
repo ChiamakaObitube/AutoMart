@@ -1,4 +1,3 @@
-
 import chai from 'chai';
 import 'chai/register-should';
 import chaiHttp from 'chai-http';
@@ -10,15 +9,12 @@ import {
   nonStringManufacturer,
   undefinedModel,
   nonStringModel,
-  undefinedPrice,
-  nonFloatPrice,
+  undefinedPrice, 
   undefinedState,
   nonStringState,
   undefinedStatus,
   nonStringStatus,
   undefinedBodyType,
-
-  nonStringBodyType,
 } from './mockData/carMock';
 
 
@@ -249,6 +245,44 @@ describe('/GET all new available cars', () => {
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
+describe('/GET all available cars within a price range', () => {
+  it('it should get all available cars within a price range', (done) => {
+    chai.request(app)
+      .get('/api/v1/car/status/available/minPrice/maxPrice')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+  it('should return 400 status if min price and max price is undefined', (done) => {
+    chai.request(app)
+      .post('/api/v1/car/status/available/minPrice/maxPrice')
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.message).to.equal('car max price and min price is required');
+        done();
+      });
+  });
+  it('should return 400 status if min price is not a number', (done) => {
+    chai.request(app)
+      .post('/api/v1/car/status/available/minPrice/maxPrice')
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.message).to.equal('car min price must be a number');
+        done();
+      });
+  });
+  it('should return 400 status if max price is not a number', (done) => {
+    chai.request(app)
+      .post('/api/v1/car/status/available/minPrice/maxPrice')
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        expect(res.body.message).to.equal('car max price must be a number');
         done();
       });
   });
