@@ -17,7 +17,7 @@ const cars = [{
   email: 'seyi@example.com',
   createdOn: Date(),
   state: 'used',
-  status: 'sold',
+  status: 'available',
   price: 2000000.00,
   manufacturer: 'Ford',
   model: '2010',

@@ -15,5 +15,7 @@ router.get('/car/:id', Authentication, carController.getSpecificCar);
 router.patch('/car/:id/status', Authentication, updateAdStatusValidator, carController.updateAdStatus);
 router.patch('/car/:id/price', Authentication, updateAdPriceValidator, carController.updateAdPrice);
 router.delete('/car/:id', Authentication, carController.deleteCar);
+router.get('/car/status/:available/:new', carController.getAllNewAvailableCars);
+
 
 export default router;

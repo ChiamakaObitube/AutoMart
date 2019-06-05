@@ -221,9 +221,8 @@ describe('/PATCH update a car price', () => {
 });
 describe('/PATCH update a car status', () => {
   it('it should update a specific car status', (done) => {
-    const id = 1;
     chai.request(app)
-      .patch(`/api/v1/car/${id}/status`)
+      .patch('/api/v1/car/:id/status')
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.a('object');
@@ -243,7 +242,17 @@ describe('/GET all available cars', () => {
       });
   });
 });
-
+describe('/GET all new available cars', () => {
+  it('it should get all new available cars', (done) => {
+    chai.request(app)
+      .get('/api/v1/car/status/:available/:new')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('object');
+        done();
+      });
+  });
+});
 describe('/DELETE a car by their id', () => {
   it('it should delete a car by their id', (done) => {
     const id = 1;
