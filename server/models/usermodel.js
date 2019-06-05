@@ -25,6 +25,13 @@ class User {
     const specificUser = users.find(user => user.email === email);
     return specificUser;
   }
+
+  deleteOneUser(email) {
+    const specificUser = users.find(user => user.email === email);
+    const index = users.indexOf(specificUser);
+    users.splice(index, 1);
+    return specificUser;
+  }
 }
 
 
