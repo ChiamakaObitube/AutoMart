@@ -1,5 +1,5 @@
 const validAd = {
-  id: 1,
+  // id: 1,
   email: 'chiomab@yahoo.com',
   created_on: new Date(),
   manufacturer: 'Ford',
@@ -8,6 +8,7 @@ const validAd = {
   state: 'new',
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 
 const undefinedManufacturer = {
@@ -18,6 +19,7 @@ const undefinedManufacturer = {
   state: 'new',
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 const emptyManufacturer = {
   id: 1,
@@ -29,6 +31,7 @@ const emptyManufacturer = {
   state: 'new',
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 const nonStringManufacturer = {
   id: 1,
@@ -40,6 +43,7 @@ const nonStringManufacturer = {
   state: 'new',
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 const undefinedModel = {
   id: 1,
@@ -50,6 +54,7 @@ const undefinedModel = {
   state: 'new',
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 
 const nonStringModel = {
@@ -62,6 +67,7 @@ const nonStringModel = {
   state: 'new',
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 
 const undefinedPrice = {
@@ -73,6 +79,7 @@ const undefinedPrice = {
   state: 'new',
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 
 const emptyPrice = {
@@ -96,6 +103,7 @@ const nonFloatPrice = {
   state: 'new',
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 
 const undefinedState = {
@@ -107,6 +115,7 @@ const undefinedState = {
   price: parseFloat('150000.00'),
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 
 
@@ -120,6 +129,7 @@ const nonStringState = {
   state: ['new'],
   status: 'sold',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 
 const undefinedStatus = {
@@ -131,8 +141,8 @@ const undefinedStatus = {
   price: parseFloat('150000.00'),
   state: 'new',
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
-
 
 
 const nonStringStatus = {
@@ -145,6 +155,7 @@ const nonStringStatus = {
   state: 'new',
   status: ['sold'],
   body_type: 'truck',
+  imageUrl: 'http://www.image.com',
 };
 
 const undefinedBodyType = {
@@ -156,8 +167,8 @@ const undefinedBodyType = {
   price: parseFloat('150000.00'),
   state: 'new',
   status: 'sold',
+  imageUrl: 'http://www.image.com',
 };
-
 
 
 const nonStringBodyType = {
@@ -170,17 +181,18 @@ const nonStringBodyType = {
   state: 'new',
   status: 'sold',
   body_type: ['truck'],
+  imageUrl: 'http://www.image.com',
 };
 
 export {
   validAd,
-  
+
   undefinedManufacturer,
   emptyManufacturer,
   nonStringManufacturer,
   undefinedModel,
   nonStringModel,
-  undefinedPrice, 
+  undefinedPrice,
   nonFloatPrice,
   undefinedState,
   nonStringState,
