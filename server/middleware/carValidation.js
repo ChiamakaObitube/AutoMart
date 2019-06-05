@@ -173,7 +173,8 @@ class CarValidators {
 }
 
 const {
-  postAdValidator, updateAdPriceValidator, updateAdStatusValidator, getAvailableCarsWithinPriceRangeValidator,
+  postAdValidator, updateAdPriceValidator,
+  updateAdStatusValidator, getAvailableCarsWithinPriceRangeValidator,
 } = CarValidators;
 export {
   postAdValidator,

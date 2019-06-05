@@ -88,12 +88,6 @@ class carController {
       status: 200,
       message: 'car successfully marked as sold',
       data: car,
-      // {
-      //     id: car.id,
-      //     updatedOn: Date(),
-      //     status: car.status,
-
-    //   },
     });
   }
 
@@ -124,9 +118,8 @@ class carController {
   }
 
   static availableCars(req, res) {
-    // const { status } = req.params;
     const allAvailableCars = CarModel.getAvailableCars();
-    // console.log(allAvailableCars);
+
     if (!allAvailableCars) {
       res.status(404).json({ status: 404, message: 'no available cars' });
     } return res.status(200).json({
@@ -135,28 +128,45 @@ class carController {
     });
   }
 
-  static getAllNewAvailableCars(request, response) {
+  static getAllNewAvailableCars(req, res) {
     const newAvailableCars = cars.filter(car => car.status === 'available' && car.state === 'new');
 
     if (!newAvailableCars) {
-      response.status(404).json({
+      res.status(404).json({
         status: 404,
         message: 'No New and Avaliable cars',
       });
     }
 
-    return response.status(200).json({
+    return res.status(200).json({
       status: 200,
       message: 'New and Avaliable cars retrieved successfully',
       data: newAvailableCars,
     });
   }
 
-  static getAvailableCarsMinMaxPrice(request, response) {
+  static getAllUsedAvailableCars(req, res) {
+    const usedAvailableCars = cars.filter(car => car.status === 'available' && car.state === 'used');
+
+    if (!usedAvailableCars) {
+      res.status(404).json({
+        status: 404,
+        message: 'No used available cars',
+      });
+    }
+    
+    return res.status(200).json({
+      status: 200,
+      message: 'Used Avaliable cars retrieved successfully',
+      data: usedAvailableCars,
+    });
+  }
+
+  static getAvailableCarsMinMaxPrice(req, res) {
     const {
       minPrice,
       maxPrice,
-    } = request.body;
+    } = req.body;
 
     const availableCars = cars.filter(car => car.status === 'available');
 
@@ -164,13 +174,13 @@ class carController {
     && car.price <= maxPrice);
 
     if (!carsWithinPriceRange) {
-      response.status(404).json({
+      res.status(404).json({
         status: 404,
         message: 'No Avaliable cars within the price range',
       });
     }
 
-    return response.status(200).json({
+    return res.status(200).json({
       status: 200,
       message: 'Avaliable cars within price range retrieved successfully',
       data: carsWithinPriceRange,
