@@ -59,7 +59,7 @@ describe('POST /api/v1/car', () => {
       .post('/api/v1/car')
       .send(undefinedManufacturer)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(403);
         expect(res.body).be.an('object');
         expect(res.body.message).to.equal('car manufacturer is required');
         done();
@@ -71,7 +71,7 @@ describe('POST /api/v1/car', () => {
       .post('/api/v1/car')
       .send(nonStringManufacturer)
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(403);
         expect(res.body).be.an('object');
         expect(res.body.message).to.equal('car manufacturer must be a string');
         done();
