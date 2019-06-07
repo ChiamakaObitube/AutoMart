@@ -12,7 +12,7 @@ const verifyToken = (req, res, next) => {
     const bearerToken = bearer[1];
     req.token = bearerToken;
   }
-  // const token = req.headers.authorization.split('')[1];
+
   jwt.verify(req.token, key, (err, data) => {
     if (err) {
       return res.status(403).json({

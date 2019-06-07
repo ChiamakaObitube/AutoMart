@@ -13,6 +13,13 @@ class OrderValidators {
         });
     }
 
+    if (typeof priceOffered !== 'number') {
+      return res.status(400)
+        .json({
+          status: 400,
+          message: 'purchase order price offered must be a number',
+        });
+    }
 
     if (status !== 'pending') {
       return res.status(400)

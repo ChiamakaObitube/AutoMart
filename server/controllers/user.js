@@ -5,14 +5,8 @@ import users from '../database/user';
 
 class userController {
   static userSignup(req, res) {
-    if (!req.body.email || !req.body.firstName || !req.body.lastName
-     || !req.body.address || !req.body.password) {
-      return res.status(400).json({
-        message: 'All fields are required',
-      });
-    }
-
-    const userExist = UserModel.getSpecificUser(req.body.email);
+    const { email } = req.body;
+    const userExist = UserModel.getSpecificUser(email);
 
     if (userExist) {
       return res.status(400).json({
@@ -25,25 +19,17 @@ class userController {
     req.body.password = hashedPassword;
 
 
-    const signUpInfo = UserModel.signup(req.body);
+    const signupInfo = UserModel.signup(req.body);
 
     return res.status(201).json({
       status: 201,
       message: 'Account created successfully.',
-      data: signUpInfo,
-
+      data: signupInfo,
     });
   }
 
   static loginUser(req, res) {
-    if (!req.body.email || !req.body.password) {
-      return res.status(400).json({
-        message: 'Enter your Email or Password',
-      });
-    }
-
     const existingUser = users.find(user => user.email === req.body.email);
-
 
     if (!existingUser) {
       return res.status(401).json({
@@ -75,8 +61,6 @@ class userController {
 
   static getAllUsers(req, res) {
     const allUsers = UserModel.getAllUsers();
-
-    // if (allUsers.length === 0) return res.status(404).send('There are no users');
     if (!allUsers) {
       return res.status(404).json({
         status: 404,
