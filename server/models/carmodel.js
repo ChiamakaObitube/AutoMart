@@ -14,6 +14,7 @@ class Car {
       price: 1000000.00,
       manufacturer: data.manufacturer,
       model: data.model,
+      bodyType: data.bodyType,
       imageUrl: data.imageUrl,
     };
     cars.push(newAd);

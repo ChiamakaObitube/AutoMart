@@ -8,7 +8,6 @@ class UserValidators {
       password,
     } = req.body;
 
-
     // First name validation
     if (firstName === undefined) {
       return res.status(400)

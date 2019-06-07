@@ -68,7 +68,8 @@ class carController {
     });
   }
 
-  static updateAdStatus(req, res) {
+
+  static updateCarAdStatus(req, res) {
     const { id } = req.params;
     const car = CarModel.getSpecificCar(Number(id));
     if (!car) {
@@ -91,7 +92,7 @@ class carController {
     });
   }
 
-  static updateAdPrice(req, res) {
+  static updateCarAdPrice(req, res) {
     const { id } = req.params;
     const car = CarModel.getSpecificCar(Number(id));
     if (!car) {
@@ -154,7 +155,7 @@ class carController {
         message: 'No used available cars',
       });
     }
-    
+
     return res.status(200).json({
       status: 200,
       message: 'Used Avaliable cars retrieved successfully',

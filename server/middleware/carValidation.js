@@ -51,6 +51,14 @@ class CarValidators {
         });
     }
 
+    if (typeof price !== 'number') {
+      return res.status(400)
+        .json({
+          status: 400,
+          message: 'car price must be a number',
+        });
+    }
+
     if (!state) {
       return res.status(400)
         .json({
@@ -91,14 +99,14 @@ class CarValidators {
       return res.status(400)
         .json({
           status: 400,
-          message: 'email must be a string',
+          message: 'car image url must be a string',
         });
     }
     if (!bodyType) {
       return res.status(400)
         .json({
           status: 400,
-          message: 'your email is required',
+          message: 'car body type is required',
         });
     }
 
@@ -106,7 +114,7 @@ class CarValidators {
       return res.status(400)
         .json({
           status: 400,
-          message: 'email must be a string',
+          message: 'car body type must be a string',
         });
     }
 
@@ -124,6 +132,13 @@ class CarValidators {
           message: 'car price is required',
         });
     }
+    if (typeof price !== 'number') {
+      return res.status(400)
+        .json({
+          status: 400,
+          message: 'car price must be a number',
+        });
+    }
     next();
   }
 
@@ -136,6 +151,13 @@ class CarValidators {
         .json({
           status: 400,
           message: 'car status is required',
+        });
+    }
+    if (typeof status !== 'string') {
+      return res.status(400)
+        .json({
+          status: 400,
+          message: 'car status must be a string',
         });
     }
     next();
