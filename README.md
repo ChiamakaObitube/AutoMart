@@ -5,22 +5,22 @@
 
 # Auto-Mart
 Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. Auto Mart users can sell their cars or buy from trusted dealerships or private sellers.
-Project Features
-User can sign up
-User can sign in
-User( Seller) can create a car sale advertisement.
-User( Buyer) can make a purchase order.
-User(Buyer) can update the price of a purchase order.
-User(Seller) can mark his/her posted car AD as sold.
-User(Seller) can update the price of his/her car AD.
-User can view a specific car
-User can view all unsold cars
-User can view all unsold cars within a price range
-User (Admin) can view all cars whether unsold or sold..
-User (Admin) can delete a car.
-User can view all new unsold cars.
-User can view all used unsold cars.
-User can flag/report a car AD as fraudulent.
+## Project Features
+* User can sign up
+* User can sign in
+* User( Seller) can create a car sale advertisement.
+* User( Buyer) can make a purchase order.
+* User(Buyer) can update the price of a purchase order.
+* User(Seller) can mark his/her posted car AD as sold.
+* User(Seller) can update the price of his/her car AD.
+* User can view a specific car
+* User can view all unsold cars
+* User can view all unsold cars within a price range
+* User (Admin) can view all cars whether unsold or sold..
+* User (Admin) can delete a car.
+* User can view all new unsold cars.
+* User can view all used unsold cars.
+* User can flag/report a car AD as fraudulent.
 
 ## Authentication
 A user is authenticated during login and only an authenticated user can have access to the resources.
@@ -46,5 +46,11 @@ Link can be found here: https://www.pivotaltracker.com/n/projects/2345935
 
 ## Author
 Chiamaka Obitube
+
+## Acknowledgments
+Special thanks to the Andela Learning community and Developer Circle, Lagos.
+
+## Developer's Notes
+This is a work in progress. Reviews and comments are highly appreciated.
 
 
