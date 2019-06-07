@@ -8,11 +8,11 @@ Auto Mart is an online marketplace for automobiles of diverse makes, model or bo
 ## Project Features
 * User can sign up
 * User can sign in
-* User( Seller) can create a car sale advertisement.
-* User( Buyer) can make a purchase order.
-* User(Buyer) can update the price of a purchase order.
-* User(Seller) can mark his/her posted car AD as sold.
-* User(Seller) can update the price of his/her car AD.
+* User (Seller) can create a car sale advertisement.
+* User (Buyer) can make a purchase order.
+* User (Buyer) can update the price of a purchase order.
+* User (Seller) can mark his/her posted car AD as sold.
+* User (Seller) can update the price of his/her car AD.
 * User can view a specific car
 * User can view all unsold cars
 * User can view all unsold cars within a price range
@@ -33,16 +33,16 @@ A user is authenticated during login and only an authenticated user can have acc
 * JAVASCRIPT
 
 
-## Current State
-Still in Development
-
 ## Link to GitHub Pages
 https://chiamakaobitube.github.io/AutoMart/
 
 ## Project Management
-This project is mnaged using the Pivotal Tracker project management tool.
+This project is managed using the Pivotal Tracker project management tool.
 Link can be found here: https://www.pivotaltracker.com/n/projects/2345935
 
+
+## Current State
+Still in Development
 
 ## Author
 Chiamaka Obitube
