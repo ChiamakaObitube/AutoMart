@@ -11,7 +11,7 @@ class Car {
       createdOn: Date(),
       state: data.state,
       status: 'available',
-      price: 1000000.00,
+      price: JSON.parse(10000),
       manufacturer: data.manufacturer,
       model: data.model,
       bodyType: data.bodyType,

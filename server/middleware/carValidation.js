@@ -51,14 +51,6 @@ class CarValidators {
         });
     }
 
-    if (typeof price !== 'number') {
-      return res.status(400)
-        .json({
-          status: 400,
-          message: 'car price must be a number',
-        });
-    }
-
     if (!state) {
       return res.status(400)
         .json({
