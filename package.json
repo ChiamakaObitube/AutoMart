@@ -6,7 +6,7 @@
     "scripts": {
         "test": "nyc mocha --require @babel/register --require @babel/polyfill server/test --exit",
         "build": "babel server -d build" ,
-        "start": "babel-node node ./build/app.js",
+        "start": "babel-node ./build/app.js",
         "start-dev": "nodemon --exec babel-node server/app",
         "coverage": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov ./node_modules/.bin/codecov",
         "coveralls": "nyc npm test && nyc report --reporter=text-lcov --reporter=text-html | coveralls"
