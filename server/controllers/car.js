@@ -3,17 +3,6 @@ import cars from '../database/car';
 
 class carController {
   static createNewAd(req, res) {
-    if (!req.body.email && req.body.address
-		&& !req.body.state && !req.body.status
-		&& !req.body.manufacturer && req.body.price
-		&& !req.body.model && !req.body.imageUrl
-		&& !req.body.bodyType) {
-      return res.status(400).json({
-        status: 400,
-        message: 'All fields are required',
-      });
-    }
-
     const carExist = CarModel.getSpecificCar(req.body.id);
 
 

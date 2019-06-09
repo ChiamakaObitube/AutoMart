@@ -24,7 +24,6 @@ class userController {
     return res.status(201).json({
       status: 201,
       message: 'Account created successfully.',
-      data: signupInfo,
     });
   }
 

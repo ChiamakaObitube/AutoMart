@@ -9,7 +9,7 @@ import {
   nonStringManufacturer,
   undefinedModel,
   nonStringModel,
-  undefinedPrice, 
+  undefinedPrice,
   undefinedState,
   nonStringState,
   undefinedStatus,
