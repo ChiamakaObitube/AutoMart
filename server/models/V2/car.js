@@ -4,6 +4,7 @@ const carQueries = {
 	  VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 		returning * `,
   getUserByIdQuery: 'SELECT email FROM users WHERE id = $1',
+  allCarsQuery: 'SELECT * FROM cars',
 };
 
 export default carQueries;
