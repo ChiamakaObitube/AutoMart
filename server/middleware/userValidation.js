@@ -16,13 +16,7 @@ class UserValidators {
           message: 'First name is required',
         });
     }
-    if (firstName === '') {
-      return res.status(400)
-        .send({
-          status: 400,
-          message: 'First name field cannot be empty',
-        });
-    }
+   
     if (typeof firstName !== 'string') {
       return res.status(400)
         .send({
@@ -44,13 +38,7 @@ class UserValidators {
           message: 'Last name is required',
         });
     }
-    if (lastName === '') {
-      return res.status(400)
-        .send({
-          status: 400,
-          message: 'Last name field cannot be empty',
-        });
-    }
+    
     if (typeof lastName !== 'string') {
       return res.status(400)
         .send({
@@ -72,7 +60,13 @@ class UserValidators {
           message: 'your email is required',
         });
     }
-
+    if (email.includes(' ')) {
+      return res.status(400)
+        .send({
+          status: 400,
+          message: 'email cannot include space.',
+        });
+    }
     if (typeof email !== 'string') {
       return res.status(400)
         .send({
@@ -87,13 +81,7 @@ class UserValidators {
           message: 'your address is required',
         });
     }
-    if (address === '') {
-      return res.status(400)
-        .send({
-          status: 400,
-          message: 'address field cannot be empty',
-        });
-    }
+    
     if (typeof address !== 'string') {
       return res.status(400)
         .send({
@@ -116,7 +104,8 @@ class UserValidators {
           message: 'password must be a string',
         });
     }
-    if (password === ' ') {
+
+    if (password.includes(' ')) {
       return res.status(400)
         .send({
           status: 400,
@@ -167,7 +156,6 @@ class UserValidators {
           message: 'your password is required',
         });
     }
-
     if (typeof password !== 'string') {
       return res.status(400)
         .send({
@@ -175,7 +163,7 @@ class UserValidators {
           message: 'password must be a string',
         });
     }
-    if (password === ' ') {
+    if (password.includes(' ')) {
       return res.status(400)
         .send({
           status: 400,
