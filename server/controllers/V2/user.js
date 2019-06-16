@@ -20,7 +20,7 @@ class userController {
     ];
     try {
       const { rows } = await db.query(createQuery, values);
-     
+
       return res.status(201).send({
         status: 201,
         message: 'Account created successfully',
@@ -69,7 +69,7 @@ class userController {
     const usersQuery = 'SELECT * FROM users';
     try {
       const { rows, rowCount } = await db.query(usersQuery);
-     
+
       if (!rows) {
         return res.status(404).send({
           message: 'There are no users in this database',
@@ -90,6 +90,27 @@ class userController {
     } catch (error) {
       return res.status(400).send({
         error: 'Error fetching users, try again',
+      });
+    }
+  }
+
+  static async getSpecificUser(req, res) {
+    const text = 'SELECT * FROM users WHERE email = $1';
+    try {
+      const { rows } = await db.query(text, [req.params.email]);
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'user does not exist',
+        });
+      }
+      return res.status(200).send({
+				status: 200,
+        message: 'user retrieved successfully',
+        data: rows[0],
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error fetching user, try again',
       });
     }
   }
