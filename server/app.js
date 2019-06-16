@@ -6,7 +6,7 @@ import Routes from './routes/index';
 
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: trueg }));
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
 app.use(Routes);
