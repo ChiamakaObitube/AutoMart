@@ -141,7 +141,6 @@ class userController {
         message: 'User deleted successfully',
       });
     } catch (error) {
-     
       return res.status(400).send({
         error: 'User cannot be deleted now, try again later',
       });
