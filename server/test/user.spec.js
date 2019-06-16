@@ -347,6 +347,17 @@ describe('/GET ALL USERS', () => {
       });
   });
 });
+describe('/GET a user by their email', () => {
+  it('should not return a user in the application if token is not provided ', (done) => {
+    chai.request(app)
+      .get('/api/v2/users/:email')
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
+        done();
+      });
+  });
+});
 describe('/DELETE a user by their email', () => {
   it('it should delete a user by their email', (done) => {
     chai.request(app)
