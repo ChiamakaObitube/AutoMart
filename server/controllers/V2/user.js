@@ -23,7 +23,7 @@ class userController {
 
       return res.status(201).send({
         status: 201,
-        message: 'Account created successfully',
+        message: 'Account created successfully.',
         data: rows[0].id,
       });
     } catch (error) {
@@ -103,14 +103,46 @@ class userController {
           message: 'user does not exist',
         });
       }
+      if (!req.user.isAdmin) {
+        return res.status(401).send({
+          status: 401,
+          error: 'You are not authorized to perform this action',
+        });
+      }
       return res.status(200).send({
-				status: 200,
+        status: 200,
         message: 'user retrieved successfully',
         data: rows[0],
       });
     } catch (error) {
       return res.status(400).send({
         error: 'Error fetching user, try again',
+      });
+    }
+  }
+
+  static async deleteSpecificUser(req, res) {
+    const deleteQuery = 'DELETE FROM users WHERE email = $1 returning *';
+    try {
+      const {	rows } = await db.query(deleteQuery, [req.params.email]);
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'This user does not exist',
+        });
+      }
+
+      if (!req.user.isAdmin) {
+        return res.status(401).send({
+          status: 401,
+          error: 'You are not authorized to perform this action',
+        });
+      }
+      return res.status(202).send({
+        message: 'User deleted successfully',
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'User cannot be deleted now, try again later',
       });
     }
   }

@@ -16,7 +16,7 @@ class UserValidators {
           message: 'First name is required',
         });
     }
-   
+
     if (typeof firstName !== 'string') {
       return res.status(400)
         .send({
@@ -38,7 +38,7 @@ class UserValidators {
           message: 'Last name is required',
         });
     }
-    
+
     if (typeof lastName !== 'string') {
       return res.status(400)
         .send({
@@ -81,7 +81,7 @@ class UserValidators {
           message: 'your address is required',
         });
     }
-    
+
     if (typeof address !== 'string') {
       return res.status(400)
         .send({
