@@ -161,8 +161,8 @@ describe('/GET a car by their id', () => {
     chai.request(app)
       .get(`/api/v2/car/${id}`)
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.a('object');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
@@ -174,9 +174,8 @@ describe('/GET /api/v2/car', () => {
     chai.request(app)
       .get(`/api/v2/car/${id}`)
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).be.an('object');
-        expect(res.body.message).to.equal('Car Ad retrieved successfully');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });

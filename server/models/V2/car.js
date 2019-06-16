@@ -5,6 +5,7 @@ const carQueries = {
 		returning * `,
   getUserByIdQuery: 'SELECT email FROM users WHERE id = $1',
   allCarsQuery: 'SELECT * FROM cars',
+  specificCarquery: 'SELECT * FROM cars WHERE carid = $1',
 };
 
 export default carQueries;

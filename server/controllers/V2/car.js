@@ -62,5 +62,21 @@ class carController {
       });
     }
   }
+
+  static async getSpecificCar(req, res) {
+    try {
+      const { rows } = await db.query(carQueries.specificCarquery, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'car does not exist',
+        });
+      }
+      return res.status(200).send(rows[0]);
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error fetching car, try again',
+      });
+    }
+  }
 }
 export default carController;
