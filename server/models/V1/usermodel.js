@@ -1,5 +1,4 @@
-import users from '../database/user';
-// const users = [];
+import users from '../../database/objectDatabase/user';
 
 class User {
   signup(data) {

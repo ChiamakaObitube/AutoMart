@@ -1,6 +1,6 @@
-import cars from '../database/car';
-import users from '../database/user';
-import flags from '../database/flag';
+import cars from '../../database/objectDatabase/car';
+import flags from '../../database/objectDatabase/flag';
+import users from '../../database/objectDatabase/user';
 
 class Flag {
   flagAd(data) {

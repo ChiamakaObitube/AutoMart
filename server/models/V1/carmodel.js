@@ -1,5 +1,5 @@
-import cars from '../database/car';
-import users from '../database/user';
+import cars from '../../database/objectDatabase/car';
+import users from '../../database/objectDatabase/user';
 
 class Car {
   postAd(data) {

@@ -1,5 +1,5 @@
-import CarModel from '../models/carmodel';
-import cars from '../database/car';
+import CarModel from '../../models/carmodel';
+import cars from '../../database/car';
 
 class carController {
   static createNewAd(req, res) {
