@@ -20,7 +20,7 @@ class userController {
     ];
     try {
       const { rows } = await db.query(createQuery, values);
-      console.log(rows);
+     
       return res.status(201).send({
         status: 201,
         message: 'Account created successfully',
@@ -62,6 +62,35 @@ class userController {
       });
     } catch (error) {
       return res.status(400).send('Login failed, try again');
+    }
+  }
+
+  static async getAllUsers(req, res) {
+    const usersQuery = 'SELECT * FROM users';
+    try {
+      const { rows, rowCount } = await db.query(usersQuery);
+     
+      if (!rows) {
+        return res.status(404).send({
+          message: 'There are no users in this database',
+        });
+      }
+      // Only admin can view all users
+      if (!req.user.isAdmin) {
+        return res.status(401).send({
+          status: 401,
+          error: 'You are not authorized to perform this action',
+        });
+      }
+      return res.status(200).send({
+        message: 'All users retrieved successfully',
+        data: rows,
+        rowCount,
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error fetching users, try again',
+      });
     }
   }
 }
