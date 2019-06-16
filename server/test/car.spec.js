@@ -31,8 +31,8 @@ describe('/GET /api/v2/car', () => {
       .get('/api/v2/car')
       .send(validAd)
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).be.an('object');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
@@ -169,17 +169,6 @@ describe('/GET a car by their id', () => {
 });
 
 describe('/GET /api/v2/car', () => {
-  it('it should get all cars whether sold or available', (done) => {
-    chai.request(app)
-      .get('/api/v2/car')
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).be.an('object');
-        expect(res.body.message).to.equal('All Car Ads retrieved successfully');
-        done();
-      });
-  });
-
   it('it should get a specific car by their id', (done) => {
     const id = 1;
     chai.request(app)
