@@ -5,6 +5,7 @@ const validUser = {
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
+  isAdmin: null,
 };
 
 const undefinedFirstName = {
@@ -106,6 +107,13 @@ const existingEmail = {
   firstName: 'Chioma',
   lastName: 'Umeh',
   email: 'chiomab@yahoo.com',
+  address: 'Lagos',
+  password: '23434',
+};
+const whitespaceEmail = {
+  firstName: 'Chioma',
+  lastName: 'Umeh',
+  email: 'chiomab@yahoo.com ',
   address: 'Lagos',
   password: '23434',
 };
@@ -228,6 +236,7 @@ export {
   emptyEmail,
   nonStringEmail,
   existingEmail,
+  whitespaceEmail,
   undefinedAddress,
   emptyAddress,
   nonStringAddress,

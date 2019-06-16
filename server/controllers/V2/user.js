@@ -14,7 +14,7 @@ class userController {
     const values = [
       req.body.firstName,
       req.body.lastName,
-      (req.body.email).toLowerCase(),
+      (req.body.email).trim().toLowerCase(),
       req.body.address,
       hashedPassword,
     ];
@@ -33,6 +33,35 @@ class userController {
         });
       }
       return res.status(400).send('signup failed');
+    }
+  }
+
+  static async loginUser(req, res) {
+    const query = 'SELECT * FROM users WHERE email = $1';
+    try {
+      const { rows } = await db.query(query, [req.body.email]);
+      if (!rows[0]) {
+        return res.status(400).send({
+          message: 'The credentials you provided is incorrect',
+        });
+      }
+
+      // Compares user's password with hashed paswword in the database
+      const authenticatedUser = Helper.comparePassword(req.body.password, rows[0].password);
+      if (!authenticatedUser) {
+        return res.status(401).send({
+          message: 'Authentication failed',
+        });
+      }
+
+      const token = Helper.generateToken(rows[0]);
+
+      return res.status(200).send({
+        message: 'User logged in successfully',
+        token,
+      });
+    } catch (error) {
+      return res.status(400).send('Login failed, try again');
     }
   }
 }

@@ -26,6 +26,7 @@ import {
   nonStringEmailSignin,
   undefinedPasswordSignin,
   nonStringPasswordSignin,
+  whitespaceEmail,
 } from './mockData/userMock';
 
 chai.use(chaiHttp);
@@ -175,6 +176,16 @@ describe('Test user login and signup', () => {
           done();
         });
     });
+    it('should return 400 status for white space email', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/signup')
+        .send(whitespaceEmail)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body.message).to.equal('email cannot include space.');
+          done();
+        });
+    });
     // Test for address input
     it('should return 400 status for undefined address', (done) => {
       chai.request(app)
@@ -250,7 +261,7 @@ describe('Test user login and signup', () => {
         .end((err, res) => {
           expect(res).to.have.status(200);
           res.body.should.be.a('object');
-          expect(res.body.message).to.equal('user logged in successfully');
+          expect(res.body.message).to.equal('User logged in successfully');
 
           done();
         });
@@ -308,6 +319,16 @@ describe('Test user login and signup', () => {
         .end((err, res) => {
           expect(res).to.have.status(400);
           expect(res.body.message).to.equal('password should be 5 to 30 characters long');
+          done();
+        });
+    });
+    it('should return 400 status for white space password', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/signin')
+        .send(whitespacePassword)
+        .end((err, res) => {
+          expect(res).to.have.status(400);
+          expect(res.body.message).to.equal('password cannot contain spaces');
           done();
         });
     });
