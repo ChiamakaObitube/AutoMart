@@ -78,5 +78,34 @@ class carController {
       });
     }
   }
+
+  static async updateCarAdStatus(req, res) {
+    try {
+      const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
+      const values = [
+        req.params.id,
+        'sold',
+      ];
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'car does not exist',
+        });
+      }
+      const markSold = await db.query(carQueries.markCarAsSoldQuery, values);
+      return res.status(200).send({
+        status: 200,
+        data: {
+          carid: markSold.rows[0].id,
+          status: markSold.rows[0].status,
+          message: 'Car successfully marked as sold',
+        },
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({
+        error: 'Error updating car status, try again',
+      });
+    }
+  }
 }
 export default carController;
