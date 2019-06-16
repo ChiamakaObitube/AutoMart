@@ -193,14 +193,13 @@ describe('/PATCH update a car price', () => {
       });
   });
 });
-describe('/PATCH update a car status', () => {
-  it('it should update a specific car status', (done) => {
+describe('/PATCH mark car ad as sold', () => {
+  it('it should mark car as sold', (done) => {
     chai.request(app)
       .patch('/api/v2/car/:id/status')
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.a('object');
-        expect(res.body.message).to.equal('car successfully marked as sold');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
