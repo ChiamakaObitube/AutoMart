@@ -5,10 +5,11 @@ import Authentication from '../middleware/authToken';
 
 const router = Router();
 
-router.post('/auth/signup', signupValidator, userController.userSignup);
-router.post('/auth/signin', signinValidator, userController.loginUser);
-router.get('/users', Authentication, userController.getAllUsers);
-router.delete('/users/:email', Authentication, userController.deleteUser);
+ router.post('/auth/signup', signupValidator, userController.userSignup);
+//  router.post('/auth/signin', signinValidator, userController.loginUser);
+
+// router.get('/users', Authentication, userController.getAllUsers);
+// router.delete('/users/:email', Authentication, userController.deleteUser);
 
 
 export default router;
