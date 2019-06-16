@@ -8,7 +8,7 @@ const app = express();
 
 app.use('/api/v2', UserRoutes);
 app.use('/api/v1', OrderRoutes);
-app.use('/api/v1', CarRoutes);
+app.use('/api/v2', CarRoutes);
 app.use('/api/v1', FlagRoutes);
 
 // app.use((req, res, next) => {
