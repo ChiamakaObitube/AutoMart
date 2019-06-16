@@ -359,13 +359,12 @@ describe('/GET a user by their email', () => {
   });
 });
 describe('/DELETE a user by their email', () => {
-  it('it should delete a user by their email', (done) => {
+  it('should not return a user in the application if token is not provided ', (done) => {
     chai.request(app)
       .delete('/api/v2/users/:email')
       .end((err, res) => {
-        expect(res).to.have.status(202);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('User deleted successfully');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });

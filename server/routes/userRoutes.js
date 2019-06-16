@@ -9,7 +9,7 @@ router.post('/auth/signup', signupValidator, userController.userSignup);
 router.post('/auth/signin', signinValidator, userController.loginUser);
 router.get('/users', Authentication, userController.getAllUsers);
 router.get('/users/:email', Authentication, userController.getSpecificUser);
-// router.delete('/users/:email', Authentication, userController.deleteUser);
+router.delete('/users/:email', Authentication, userController.deleteSpecificUser);
 
 
 export default router;
