@@ -1,6 +1,6 @@
-import UserModel from '../models/usermodel';
-import Helper from '../middleware/helper';
-import users from '../database/user';
+import UserModel from '../../models/V1/usermodel';
+import Helper from '../../middleware/helper';
+import users from '../../database/objectDatabase/user';
 
 
 class userController {
@@ -18,8 +18,6 @@ class userController {
     const hashedPassword = Helper.hashPassword(req.body.password);
     req.body.password = hashedPassword;
 
-
-    const signupInfo = UserModel.signup(req.body);
 
     return res.status(201).json({
       status: 201,

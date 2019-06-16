@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import carController from '../controllers/car';
+import carController from '../controllers/V2/car';
 import {
   postAdValidator,
   updateAdPriceValidator,

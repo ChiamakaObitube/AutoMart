@@ -1,5 +1,5 @@
-import CarModel from '../models/carmodel';
-import FlagModel from '../models/flagModel';
+import CarModel from '../../models/carmodel';
+import FlagModel from '../../models/flagModel';
 
 class flagController {
   static flagAd(req, res) {
