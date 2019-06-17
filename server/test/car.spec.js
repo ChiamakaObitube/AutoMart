@@ -186,9 +186,8 @@ describe('/PATCH update a car price', () => {
     chai.request(app)
       .patch(updateUrl)
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('car price updated successfully');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
