@@ -158,6 +158,28 @@ class carController {
     }
   }
 
+  static async getAllNewAvailableCars(req, res) {
+    try {
+      const { rows, rowCount } = await db.query(carQueries.newAvailableCarsQuery);
+      
+      if (rowCount === 0) {
+        return res.status(404).send({
+          message: 'No results',
+        });
+      }
+
+      return res.status(200).send({
+        message: 'new available cars retrieved successfully',
+        data: rows,
+        rowCount,
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error fetching available cars, try again',
+      });
+    }
+  }
+
   static async deleteCarAd(req, res) {
     try {
       const { rows } = await db.query(carQueries.deleteCarByIdQuery, [req.params.id]);
@@ -166,12 +188,12 @@ class carController {
           message: 'This car does not exist',
         });
       }
-      // if (!req.user.isAdmin) {
-      //   return res.status(401).send({
-      //     status: 401,
-      //     error: 'You are not authorized to perform this action',
-      //   });
-      // }
+      if (!req.user.isAdmin) {
+        return res.status(401).send({
+          status: 401,
+          error: 'You are not authorized to perform this action',
+        });
+      }
       return res.status(202).send({
         message: 'Car deleted successfully',
       });
