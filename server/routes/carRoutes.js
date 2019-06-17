@@ -22,7 +22,7 @@ router.get('/car/status/available', Authentication, carController.availableCars)
 // router.get('/car/status/available/minPrice/maxPrice',
 // getAvailableCarsWithinPriceRangeValidator, carController.getAvailableCarsMinMaxPrice);
 router.get('/car/status/available/new', carController.getAllNewAvailableCars);
-// router.get('/car/status/available/used', carController.getAllUsedAvailableCars);
+router.get('/car/status/available/used', carController.getAllUsedAvailableCars);
 router.delete('/car/:id', Authentication, carController.deleteCarAd);
 
 
