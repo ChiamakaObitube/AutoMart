@@ -157,5 +157,30 @@ class carController {
       });
     }
   }
+
+  static async deleteCarAd(req, res) {
+    try {
+      const { rows } = await db.query(carQueries.deleteCarByIdQuery, [req.params.id]);
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'This car does not exist',
+        });
+      }
+      // if (!req.user.isAdmin) {
+      //   return res.status(401).send({
+      //     status: 401,
+      //     error: 'You are not authorized to perform this action',
+      //   });
+      // }
+      return res.status(202).send({
+        message: 'Car deleted successfully',
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(400).send({
+        error: 'Car cannot be deleted now, try again later',
+      });
+    }
+  }
 }
 export default carController;

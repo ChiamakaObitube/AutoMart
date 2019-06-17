@@ -291,9 +291,8 @@ describe('/DELETE a car by their id', () => {
     chai.request(app)
       .delete(`/api/v2/car/${id}`)
       .end((err, res) => {
-        expect(res).to.have.status(202);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('Purchase order deleted successfully');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
