@@ -220,18 +220,17 @@ describe('/GET all available cars', () => {
       .end((err, res) => {
         expect(res).to.have.status(403);
         res.body.should.have.property('message');
-
         done();
       });
   });
 });
 describe('/GET all new available cars', () => {
-  it('it should get all new available cars', (done) => {
+  it('it should not get all new available cars if user is not authenticated', (done) => {
     chai.request(app)
       .get('/api/v2/car/status/available/new')
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.an('object');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
@@ -287,9 +286,8 @@ describe('/GET all available cars within a price range', () => {
 });
 describe('/DELETE a car by their id', () => {
   it('it should delete a car by their id', (done) => {
-    const id = 1;
     chai.request(app)
-      .delete(`/api/v2/car/${id}`)
+      .delete('/api/v2/car/:id')
       .end((err, res) => {
         expect(res).to.have.status(403);
         res.body.should.have.property('message');
