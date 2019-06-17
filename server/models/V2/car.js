@@ -9,6 +9,7 @@ const carQueries = {
   getCarByIdQuery: 'SELECT carid FROM cars WHERE carid = $1',
   markCarAsSoldQuery: 'UPDATE cars SET status = $2 WHERE carid = $1 returning carid, status',
   updateCarPriceQuery: 'UPDATE cars SET price = $2 WHERE carid = $1 and status=\'available\' returning carid, price',
+  availableCarsQuery: 'SELECT * FROM cars WHERE status = \'available\' ',
 };
 
 export default carQueries;
