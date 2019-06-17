@@ -107,5 +107,34 @@ class carController {
       });
     }
   }
+
+  static async updateCarAdPrice(req, res) {
+    try {
+      const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
+      const values = [
+        req.params.id,
+        req.body.price,
+      ];
+      // Car ad price can only be updated if car status is available
+      const updatedCarPrice = await db.query(carQueries.updateCarPriceQuery, values);
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'car does not exist',
+        });
+      }
+      return res.status(200).send({
+        status: 200,
+        data: {
+          carid: updatedCarPrice.rows[0].id,
+          price: updatedCarPrice.rows[0].price,
+          message: 'Car price updated successfully',
+        },
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error updating car price, try again',
+      });
+    }
+  }
 }
 export default carController;
