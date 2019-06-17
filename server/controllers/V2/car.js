@@ -136,5 +136,26 @@ class carController {
       });
     }
   }
+
+  static async availableCars(req, res) {
+    try {
+      const { rows, rowCount } = await db.query(carQueries.availableCarsQuery);
+      if (rowCount === 0) {
+        return res.status(404).send({
+          message: 'There are no available cars',
+        });
+      }
+
+      return res.status(200).send({
+        message: 'Available cars retrieved successfully',
+        data: rows,
+        rowCount,
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error fetching available cars, try again',
+      });
+    }
+  }
 }
 export default carController;

@@ -144,6 +144,16 @@ describe('POST /api/v2/car', () => {
         done();
       });
   });
+  it('it should return 400 status if car bodyType  is undefined', (done) => {
+    chai.request(app)
+      .post('/api/v2/car')
+      .send(undefinedStatus)
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
+        done();
+      });
+  });
   // it('it should return 400 status if car image is not uploaded', (done) => {
   //   chai.request(app)
   //     .post('/api/v2/car')
@@ -204,12 +214,13 @@ describe('/PATCH mark car ad as sold', () => {
   });
 });
 describe('/GET all available cars', () => {
-  it('it should get all unsold cars', (done) => {
+  it('it should not get all unsold cars if user is not authenticated', (done) => {
     chai.request(app)
       .get('/api/v2/car/status/available')
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.a('object');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
+
         done();
       });
   });
