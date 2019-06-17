@@ -161,7 +161,6 @@ class carController {
   static async getAllNewAvailableCars(req, res) {
     try {
       const { rows, rowCount } = await db.query(carQueries.newAvailableCarsQuery);
-      
       if (rowCount === 0) {
         return res.status(404).send({
           message: 'No results',
@@ -176,6 +175,27 @@ class carController {
     } catch (error) {
       return res.status(400).send({
         error: 'Error fetching available cars, try again',
+      });
+    }
+  }
+
+  static async getAllUsedAvailableCars(req, res) {
+    try {
+      const { rows, rowCount } = await db.query(carQueries.usedAvailableCarsQuery);
+      if (rowCount === 0) {
+        return res.status(404).send({
+          message: 'No results',
+        });
+      }
+
+      return res.status(200).send({
+        message: 'used available cars retrieved successfully',
+        data: rows,
+        rowCount,
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error fetching used available cars, try again',
       });
     }
   }

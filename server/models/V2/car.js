@@ -12,6 +12,7 @@ const carQueries = {
   availableCarsQuery: 'SELECT * FROM cars WHERE status = \'available\' ',
   deleteCarByIdQuery: 'DELETE FROM cars WHERE carid = $1 returning *',
   newAvailableCarsQuery: 'SELECT * FROM cars WHERE status=\'available\' AND state=\'new\' ',
+  usedAvailableCarsQuery: 'SELECT * FROM cars WHERE status=\'available\' AND state=\'used\' ',
 };
 
 export default carQueries;

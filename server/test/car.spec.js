@@ -240,8 +240,8 @@ describe('/GET all used available cars', () => {
     chai.request(app)
       .get('/api/v2/car/status/available/used')
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.an('object');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
