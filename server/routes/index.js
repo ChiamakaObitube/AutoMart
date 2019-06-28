@@ -9,7 +9,7 @@ const app = express();
 app.use('/api/v2', UserRoutes);
 app.use('/api/v1', OrderRoutes);
 app.use('/api/v2', CarRoutes);
-app.use('/api/v1', FlagRoutes);
+app.use('/api/v2', FlagRoutes);
 
 // app.use((req, res, next) => {
 //   const error = new Error('4 Oh Not found');
