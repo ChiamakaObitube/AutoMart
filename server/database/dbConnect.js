@@ -17,6 +17,7 @@ const createTables = () => {
   DROP TABLE IF EXISTS users CASCADE;
   DROP TABLE IF EXISTS cars RESTRICT;
   DROP TABLE IF EXISTS orders CASCADE;
+  DROP TABLE IF EXISTS flagged CASCADE;
 
   CREATE TABLE users(
 			"id" SERIAL NOT NULL PRIMARY KEY,
@@ -45,7 +46,7 @@ const createTables = () => {
 
      CREATE TABLE orders(
       "orderId" SERIAL NOT NULL PRIMARY KEY ,
-      "carId" BIGINT NOT NULL ,
+      "carId" INTEGER NOT NULL ,
       "buyerEmail" VARCHAR(100) NOT NULL , 
       "createdOn" TIMESTAMP,
       "status" VARCHAR(10) NOT NULL,
@@ -53,6 +54,14 @@ const createTables = () => {
       "priceOffered" FLOAT NOT NULL 
 			
     );
+    CREATE TABLE flagged(
+     "flaggedId" SERIAL NOT NULL PRIMARY KEY,
+     "carId" BIGINT NOT NULL,
+     "reason" VARCHAR(200) NOT NULL,
+     "createdOn" TIMESTAMP,
+     "description" VARCHAR(400) NOT NULL,
+     "reportedBy" VARCHAR(100) NOT NULL
+);
     `;
 
   pool.query(queryText)

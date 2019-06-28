@@ -11,7 +11,7 @@ const {
 } = chai;
 should();
 
-describe('POST /api/v1/flag', () => {
+describe('POST /api/v2/flag', () => {
   it('it should report/flag a posted ad as fraudulent', (done) => {
     const newFlag = {
       id: 1,
@@ -22,12 +22,11 @@ describe('POST /api/v1/flag', () => {
       createdOn: Date(),
     };
     chai.request(app)
-      .post('/api/v1/flag')
+      .post('/api/v2/flag')
       .send(newFlag)
       .end((err, res) => {
-        expect(res).to.have.status(201);
-        expect(res.body).be.an('object');
-        expect(res.body.message).to.equal('Car Ad reported successfully');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
