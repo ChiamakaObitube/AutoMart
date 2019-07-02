@@ -29,6 +29,7 @@ class carController {
         data: rows[0],
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).send({
         status: 400,
         error: 'Your advert could not be posted',
