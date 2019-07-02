@@ -60,8 +60,8 @@ describe('/GET /api/v2/order', () => {
     chai.request(app)
       .get('/api/v2/order')
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).be.an('object');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
