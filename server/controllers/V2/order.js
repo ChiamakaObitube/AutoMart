@@ -41,12 +41,12 @@ class orderController {
           message: 'There are no orders in this database',
         });
       }
-      // if (!req.user.isAdmin) {
-      //   return res.status(401).send({
-      //     status: 401,
-      //     error: 'You are not authorized to perform this action',
-      //   });
-      // }
+      if (!req.user.isAdmin) {
+        return res.status(401).send({
+          status: 401,
+          error: 'You are not authorized to perform this action',
+        });
+      }
       return res.status(200).send({
         message: 'All cars retrieved successfully',
         data: rows,
