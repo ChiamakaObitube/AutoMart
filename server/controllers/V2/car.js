@@ -29,7 +29,6 @@ class carController {
         data: rows[0],
       });
     } catch (error) {
-      console.log(error);
       return res.status(400).send({
         status: 400,
         error: 'Your advert could not be posted',
@@ -102,7 +101,6 @@ class carController {
         },
       });
     } catch (error) {
-      console.log(error);
       return res.status(400).send({
         error: 'Error updating car status, try again',
       });
@@ -219,7 +217,6 @@ class carController {
         message: 'Car deleted successfully',
       });
     } catch (error) {
-      console.log(error);
       return res.status(400).send({
         error: 'Car cannot be deleted now, try again later',
       });

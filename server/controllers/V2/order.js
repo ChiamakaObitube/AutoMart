@@ -14,7 +14,7 @@ class orderController {
         new Date(),
         req.body.status,
         parseFloat(req.body.price),
-        parseFloat(req.body.priceOffered),
+        parseFloat(req.body.priceoffered),
       ];
 
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
@@ -70,6 +70,35 @@ class orderController {
     } catch (error) {
       return res.status(400).send({
         error: 'Error fetching order, try again',
+      });
+    }
+  }
+
+  static async updatePurchaseOrderPrice(req, res) {
+    try {
+      const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
+      const values = [
+        req.params.id,
+        req.body.priceoffered,
+      ];
+      // Purchase order price offered can only be updated if order status is pending
+      const updatedOrderPrice = await db.query(orderQueries.updateOrderPriceQuery, values);
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'order does not exist',
+        });
+      }
+      return res.status(200).send({
+        status: 200,
+        data: {
+          orderid: updatedOrderPrice.rows[0].id,
+          priceOffered: updatedOrderPrice.rows[0].priceoffered,
+          message: 'purchase order price offered updated successfully',
+        },
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error updating purchase order price offered, try again',
       });
     }
   }

@@ -84,9 +84,8 @@ describe('/PATCH update a order price offered', () => {
     chai.request(app)
       .patch(updateUrl)
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.an('object');
-        expect(res.body.message).to.equal('order price updated successfully');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
@@ -97,8 +96,8 @@ describe('/DELETE a purchase order by their id', () => {
     chai.request(app)
       .delete(`/api/v2/order/${id}`)
       .end((err, res) => {
-        expect(res).to.have.status(202);
-        expect(res.body).to.be.an('object');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
