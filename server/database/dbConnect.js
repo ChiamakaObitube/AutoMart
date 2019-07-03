@@ -15,7 +15,7 @@ pool.on('connect', () => {
 const createTables = () => {
   const queryText = `
   DROP TABLE IF EXISTS users CASCADE;
-  DROP TABLE IF EXISTS cars RESTRICT;
+  DROP TABLE IF EXISTS cars CASCADE;
   DROP TABLE IF EXISTS orders CASCADE;
   DROP TABLE IF EXISTS flagged CASCADE;
 
@@ -45,7 +45,7 @@ const createTables = () => {
     );
 
      CREATE TABLE orders(
-      "orderId" SERIAL NOT NULL PRIMARY KEY ,
+      "orderid" SERIAL NOT NULL PRIMARY KEY ,
       "carId" INTEGER NOT NULL ,
       "buyerEmail" VARCHAR(100) NOT NULL , 
       "createdOn" TIMESTAMP,
