@@ -1,5 +1,4 @@
 import orderQueries from '../../models/V2/order';
-
 import db from '../../database/index';
 
 
@@ -18,14 +17,13 @@ class orderController {
         parseFloat(req.body.priceOffered),
       ];
 
-      const { rows } = await db.query(orderQueries.createQuery, values);
+      const { rows } = await db.query(orderQueries.createOrderQuery, values);
       return res.status(201).send({
         status: 201,
         message: 'Purchase Order created successfully',
         data: rows[0],
       });
     } catch (error) {
-      console.log(error);
       return res.status(400).send({
         status: 400,
         error: 'Your order could not be  made',
@@ -48,13 +46,30 @@ class orderController {
         });
       }
       return res.status(200).send({
-        message: 'All cars retrieved successfully',
+        message: 'All orders retrieved successfully',
         data: rows,
         rowCount,
       });
     } catch (error) {
       return res.status(400).send({
         error: 'Error fetching orders, try again',
+      });
+    }
+  }
+
+  static async getSpecificOrder(req, res) {
+    try {
+      const { rows } = await db.query(orderQueries.specificOrderQuery, [req.params.id]);
+
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'order does not exist',
+        });
+      }
+      return res.status(200).send(rows[0]);
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error fetching order, try again',
       });
     }
   }

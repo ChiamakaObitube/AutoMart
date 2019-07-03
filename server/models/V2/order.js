@@ -1,9 +1,10 @@
 const orderQueries = {
-  createQuery: `INSERT INTO
+  createOrderQuery: `INSERT INTO
 		orders("carId", "buyerEmail", "createdOn", "status", "price", "priceOffered")
 	  VALUES($1, $2, $3, $4, $5, $6)
 		returning * `,
   allOrdersQuery: 'SELECT * FROM orders',
+  specificOrderQuery: 'SELECT * FROM orders WHERE orderid = $1',
 };
 
 export default orderQueries;

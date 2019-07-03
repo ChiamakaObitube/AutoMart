@@ -66,7 +66,7 @@ class carController {
 
   static async getSpecificCar(req, res) {
     try {
-      const { rows } = await db.query(carQueries.specificCarquery, [req.params.id]);
+      const { rows } = await db.query(carQueries.specificCarQuery, [req.params.id]);
       if (!rows[0]) {
         return res.status(404).send({
           message: 'car does not exist',

@@ -68,12 +68,11 @@ describe('/GET /api/v2/order', () => {
 });
 describe('/GET /api/v2/order/<order:id>', () => {
   it('it should get a specific order by their id', (done) => {
-    const id = 1;
     chai.request(app)
-      .get(`/api/v2/order/${id}`)
+      .get('/api/v2/order/:id')
       .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).be.an('object');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('message');
         done();
       });
   });
