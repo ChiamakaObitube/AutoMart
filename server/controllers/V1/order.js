@@ -1,4 +1,4 @@
-import OrderModel from '../../models/ordermodel';
+import OrderModel from '../../models/V1/ordermodel';
 
 
 class orderController {
