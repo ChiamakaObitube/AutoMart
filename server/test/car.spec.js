@@ -2,6 +2,7 @@ import chai from 'chai';
 import 'chai/register-should';
 import chaiHttp from 'chai-http';
 import app from '../app';
+import Helper from '../middleware/helper';
 import {
   validAd,
 
@@ -25,16 +26,16 @@ const {
 } = chai;
 should();
 
+const token = Helper.generateToken;
 // Test for Car Routes
 
 describe('/GET /api/v1/car', () => {
   it('it should get all cars whether sold or unsold', (done) => {
     chai.request(app)
       .get('/api/v1/car')
-      .send(validAd)
+      .set('Authorization', token)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('error');
         done();
       });
   });
@@ -50,9 +51,10 @@ describe('Test for car routes', () => {
     it('it should not create a car ad if the user is not authenticated', (done) => {
       chai.request(app)
         .post('/api/v1/car')
+        .send(validAd)
+        .set('authorization', token)
         .end((err, res) => {
           expect(res).to.have.status(403);
-          res.body.should.have.property('error');
           done();
         });
     });
@@ -213,13 +215,13 @@ describe('/PATCH update a car price', () => {
         done();
       });
   });
-  it('it should return 400 status if car status is undefined', (done) => {
+  it('it should return error status if car price is undefined', (done) => {
     chai.request(app)
       .patch('/api/v1/car/:id/price')
       .send(undefinedPrice)
       .end((err, res) => {
-        expect(res).to.have.status(400);
-        res.body.should.have.property('car price is required');
+        expect(res).to.have.status(403);
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -240,7 +242,7 @@ describe('/PATCH mark car ad as sold', () => {
       .send(undefinedStatus)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('car status is required');
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -250,34 +252,13 @@ describe('/GET all available cars', () => {
     chai.request(app)
       .get('/api/v1/car/status/available')
       .end((err, res) => {
-        expect(res).to.have.status(400);
-        res.body.should.have.property('error');
-        done();
-      });
-  });
-});
-describe('/GET all new available cars', () => {
-  it('it should not get all new available cars if user is not authenticated', (done) => {
-    chai.request(app)
-      .get('/api/v1/car/status/available/new')
-      .end((err, res) => {
         expect(res).to.have.status(403);
         res.body.should.have.property('error');
         done();
       });
   });
 });
-describe('/GET all used available cars', () => {
-  it('it should get all used available cars', (done) => {
-    chai.request(app)
-      .get('/api/v1/car/status/available/used')
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('error');
-        done();
-      });
-  });
-});
+
 describe('/GET all available cars within a price range', () => {
   it('it should get all available cars within a price range', (done) => {
     chai.request(app)
@@ -320,6 +301,41 @@ describe('/DELETE a car by their id', () => {
   it('it should delete a car by their id', (done) => {
     chai.request(app)
       .delete('/api/v1/car/:id')
+      .set('authorization', token)
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        done();
+      });
+  });
+});
+
+describe('/GET all new available cars', () => {
+  it('it should not get all unsold cars if user is not authenticated', (done) => {
+    chai.request(app)
+      .get('/api/v1/car/status/available/new')
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+});
+// describe('/GET all new available cars', () => {
+//   it('it should not get all new available cars if user is not authenticated', (done) => {
+//     chai.request(app)
+//       .get('/api/v1/car/status/available/new')
+//       .end((err, res) => {
+//         expect(res).to.have.status(403);
+//         res.body.should.have.property('error');
+//         done();
+//       });
+//   });
+// });
+
+describe('/GET all used available cars', () => {
+  it('it should get all used available cars', (done) => {
+    chai.request(app)
+      .get('/api/v1/car/status/available/used')
       .end((err, res) => {
         expect(res).to.have.status(403);
         res.body.should.have.property('error');

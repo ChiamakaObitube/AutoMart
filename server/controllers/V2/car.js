@@ -47,6 +47,7 @@ class carController {
   }
 
   // Get all cars controller
+  // Only admin can view all cars whether available or sold
   static async getAllCars(req, res) {
     try {
       const { rows, rowCount } = await db.query(carQueries.allCarsQuery);
@@ -55,7 +56,7 @@ class carController {
           message: 'There are no cars in this database',
         });
       }
-      if (!req.user.isAdmin) {
+      if (!req.user.is_admin) {
         return res.status(401).send({
           status: 401,
           error: 'You are not authorized to perform this action',
@@ -89,6 +90,7 @@ class carController {
     }
   }
 
+// A user (seller) can update the status of his ad as sold.
   static async updateCarAdStatus(req, res) {
     try {
       const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
@@ -106,9 +108,6 @@ class carController {
         status: 200,
         message: 'Car successfully marked as sold',
         data: markSold.rows[0],
-
-        // id: markSold.rows[0].id,
-        // status: markSold.rows[0].status,
       });
     } catch (error) {
       return res.status(400).send({
@@ -221,7 +220,7 @@ class carController {
           message: 'This car does not exist',
         });
       }
-      if (!req.user.isAdmin) {
+      if (!req.user.is_admin) {
         return res.status(401).send({
           status: 401,
           error: 'You are not authorized to perform this action',

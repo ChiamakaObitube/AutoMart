@@ -154,7 +154,7 @@ class userController {
   }
 
   static async makeAdmin(req, res) {
-    const makeAdminQuery = 'UPDATE users SET "isAdmin"=\'true\' WHERE "email" = $1 returning *';
+    const makeAdminQuery = 'UPDATE users SET "is_admin"=\'true\' WHERE "email" = $1 returning *';
     try {
       const { rows } = await db.query(makeAdminQuery, [req.user.email]);
       if (!rows[0]) {
@@ -163,7 +163,7 @@ class userController {
         });
       }
       return res.status(202).send({
-        message: 'User updated successfully',
+        message: 'User updated successfully',  
       });
     } catch (error) {
       return res.status(400).send({

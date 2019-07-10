@@ -66,9 +66,7 @@ describe('Test user login and signup', () => {
         .send(validUser)
         .end((err, res) => {
           expect(res).to.have.status(201);
-          res.body.should.be.a('object');
           expect(res.body.message).to.equal('Account created successfully.');
-          expect(res.body).to.have.property('token');
           done();
         });
     });
@@ -349,15 +347,13 @@ describe('Test user login and signup', () => {
   });
 
 
-  describe('PATCH apiv1/users/admin', () => {
-    it('Should sign in existing user', (done) => {
+  describe('PATCH api/v1/users/admin', () => {
+    it('Should make a user an admin', (done) => {
       chai.request(app)
         .patch('/api/v1/users/admin')
-        .send(validSignIn)
         .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body.message).to.equal('User updated successfully');
-          expect(res.body).to.have.property('token');
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
           done();
         });
     });
@@ -376,8 +372,8 @@ describe('Test user login and signup', () => {
         .patch('/api/v1/users/admin')
         .send(invalidEmailFormat)
         .end((err, res) => {
-         expect(res).to.have.status(403);
-         res.body.should.have.property('error');
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
           done();
         });
     });
