@@ -11,7 +11,7 @@
         "start-dev": "nodemon --exec babel-node server/app",
         "coverage": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov ./node_modules/.bin/codecov",
         "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
-        "coveralls": "nyc npm test && nyc report --reporter=text-lcov --reporter=text-html | coveralls"
+        "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
     },
     "repository": {
         "type": "git",
