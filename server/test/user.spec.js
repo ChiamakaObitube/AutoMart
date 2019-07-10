@@ -38,8 +38,6 @@ const {
 should();
 
 
-let authToken;
-
 describe('Tests for landing page', () => {
   it('should return 200 success status', (done) => {
     chai.request(app)
