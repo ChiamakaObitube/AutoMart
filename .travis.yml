@@ -9,8 +9,7 @@ addons:
     repo_token: 6c8df1c03b7fa63ae4a9ccaf3dd7468e6086494d03de914c52d01051dd309829
 
 before_script:
-  - curl -L 
-https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
