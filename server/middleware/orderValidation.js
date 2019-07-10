@@ -2,10 +2,10 @@ class OrderValidators {
   static postOrderValidator(req, res, next) {
     const {
       status,
-      priceoffered,
+      price_offered,
     } = req.body;
 
-    if (!priceoffered) {
+    if (!price_offered) {
       return res.status(400)
         .send({
           status: 400,
@@ -13,7 +13,7 @@ class OrderValidators {
         });
     }
 
-    if (typeof priceoffered !== 'number') {
+    if (typeof price_offered !== 'number') {
       return res.status(400)
         .json({
           status: 400,
@@ -33,9 +33,9 @@ class OrderValidators {
 
   static updateOrderPriceValidator(req, res, next) {
     const {
-      priceoffered,
+      price_offered,
     } = req.body;
-    if (!priceoffered) {
+    if (!price_offered) {
       return res.status(400)
         .send({
           status: 400,

@@ -4,13 +4,9 @@ import chaiHttp from 'chai-http';
 import app from '../app';
 import {
   validOrder,
-
+  updatePriceOffered,
   nonPendingStatus,
-  nonStringStatus,
-  undefinedPrice,
-
   undefinedPriceOfferred,
-
 } from './mockData/orderMock';
 
 chai.use(chaiHttp);
@@ -20,59 +16,60 @@ const {
 } = chai;
 should();
 
-describe('POST /api/v2/order', () => {
+describe('POST /api/v1/order', () => {
   it('should create a purchase order', (done) => {
     chai.request(app)
-      .post('/api/v2/order')
+      .post('/api/v1/order')
       .send(validOrder)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
 
   it('it should return 400 status if order status is not pending', (done) => {
     chai.request(app)
-      .post('/api/v2/order')
+      .post('/api/v1/order')
       .send(nonPendingStatus)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
+  
 
   it('it should return 400 status if order price offered is undefined', (done) => {
     chai.request(app)
-      .post('/api/v2/order')
+      .post('/api/v1/order')
       .send(undefinedPriceOfferred)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
 });
 
-describe('/GET /api/v2/order', () => {
+describe('/GET /api/v1/order', () => {
   it('it should get all orders whether accepted or pending', (done) => {
     chai.request(app)
-      .get('/api/v2/order')
+      .get('/api/v1/order')
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
 });
-describe('/GET /api/v2/order/<order:id>', () => {
+describe('/GET /api/v1/order/<order:id>', () => {
   it('it should get a specific order by their id', (done) => {
     chai.request(app)
-      .get('/api/v2/order/:id')
+      .get('/api/v1/order/:id')
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -80,12 +77,12 @@ describe('/GET /api/v2/order/<order:id>', () => {
 
 describe('/PATCH update a order price offered', () => {
   it('it should update a specific order price offered', (done) => {
-    const updateUrl = '/api/v2/order/1/price';
     chai.request(app)
-      .patch(updateUrl)
+      .patch('/api/v1/order/1/price')
+      .send(updatePriceOffered)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -94,10 +91,10 @@ describe('/DELETE a purchase order by their id', () => {
   it('it should delete a purchase order by their id', (done) => {
     const id = 1;
     chai.request(app)
-      .delete(`/api/v2/order/${id}`)
+      .delete(`/api/v1/order/${id}`)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });

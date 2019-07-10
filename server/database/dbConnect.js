@@ -21,46 +21,46 @@ const createTables = () => {
 
   CREATE TABLE users(
 			"id" SERIAL NOT NULL PRIMARY KEY,
-			"firstName" VARCHAR(30) NOT NULL,
-			"lastName" VARCHAR(30) NOT NULL,
-			"email" VARCHAR(100) UNIQUE NOT NULL,
-			"address" VARCHAR(100) NOT NULL,
+      "email" VARCHAR(100) UNIQUE NOT NULL,
+			"first_name" VARCHAR(30) NOT NULL,
+			"last_name" VARCHAR(30) NOT NULL,
 			"password" VARCHAR(255) NOT NULL,
-      "isAdmin" BOOLEAN
+      "address" VARCHAR(100) NOT NULL,
+      "is_admin" BOOLEAN
 		);
 
     CREATE TABLE cars(
-      "carid" SERIAL NOT NULL PRIMARY KEY,
-      "owner" INTEGER NOT NULL ,
-      "ownerEmail" VARCHAR(100) NOT NULL,
-      "createdOn" TIMESTAMP,
-      "model" VARCHAR(50) NOT NULL,
-      "manufacturer" VARCHAR(50) NOT NULL,
-      "price" FLOAT NOT NULL,
-      "status" VARCHAR(10) NOT NULL,
+      "id" SERIAL NOT NULL PRIMARY KEY,
+      "owner" INTEGER NOT NULL,
+      "email" VARCHAR(100) NOT NULL,
+      "created_on" TIMESTAMP,
       "state" VARCHAR(10) NOT NULL,
-      "bodyType" VARCHAR(50) NOT NULL,
-      "imageUrl" VARCHAR(200) UNIQUE NOT NULL,
+      "status" VARCHAR(10) NOT NULL,
+      "price" FLOAT NOT NULL, 
+      "manufacturer" VARCHAR(50) NOT NULL,
+      "model" VARCHAR(50) NOT NULL,   
+      "body_type" VARCHAR(50) NOT NULL,
+      "image_url" VARCHAR(200) UNIQUE NOT NULL,
       FOREIGN KEY(owner) REFERENCES users(id)
     );
 
      CREATE TABLE orders(
-      "orderid" SERIAL NOT NULL PRIMARY KEY ,
-      "carId" INTEGER NOT NULL ,
-      "buyerEmail" VARCHAR(100) NOT NULL , 
-      "createdOn" TIMESTAMP,
+      "id" SERIAL NOT NULL PRIMARY KEY ,
+      "car_id" INTEGER NOT NULL ,
+      "buyer" INTEGER NOT NULL , 
+      "created_on" TIMESTAMP,
       "status" VARCHAR(10) NOT NULL,
       "price" FLOAT NOT NULL,
-      "priceoffered" FLOAT NOT NULL 
+      "price_offered" FLOAT NOT NULL 
 			
     );
     CREATE TABLE flagged(
-     "flaggedId" SERIAL NOT NULL PRIMARY KEY,
-     "carId" BIGINT NOT NULL,
+     "id" SERIAL NOT NULL PRIMARY KEY,
+     "car_id" BIGINT NOT NULL,
+     "created_on" TIMESTAMP,
      "reason" VARCHAR(200) NOT NULL,
-     "createdOn" TIMESTAMP,
      "description" VARCHAR(400) NOT NULL,
-     "reportedBy" VARCHAR(100) NOT NULL
+     "reported_by" VARCHAR(100) NOT NULL
 );
     `;
 

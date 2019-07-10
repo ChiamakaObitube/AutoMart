@@ -8,14 +8,14 @@ class Car {
       owner: users[users.length - 1].id,
       email: users[users.length - 1].email,
       address: users[users.length - 1].address,
-      createdOn: Date(),
+      created_on: Date(),
       state: data.state,
       status: 'available',
       price: JSON.parse(10000),
       manufacturer: data.manufacturer,
       model: data.model,
-      bodyType: data.bodyType,
-      imageUrl: data.imageUrl,
+      body_type: data.body_type,
+      image_url: data.image_url,
     };
     cars.push(newAd);
     return newAd;

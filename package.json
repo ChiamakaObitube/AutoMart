@@ -10,6 +10,7 @@
         "create-table": " babel-node server/database/dbConnect.js createTables",
         "start-dev": "nodemon --exec babel-node server/app",
         "coverage": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov ./node_modules/.bin/codecov",
+        "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
         "coveralls": "nyc npm test && nyc report --reporter=text-lcov --reporter=text-html | coveralls"
     },
     "repository": {
@@ -48,6 +49,7 @@
     "devDependencies": {
         "chai": "^4.2.0",
         "chai-http": "^4.3.0",
+        "codeclimate-test-reporter": "^0.5.1",
         "coveralls": "^3.0.3",
         "eslint": "^5.16.0",
         "eslint-config-airbnb-base": "^13.1.0",

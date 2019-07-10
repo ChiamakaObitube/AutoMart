@@ -25,138 +25,149 @@ const {
 } = chai;
 should();
 
-describe('/GET /api/v2/car', () => {
+// Test for Car Routes
+
+describe('/GET /api/v1/car', () => {
   it('it should get all cars whether sold or unsold', (done) => {
     chai.request(app)
-      .get('/api/v2/car')
+      .get('/api/v1/car')
       .send(validAd)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
 });
+describe('Test for car routes', () => {
+  beforeEach((done) => {
+    done();
+  });
+  afterEach((done) => {
+    done();
+  });
+  describe('POST /api/v1/car', () => {
+    it('it should not create a car ad if the user is not authenticated', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
 
-describe('POST /api/v2/car', () => {
-  it('it should not create a car ad if the user is not authenticated', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
+    it('it should return 400 status if manufacturer is undefined', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .send(undefinedManufacturer)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
 
-  it('it should return 400 status if manufacturer is undefined', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(undefinedManufacturer)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
+    it('it should return 400 status if car manufacturer is not a string', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .send(nonStringManufacturer)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
+    it('it should return 400 status if car model is undefined', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .send(undefinedModel)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
 
-  it('it should return 400 status if car manufacturer is not a string', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(nonStringManufacturer)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
-  it('it should return 400 status if car model is undefined', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(undefinedModel)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
+    it('it should return 400 status if car model is not a string', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .send(nonStringModel)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
+    it('it should return 400 status if car price is undefined', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .send(undefinedPrice)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
 
-  it('it should return 400 status if car model is not a string', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(nonStringModel)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
-  it('it should return 400 status if car price is undefined', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(undefinedPrice)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
+    it('it should return 400 status if car state is undefined', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .send(undefinedState)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
 
-  it('it should return 400 status if car state is undefined', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(undefinedState)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
+    it('it should return 400 status if car state is not a string', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .send(nonStringState)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
+    it('it should return 400 status if car status is undefined', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .type('form')
+        .set('enctype', 'multipart/form-data')
+        .send(undefinedStatus)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
 
-  it('it should return 400 status if car state is not a string', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(nonStringState)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
-  it('it should return 400 status if car status  is undefined', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(undefinedStatus)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
-
-  it('it should return 400 status if car status is not a string', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(nonStringStatus)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
-  it('it should return 400 status if car bodyType  is undefined', (done) => {
-    chai.request(app)
-      .post('/api/v2/car')
-      .send(undefinedStatus)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
-        done();
-      });
-  });
+    it('it should return 400 status if car status is not a string', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .type('form')
+        .send(nonStringStatus)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
+    it('it should return 400 status if car bodyType  is undefined', (done) => {
+      chai.request(app)
+        .post('/api/v1/car')
+        .send(undefinedBodyType)
+        .end((err, res) => {
+          expect(res).to.have.status(403);
+          res.body.should.have.property('error');
+          done();
+        });
+    });
   // it('it should return 400 status if car image is not uploaded', (done) => {
   //   chai.request(app)
-  //     .post('/api/v2/car')
+  //     .post('/api/v1/car')
   //     .end((err, res) => {
   //       expect(res).to.have.status(400);
   //       expect(res.body).be.an('object');
@@ -164,40 +175,51 @@ describe('POST /api/v2/car', () => {
   //       done();
   //     });
   // });
+  });
 });
 describe('/GET a car by their id', () => {
   it('it should get a specific car by the given id', (done) => {
     const id = 1;
     chai.request(app)
-      .get(`/api/v2/car/${id}`)
+      .get(`/api/v1/car/${id}`)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
 });
 
-describe('/GET /api/v2/car', () => {
+describe('/GET /api/v1/car', () => {
   it('it should get a specific car by their id', (done) => {
     const id = 1;
     chai.request(app)
-      .get(`/api/v2/car/${id}`)
+      .get(`/api/v1/car/${id}`)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
 });
 describe('/PATCH update a car price', () => {
   it('it should update a specific car price', (done) => {
-    const updateUrl = '/api/v2/car/1/price';
+    const updateUrl = '/api/v1/car/1/price';
     chai.request(app)
       .patch(updateUrl)
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+  it('it should return 400 status if car status is undefined', (done) => {
+    chai.request(app)
+      .patch('/api/v1/car/:id/price')
+      .send(undefinedPrice)
+      .end((err, res) => {
+        expect(res).to.have.status(400);
+        res.body.should.have.property('car price is required');
         done();
       });
   });
@@ -205,10 +227,20 @@ describe('/PATCH update a car price', () => {
 describe('/PATCH mark car ad as sold', () => {
   it('it should mark car as sold', (done) => {
     chai.request(app)
-      .patch('/api/v2/car/:id/status')
+      .patch('/api/v1/car/:id/status')
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
+        done();
+      });
+  });
+  it('it should return 400 status if car status is undefined', (done) => {
+    chai.request(app)
+      .patch('/api/v1/car/:id/status')
+      .send(undefinedStatus)
+      .end((err, res) => {
+        expect(res).to.have.status(403);
+        res.body.should.have.property('car status is required');
         done();
       });
   });
@@ -216,10 +248,10 @@ describe('/PATCH mark car ad as sold', () => {
 describe('/GET all available cars', () => {
   it('it should not get all unsold cars if user is not authenticated', (done) => {
     chai.request(app)
-      .get('/api/v2/car/status/available')
+      .get('/api/v1/car/status/available')
       .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        expect(res).to.have.status(400);
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -227,10 +259,10 @@ describe('/GET all available cars', () => {
 describe('/GET all new available cars', () => {
   it('it should not get all new available cars if user is not authenticated', (done) => {
     chai.request(app)
-      .get('/api/v2/car/status/available/new')
+      .get('/api/v1/car/status/available/new')
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -238,10 +270,10 @@ describe('/GET all new available cars', () => {
 describe('/GET all used available cars', () => {
   it('it should get all used available cars', (done) => {
     chai.request(app)
-      .get('/api/v2/car/status/available/used')
+      .get('/api/v1/car/status/available/used')
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });
@@ -249,7 +281,7 @@ describe('/GET all used available cars', () => {
 describe('/GET all available cars within a price range', () => {
   it('it should get all available cars within a price range', (done) => {
     chai.request(app)
-      .get('/api/v2/car/status/available/minPrice/maxPrice')
+      .get('/api/v1/car/status/available/minPrice/maxPrice')
       .end((err, res) => {
         expect(res).to.have.status(200);
         expect(res.body).to.be.an('object');
@@ -258,7 +290,7 @@ describe('/GET all available cars within a price range', () => {
   });
   it('should return 400 status if min price and max price is undefined', (done) => {
     chai.request(app)
-      .post('/api/v2/car/status/available/minPrice/maxPrice')
+      .post('/api/v1/car/status/available/minPrice/maxPrice')
       .end((err, res) => {
         expect(res).to.have.status(400);
         expect(res.body.message).to.equal('car max price and min price is required');
@@ -267,7 +299,7 @@ describe('/GET all available cars within a price range', () => {
   });
   it('should return 400 status if min price is not a number', (done) => {
     chai.request(app)
-      .post('/api/v2/car/status/available/minPrice/maxPrice')
+      .post('/api/v1/car/status/available/minPrice/maxPrice')
       .end((err, res) => {
         expect(res).to.have.status(400);
         expect(res.body.message).to.equal('car min price must be a number');
@@ -276,7 +308,7 @@ describe('/GET all available cars within a price range', () => {
   });
   it('should return 400 status if max price is not a number', (done) => {
     chai.request(app)
-      .post('/api/v2/car/status/available/minPrice/maxPrice')
+      .post('/api/v1/car/status/available/minPrice/maxPrice')
       .end((err, res) => {
         expect(res).to.have.status(400);
         expect(res.body.message).to.equal('car max price must be a number');
@@ -287,10 +319,10 @@ describe('/GET all available cars within a price range', () => {
 describe('/DELETE a car by their id', () => {
   it('it should delete a car by their id', (done) => {
     chai.request(app)
-      .delete('/api/v2/car/:id')
+      .delete('/api/v1/car/:id')
       .end((err, res) => {
         expect(res).to.have.status(403);
-        res.body.should.have.property('message');
+        res.body.should.have.property('error');
         done();
       });
   });

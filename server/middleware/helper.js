@@ -19,13 +19,27 @@ class Helper {
     return /\s+@\S+\.\S+/.test(email);
   }
 
-  static generateToken(payload) {
-    const token = jwt.sign(
-      payload,
-      key, {
-        expiresIn: '1d',
-      },
-    );
+  static generateToken({
+    id,
+    email,
+    first_name,
+    last_name,
+    address,
+    password,
+    is_admin,
+  }) {
+    const token = jwt.sign({
+      id,
+      email,
+      first_name,
+      last_name,
+      address,
+      password,
+      is_admin,
+    },
+    key, {
+      expiresIn: '1d',
+    });
     return token;
   }
 }

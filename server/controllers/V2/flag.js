@@ -6,11 +6,11 @@ class flagController {
   static async flagAd(req, res) {
     try {
       const values = [
-        req.body.carId,
+        req.body.car_id,
         req.body.reason,
         new Date(),
         req.body.description,
-        req.body.reportedBy,
+        req.body.reported_by,
       ];
 
       const { rows } = await db.query(flagQueries.createQuery, values);

@@ -1,10 +1,10 @@
 import CarModel from '../../models/carmodel';
-import FlagModel from '../../models/flagModel';
+import FlagModel from '../../models/V1/flagModel';
 
 class flagController {
   static flagAd(req, res) {
-    if (!req.body.carId && !req.body.reason && !req.body.description
-			&& req.body.reportedBy) {
+    if (!req.body.car_id && !req.body.reason && !req.body.description
+			&& req.body.reported_by) {
       return res.status(400).json({
         status: 400,
         error: 'input all fields',

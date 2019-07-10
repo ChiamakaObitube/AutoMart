@@ -1,9 +1,19 @@
+import jwt from 'jsonwebtoken';
 import db from '../../database';
 import carQueries from '../../models/V2/car';
 
 
 class carController {
   static async createNewAd(req, res) {
+    // const userData = jwt.verify(request.token, process.env.jwt_secret);
+    // const {
+    //   id,
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   address,
+    //   password,
+    // } = userData;
     const status = 'available';
 
     try {
@@ -17,8 +27,8 @@ class carController {
         parseFloat(req.body.price),
         req.body.manufacturer,
         req.body.model,
-        req.body.bodyType,
-        req.body.imageUrl,
+        req.body.body_type,
+        req.body.image_url,
 
       ];
 
@@ -94,11 +104,11 @@ class carController {
       const markSold = await db.query(carQueries.markCarAsSoldQuery, values);
       return res.status(200).send({
         status: 200,
-        data: {
-          carid: markSold.rows[0].id,
-          status: markSold.rows[0].status,
-          message: 'Car successfully marked as sold',
-        },
+        message: 'Car successfully marked as sold',
+        data: markSold.rows[0],
+
+        // id: markSold.rows[0].id,
+        // status: markSold.rows[0].status,
       });
     } catch (error) {
       return res.status(400).send({
@@ -114,20 +124,24 @@ class carController {
         req.params.id,
         req.body.price,
       ];
-      // Car ad price can only be updated if car status is available
+
       const updatedCarPrice = await db.query(carQueries.updateCarPriceQuery, values);
+
       if (!rows[0]) {
-        return res.status(404).send({
-          message: 'car does not exist',
+        return res.status(400).send({
+          error: 'car does not exist',
+        });
+      }
+      // Car ad price can only be updated if car status is available
+      if (updatedCarPrice.rows[0].status === 'sold') {
+        return res.status(400).send({
+          message: 'This car is already sold.',
         });
       }
       return res.status(200).send({
         status: 200,
-        data: {
-          carid: updatedCarPrice.rows[0].id,
-          price: updatedCarPrice.rows[0].price,
-          message: 'Car price updated successfully',
-        },
+        message: 'Car price updated successfully',
+        data: updatedCarPrice.rows[0],
       });
     } catch (error) {
       return res.status(400).send({
