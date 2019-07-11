@@ -90,7 +90,7 @@ class carController {
     }
   }
 
-// A user (seller) can update the status of his ad as sold.
+  // A user (seller) can update the status of his ad as sold.
   static async updateCarAdStatus(req, res) {
     try {
       const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
@@ -169,6 +169,31 @@ class carController {
       });
     }
   }
+
+  // static getAvailableCarsMinMaxPrice(req, res) {
+  //   const {
+  //     minPrice,
+  //     maxPrice,
+  //   } = req.body;
+
+  //   const availableCars = cars.filter(car => car.status === 'available');
+
+  //   const carsWithinPriceRange = availableCars.find(car => car.price >= minPrice
+  //   && car.price <= maxPrice);
+
+  //   if (!carsWithinPriceRange) {
+  //     res.status(404).json({
+  //       status: 404,
+  //       message: 'No Avaliable cars within the price range',
+  //     });
+  //   }
+
+  //   return res.status(200).json({
+  //     status: 200,
+  //     message: 'Avaliable cars within price range retrieved successfully',
+  //     data: carsWithinPriceRange,
+  //   });
+  // }
 
   static async getAllNewAvailableCars(req, res) {
     try {
