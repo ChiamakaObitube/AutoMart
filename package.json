@@ -9,11 +9,10 @@
         "start": "babel-node ./build/app.js",
         "create-table": " babel-node server/database/dbConnect.js createTables",
         "start-dev": "nodemon --exec babel-node server/app",
-        "generate-lcov": "nyc report --reporter=text-lcov > lcov.info",  
         "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
         "coveralls-coverage": "coveralls < lcov.info",
         "codeclimate-coverage": "codeclimate-test-reporter < lcov.info",
-        "coverage": "npm run generate-lcov && npm run coveralls-coverage && npm run codeclimate-coverage"
+        "coverage": "npm run coveralls-coverage && npm run codeclimate-coverage"
     },
     "repository": {
         "type": "git",
