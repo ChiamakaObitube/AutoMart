@@ -1,4 +1,3 @@
-
 class CarValidators {
   static postAdValidator(req, res, next) {
     const {
@@ -7,9 +6,8 @@ class CarValidators {
       price,
       state,
       status,
-      imageUrl,
-      bodyType,
-
+      image_url,
+      body_type,
     } = req.body;
 
     if (!manufacturer) {
@@ -79,7 +77,7 @@ class CarValidators {
           message: 'car status must be a string',
         });
     }
-    if (!imageUrl) {
+    if (!image_url) {
       return res.status(400)
         .json({
           status: 400,
@@ -87,14 +85,14 @@ class CarValidators {
         });
     }
 
-    if (typeof imageUrl !== 'string') {
+    if (typeof image_url !== 'string') {
       return res.status(400)
         .json({
           status: 400,
           message: 'car image url must be a string',
         });
     }
-    if (!bodyType) {
+    if (!body_type) {
       return res.status(400)
         .json({
           status: 400,
@@ -102,7 +100,7 @@ class CarValidators {
         });
     }
 
-    if (typeof bodyType !== 'string') {
+    if (typeof body_type !== 'string') {
       return res.status(400)
         .json({
           status: 400,

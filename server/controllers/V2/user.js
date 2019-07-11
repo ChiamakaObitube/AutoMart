@@ -5,26 +5,32 @@ class userController {
   static async userSignup(req, res) {
     const hashedPassword = Helper.hashPassword(req.body.password);
     req.body.password = hashedPassword;
+    const is_admin = false;
+
+
 
     const createQuery = `INSERT INTO
-		users("firstName", "lastName", "email", "address", "password")
-	  VALUES($1, $2, $3, $4, $5)
+		users("first_name", "last_name", "email", "address", "password", "is_admin")
+	  VALUES($1, $2, $3, $4, $5, $6)
 		returning * `;
 
     const values = [
-      req.body.firstName,
-      req.body.lastName,
+      req.body.first_name,
+      req.body.last_name,
       (req.body.email).trim().toLowerCase(),
       req.body.address,
       hashedPassword,
+      is_admin,
     ];
     try {
       const { rows } = await db.query(createQuery, values);
+      const token = Helper.generateToken(rows[0]);
 
       return res.status(201).send({
         status: 201,
         message: 'Account created successfully.',
-        data: rows[0].id,
+        token,
+        data: rows[0],
       });
     } catch (error) {
       if (error.routine === '_bt_check_unique') {
@@ -76,7 +82,7 @@ class userController {
         });
       }
       // Only admin can view all users
-      if (!req.user.isAdmin) {
+      if (!req.user.is_admin) {
         return res.status(401).send({
           status: 401,
           error: 'You are not authorized to perform this action',
@@ -103,7 +109,7 @@ class userController {
           message: 'user does not exist',
         });
       }
-      if (!req.user.isAdmin) {
+      if (!req.user.is_admin) {
         return res.status(401).send({
           status: 401,
           error: 'You are not authorized to perform this action',
@@ -131,7 +137,7 @@ class userController {
         });
       }
 
-      if (!req.user.isAdmin) {
+      if (!req.user.is_admin) {
         return res.status(401).send({
           status: 401,
           error: 'You are not authorized to perform this action',
@@ -143,6 +149,25 @@ class userController {
     } catch (error) {
       return res.status(400).send({
         error: 'User cannot be deleted now, try again later',
+      });
+    }
+  }
+
+  static async makeAdmin(req, res) {
+    const makeAdminQuery = 'UPDATE users SET "is_admin"=\'true\' WHERE "email" = $1 returning *';
+    try {
+      const { rows } = await db.query(makeAdminQuery, [req.user.email]);
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'This user does not exist',
+        });
+      }
+      return res.status(202).send({
+        message: 'User updated successfully',  
+      });
+    } catch (error) {
+      return res.status(400).send({
+        error: 'Error updating user to Admin, try again later',
       });
     }
   }

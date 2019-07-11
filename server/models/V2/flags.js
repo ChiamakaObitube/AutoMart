@@ -1,6 +1,6 @@
 const flagQueries = {
   createQuery: `INSERT INTO
-		flagged( "carId", "reason", "createdOn", "description", "reportedBy")
+		flagged( "car_id", "reason", "created_on", "description", "reported_by")
 	  VALUES($1, $2, $3, $4, $5)
 		returning * `,
 };

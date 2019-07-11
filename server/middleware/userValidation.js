@@ -1,15 +1,15 @@
 class UserValidators {
   static signupValidator(req, res, next) {
     const {
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       email,
       address,
       password,
     } = req.body;
 
     // First name validation
-    if (firstName === undefined) {
+    if (first_name === undefined) {
       return res.status(400)
         .send({
           status: 400,
@@ -17,21 +17,21 @@ class UserValidators {
         });
     }
 
-    if (typeof firstName !== 'string') {
+    if (typeof first_name !== 'string') {
       return res.status(400)
         .send({
           status: 400,
           message: 'First name must be a string',
         });
     }
-    if (!/^([A-Za-z]){2,25}$/.test(firstName)) {
+    if (!/^([A-Za-z]){2,25}$/.test(first_name)) {
       return res.status(400).json({
         status: '400',
         message: 'First name must be an alphabet with length 2 to 25',
       });
     }
 
-    if (lastName === undefined) {
+    if (last_name === undefined) {
       return res.status(400)
         .send({
           status: 400,
@@ -39,14 +39,14 @@ class UserValidators {
         });
     }
 
-    if (typeof lastName !== 'string') {
+    if (typeof last_name !== 'string') {
       return res.status(400)
         .send({
           status: 400,
           message: 'Last name must be a string',
         });
     }
-    if (!/^([A-Za-z-]){2,25}$/.test(lastName)) {
+    if (!/^([A-Za-z-]){2,25}$/.test(last_name)) {
       return res.status(400).json({
         status: '400',
         message: 'Last name must be an alphabet with length 2 to 25',
@@ -179,7 +179,38 @@ class UserValidators {
     }
     next();
   }
-}
-const { signupValidator, signinValidator, loginCheck } = UserValidators;
 
-export { signupValidator, signinValidator, loginCheck };
+  static makeAdminValidator(req, res, next) {
+    const {
+      email,
+    } = req.body;
+
+    if (!email) {
+      return res.status(400)
+        .send({
+          status: 400,
+          message: 'your email is required',
+        });
+    }
+
+    if (typeof email !== 'string') {
+      return res.status(400)
+        .send({
+          status: 400,
+          message: 'email must be a string',
+        });
+    }
+    const checkEmailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+    if (!checkEmailRegex.test(email)) {
+      return res.status(400).send({
+        status: 400,
+        message: 'email address format is invalid',
+      });
+    }
+    next();
+  }
+}
+
+const { signupValidator, signinValidator, makeAdminValidator, loginCheck } = UserValidators;
+export { signupValidator, signinValidator, makeAdminValidator, loginCheck,
+};

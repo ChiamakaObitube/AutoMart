@@ -1,9 +1,19 @@
+import jwt from 'jsonwebtoken';
 import db from '../../database';
 import carQueries from '../../models/V2/car';
 
 
 class carController {
   static async createNewAd(req, res) {
+    // const userData = jwt.verify(request.token, process.env.jwt_secret);
+    // const {
+    //   id,
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   address,
+    //   password,
+    // } = userData;
     const status = 'available';
 
     try {
@@ -17,8 +27,8 @@ class carController {
         parseFloat(req.body.price),
         req.body.manufacturer,
         req.body.model,
-        req.body.bodyType,
-        req.body.imageUrl,
+        req.body.body_type,
+        req.body.image_url,
 
       ];
 
@@ -37,6 +47,7 @@ class carController {
   }
 
   // Get all cars controller
+  // Only admin can view all cars whether available or sold
   static async getAllCars(req, res) {
     try {
       const { rows, rowCount } = await db.query(carQueries.allCarsQuery);
@@ -45,7 +56,7 @@ class carController {
           message: 'There are no cars in this database',
         });
       }
-      if (!req.user.isAdmin) {
+      if (!req.user.is_admin) {
         return res.status(401).send({
           status: 401,
           error: 'You are not authorized to perform this action',
@@ -79,6 +90,7 @@ class carController {
     }
   }
 
+// A user (seller) can update the status of his ad as sold.
   static async updateCarAdStatus(req, res) {
     try {
       const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
@@ -94,11 +106,8 @@ class carController {
       const markSold = await db.query(carQueries.markCarAsSoldQuery, values);
       return res.status(200).send({
         status: 200,
-        data: {
-          carid: markSold.rows[0].id,
-          status: markSold.rows[0].status,
-          message: 'Car successfully marked as sold',
-        },
+        message: 'Car successfully marked as sold',
+        data: markSold.rows[0],
       });
     } catch (error) {
       return res.status(400).send({
@@ -114,20 +123,24 @@ class carController {
         req.params.id,
         req.body.price,
       ];
-      // Car ad price can only be updated if car status is available
+
       const updatedCarPrice = await db.query(carQueries.updateCarPriceQuery, values);
+
       if (!rows[0]) {
-        return res.status(404).send({
-          message: 'car does not exist',
+        return res.status(400).send({
+          error: 'car does not exist',
+        });
+      }
+      // Car ad price can only be updated if car status is available
+      if (updatedCarPrice.rows[0].status === 'sold') {
+        return res.status(400).send({
+          message: 'This car is already sold.',
         });
       }
       return res.status(200).send({
         status: 200,
-        data: {
-          carid: updatedCarPrice.rows[0].id,
-          price: updatedCarPrice.rows[0].price,
-          message: 'Car price updated successfully',
-        },
+        message: 'Car price updated successfully',
+        data: updatedCarPrice.rows[0],
       });
     } catch (error) {
       return res.status(400).send({
@@ -207,7 +220,7 @@ class carController {
           message: 'This car does not exist',
         });
       }
-      if (!req.user.isAdmin) {
+      if (!req.user.is_admin) {
         return res.status(401).send({
           status: 401,
           error: 'You are not authorized to perform this action',

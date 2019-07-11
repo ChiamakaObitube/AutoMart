@@ -11,7 +11,7 @@ cloudinary.config({
 
 const cloudinaryImage = (req, res, next) => {
   cloudinary.v2.uploader.upload(req.file.path, (error, result) => {
-    req.body.imageUrl = result.secure_url;
+    req.body.image_url = result.secure_url;
     return next();
   });
 };

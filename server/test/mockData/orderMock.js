@@ -5,7 +5,7 @@ const validOrder = {
   status: 'pending',
   state: 'new',
   price: parseFloat(400000.00),
-  priceOffered: parseFloat(30000000.00),
+  price_offered: parseFloat(30000000.00),
 };
 const undefinedCarId = {
   id: 1,
@@ -13,7 +13,7 @@ const undefinedCarId = {
   status: 'pending',
   state: 'new',
   price: parseFloat(400000.00),
-  priceOffered: parseFloat(30000000.00),
+  price_offered: parseFloat(30000000.00),
 };
 
 const nonIntegerCarId = {
@@ -23,7 +23,7 @@ const nonIntegerCarId = {
   status: 'pending',
   state: 'new',
   price: parseFloat(400000.00),
-  priceOffered: parseFloat(30000000.00),
+  price_offered: parseFloat(30000000.00),
 };
 
 const nonPendingStatus = {
@@ -31,7 +31,7 @@ const nonPendingStatus = {
   car_id: null,
   state: 'new',
   price: parseFloat(400000.00),
-  priceOffered: parseFloat(30000000.00),
+  price_offered: parseFloat(30000000.00),
 };
 
 
@@ -42,7 +42,7 @@ const nonStringStatus = {
   status: 'pending',
   state: 'new',
   price: parseFloat(400000.00),
-  priceOffered: parseFloat(30000000.00),
+  price_offered: parseFloat(30000000.00),
 };
 
 const undefinedPrice = {
@@ -52,7 +52,7 @@ const undefinedPrice = {
   status: 'pending',
   state: 'new',
 
-  priceOffered: parseFloat(30000000.00),
+  price_offered: parseFloat(30000000.00),
 };
 
 const nonFloatPrice = {
@@ -62,7 +62,7 @@ const nonFloatPrice = {
   status: 'pending',
   state: 'new',
   price: 'parseFloat(400000.00)',
-  priceOffered: parseFloat(30000000.00),
+  price_offered: parseFloat(30000000.00),
 };
 const undefinedPriceOfferred = {
   id: 1,
@@ -81,7 +81,11 @@ const nonFloatPriceOffered = {
   status: 'pending',
   state: 'new',
   price: parseFloat(400000.00),
-  priceOffered: 'parseFloat(30000000.00)',
+  price_offered: 'parseFloat(30000000.00)',
+};
+const updatePriceOffered = {
+  id: 1,
+  price_offered: parseFloat(30000000.00),
 };
 export {
   validOrder,
@@ -93,4 +97,5 @@ export {
   nonFloatPrice,
   undefinedPriceOfferred,
   nonFloatPriceOffered,
+  updatePriceOffered,
 };

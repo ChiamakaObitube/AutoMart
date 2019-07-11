@@ -1,171 +1,170 @@
 const validUser = {
-
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
-  isAdmin: null,
+  is_admin: null,
 };
 
 const undefinedFirstName = {
-  lastName: 'Umeh',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 const emptyFirstName = {
-  firstName: '',
-  lastName: 'Umeh',
+  first_name: '',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 
 const nonStringFirstName = {
-  firstName: ['Chioma'],
-  lastName: 'Umeh',
+  first_name: ['Chioma'],
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 const invalidFirstNameCharacter = {
-  firstName: 'C2ioma',
-  lastName: 'Umeh',
+  first_name: 'C2ioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 const invalidFirstNameLength = {
-  firstName: 'C',
-  lastName: 'Umeh',
+  first_name: 'C',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 
 const undefinedLastName = {
-  firstName: 'Chioma',
+  first_name: 'Chioma',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 
 const emptyLastName = {
-  firstName: 'Chioma',
-  lastName: '',
+  first_name: 'Chioma',
+  last_name: '',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 
 const nonStringLastName = {
-  firstName: 'Chioma',
-  lastName: ['Umeh'],
+  first_name: 'Chioma',
+  last_name: ['Umeh'],
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 const invalidLastNameCharacter = {
-  firstName: 'Chioma',
-  lastName: 'U2meh',
+  first_name: 'Chioma',
+  last_name: 'U2meh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 const invalidLastNameLength = {
-  firstName: 'Chioma',
-  lastName: 'u',
+  first_name: 'Chioma',
+  last_name: 'u',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 const undefinedEmail = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   address: 'Lagos',
   password: '23434',
 };
 
 const emptyEmail = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: '',
   address: 'Lagos',
   password: '23434',
 };
 
 const nonStringEmail = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: ['chiomab@yahoo.com'],
   address: 'Lagos',
   password: '23434',
 };
 
 const existingEmail = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '23434',
 };
 const whitespaceEmail = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com ',
   address: 'Lagos',
   password: '23434',
 };
 
 const undefinedPassword = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
 };
 
 const emptyPassword = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '',
 };
 
 const nonStringPassword = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: ['23434', '23434'],
 };
 
 const invalidPasswordLength = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: '2',
 };
 const whitespacePassword = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: 'Lagos',
   password: ' ',
 };
 
 const undefinedAddress = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   password: '23434',
 };
 
 const emptyAddress = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: '',
   password: '23434',
@@ -173,8 +172,8 @@ const emptyAddress = {
 };
 
 const nonStringAddress = {
-  firstName: 'Chioma',
-  lastName: 'Umeh',
+  first_name: 'Chioma',
+  last_name: 'Umeh',
   email: 'chiomab@yahoo.com',
   address: ['Lagos'],
   password: '23434',
@@ -184,7 +183,10 @@ const validSignIn = {
   email: 'chiomab@yahoo.com',
   password: '23434',
 };
-
+const invalidEmailFormat = {
+  email: 'chiomabanyahoo.com',
+  password: '23434',
+};
 const undefinedEmailSignin = {
   password: '23434',
 };
@@ -246,6 +248,7 @@ export {
   invalidPasswordLength,
   whitespacePassword,
   validSignIn,
+  invalidEmailFormat,
   undefinedEmailSignin,
   emptyEmailSignin,
   nonStringEmailSignin,

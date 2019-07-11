@@ -6,9 +6,9 @@ class Flag {
   flagAd(data) {
     const newFlag = {
       id: flags.length + 1,
-      carId: cars[cars.length - 1].id,
-      reportedBy: users[users.length - 1].id,
-      createdOn: Date(),
+      car_id: cars[cars.length - 1].id,
+      reported_by: users[users.length - 1].id,
+      created_on: Date(),
       reason: data.reason,
       description: data.description,
     };
