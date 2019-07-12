@@ -13,7 +13,6 @@
         "coveralls-coverage": "coveralls < lcov.info ./node_modules/.bin/codecov",
         "codeclimate-coverage": "codeclimate-test-reporter < lcov.info ./node_modules/.bin/codecov",
         "coverage": "npm run coveralls-coverage && npm run codeclimate-coverage && npm run coveralls"
-       
     },
     "repository": {
         "type": "git",
@@ -45,6 +44,7 @@
         "express": "^4.16.4",
         "jsonwebtoken": "^8.5.1",
         "morgan": "^1.9.1",
+        "multer": "^1.4.1",
         "pg": "^7.11.0"
     },
     "devDependencies": {
