@@ -1,19 +1,12 @@
-import jwt from 'jsonwebtoken';
 import db from '../../database';
 import carQueries from '../../models/V2/car';
+import Helper from '../../middleware/helper';
 
+const token = Helper.generateToken(rows[0]);
 
 class carController {
   static async createNewAd(req, res) {
-    // const userData = jwt.verify(request.token, process.env.jwt_secret);
-    // const {
-    //   id,
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   address,
-    //   password,
-    // } = userData;
+    // const token = Helper.generateToken(rows[0]);
     const status = 'available';
 
     try {
@@ -37,11 +30,12 @@ class carController {
         status: 201,
         message: 'Car ad created successfully',
         data: rows[0],
+        token,
       });
     } catch (error) {
       return res.status(400).send({
         status: 400,
-        error: 'Your advert could not be posted',
+        error: 'Your advert could not be posted, please try again',
       });
     }
   }
@@ -65,10 +59,12 @@ class carController {
       return res.status(200).send({
         message: 'All cars retrieved successfully',
         data: rows,
+token,
         rowCount,
       });
     } catch (error) {
       return res.status(400).send({
+        status: 400,
         error: 'Error fetching cars, try again',
       });
     }
@@ -79,18 +75,20 @@ class carController {
       const { rows } = await db.query(carQueries.specificCarQuery, [req.params.id]);
       if (!rows[0]) {
         return res.status(404).send({
+          status: 404,
           message: 'car does not exist',
         });
       }
-      return res.status(200).send(rows[0]);
+      return res.status(200).send(token, rows[0]);
     } catch (error) {
       return res.status(400).send({
+        status: 400,
         error: 'Error fetching car, try again',
       });
     }
   }
 
-// A user (seller) can update the status of his ad as sold.
+  // A user (seller) can update the status of his ad as sold.
   static async updateCarAdStatus(req, res) {
     try {
       const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
@@ -108,9 +106,11 @@ class carController {
         status: 200,
         message: 'Car successfully marked as sold',
         data: markSold.rows[0],
+        token,
       });
     } catch (error) {
       return res.status(400).send({
+        status: 400,
         error: 'Error updating car status, try again',
       });
     }
@@ -141,9 +141,11 @@ class carController {
         status: 200,
         message: 'Car price updated successfully',
         data: updatedCarPrice.rows[0],
+        token,
       });
     } catch (error) {
       return res.status(400).send({
+        status: 400,
         error: 'Error updating car price, try again',
       });
     }
@@ -161,14 +163,48 @@ class carController {
       return res.status(200).send({
         message: 'Available cars retrieved successfully',
         data: rows,
+        token,
         rowCount,
       });
     } catch (error) {
       return res.status(400).send({
+        status: 400,
         error: 'Error fetching available cars, try again',
       });
     }
   }
+
+  // static getAvailableCarsMinMaxPrice(req, res) {
+  //   try {
+  //     const {
+  //       minPrice,
+  //       maxPrice,
+  //     } = req.body;
+
+  //     const availableCars = cars.filter(car => car.status === 'available');
+
+  //     const carsWithinPriceRange = availableCars.find(car => car.price >= minPrice
+  //   && car.price <= maxPrice);
+
+  //     if (!carsWithinPriceRange) {
+  //       res.status(404).json({
+  //         status: 404,
+  //         message: 'No Avaliable cars within the price range',
+  //       });
+  //     }
+
+  //     return res.status(200).json({
+  //       status: 200,
+  //       message: 'Avaliable cars within price range retrieved successfully',
+  //       data: carsWithinPriceRange,
+  //     });
+  //   } catch (error) {
+  //     return res.status(400).send({
+  //       status: 400,
+  //       error: 'Error fetching available cars, try again',
+  //     });
+  //   }
+  // }
 
   static async getAllNewAvailableCars(req, res) {
     try {
@@ -182,10 +218,12 @@ class carController {
       return res.status(200).send({
         message: 'new available cars retrieved successfully',
         data: rows,
+        token,
         rowCount,
       });
     } catch (error) {
       return res.status(400).send({
+        status: 400,
         error: 'Error fetching available cars, try again',
       });
     }
@@ -196,6 +234,7 @@ class carController {
       const { rows, rowCount } = await db.query(carQueries.usedAvailableCarsQuery);
       if (rowCount === 0) {
         return res.status(404).send({
+          status: 404,
           message: 'No results',
         });
       }
@@ -203,10 +242,12 @@ class carController {
       return res.status(200).send({
         message: 'used available cars retrieved successfully',
         data: rows,
+        token,
         rowCount,
       });
     } catch (error) {
       return res.status(400).send({
+        status: 400,
         error: 'Error fetching used available cars, try again',
       });
     }
@@ -226,11 +267,12 @@ class carController {
           error: 'You are not authorized to perform this action',
         });
       }
-      return res.status(202).send({
+      return res.status(202).send({token,
         message: 'Car deleted successfully',
       });
     } catch (error) {
       return res.status(400).send({
+        status: 400,
         error: 'Car cannot be deleted now, try again later',
       });
     }

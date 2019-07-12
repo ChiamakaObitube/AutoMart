@@ -1,5 +1,8 @@
 import orderQueries from '../../models/V2/order';
 import db from '../../database/index';
+import Helper from '../../middleware/helper';
+
+const token = Helper.generateToken(rows[0]);
 
 
 class orderController {
@@ -22,6 +25,7 @@ class orderController {
         status: 201,
         message: 'Purchase Order created successfully',
         data: rows[0],
+        token,
       });
     } catch (error) {
       return res.status(400).send({
@@ -48,6 +52,7 @@ class orderController {
       return res.status(200).send({
         message: 'All orders retrieved successfully',
         data: rows,
+        token,
         rowCount,
       });
     } catch (error) {
@@ -66,7 +71,7 @@ class orderController {
           message: 'order does not exist',
         });
       }
-      return res.status(200).send(rows[0]);
+      return res.status(200).send(token, rows[0]);
     } catch (error) {
       return res.status(400).send({
         error: 'Error fetching order, try again',
@@ -90,12 +95,14 @@ class orderController {
       }
       if (updatedOrderPrice.rows[0].status !== 'pending') {
         return res.status(400).send({
+          token,
           message: 'you can only update a pending order.',
         });
       }
       return res.status(200).send({
         status: 200,
         data: updatedOrderPrice.rows[0],
+        token,
       });
     } catch (error) {
       return res.status(400).send({
