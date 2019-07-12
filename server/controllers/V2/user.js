@@ -8,6 +8,7 @@ class userController {
     const is_admin = false;
 
 
+
     const createQuery = `INSERT INTO
 		users("first_name", "last_name", "email", "address", "password", "is_admin")
 	  VALUES($1, $2, $3, $4, $5, $6)
@@ -62,10 +63,8 @@ class userController {
       const token = Helper.generateToken(rows[0]);
 
       return res.status(200).send({
-        status: 200,
         message: 'User logged in successfully',
         token,
-        data: rows[0],
       });
     } catch (error) {
       return res.status(400).send('Login failed, try again');
@@ -154,8 +153,6 @@ class userController {
     }
   }
 
-
-  // Make user an admin to be able to access admin routes.
   static async makeAdmin(req, res) {
     const makeAdminQuery = 'UPDATE users SET "is_admin"=\'true\' WHERE "email" = $1 returning *';
     try {
@@ -166,7 +163,7 @@ class userController {
         });
       }
       return res.status(202).send({
-        message: 'User updated successfully',
+        message: 'User updated successfully',  
       });
     } catch (error) {
       return res.status(400).send({

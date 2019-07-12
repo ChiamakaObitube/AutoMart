@@ -320,6 +320,17 @@ describe('/GET all new available cars', () => {
       });
   });
 });
+// describe('/GET all new available cars', () => {
+//   it('it should not get all new available cars if user is not authenticated', (done) => {
+//     chai.request(app)
+//       .get('/api/v1/car/status/available/new')
+//       .end((err, res) => {
+//         expect(res).to.have.status(403);
+//         res.body.should.have.property('error');
+//         done();
+//       });
+//   });
+// });
 
 describe('/GET all used available cars', () => {
   it('it should get all used available cars', (done) => {
