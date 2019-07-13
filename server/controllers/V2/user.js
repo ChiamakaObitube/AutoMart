@@ -47,7 +47,8 @@ class userController {
       console.log(error);
       if (error.routine === '_bt_check_unique') {
         return res.status(400).send({
-          message: 'User with that EMAIL already exist',
+          status: 400,
+          error: 'User with that EMAIL already exist',
         });
       }
       return res.status(400).send({ error: 'signup failed' });
