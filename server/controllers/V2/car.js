@@ -1,19 +1,11 @@
-import jwt from 'jsonwebtoken';
+import Helper from '../../middleware/helper'
 import db from '../../database';
 import carQueries from '../../models/V2/car';
 
 
 class carController {
   static async createNewAd(req, res) {
-    // const userData = jwt.verify(request.token, process.env.jwt_secret);
-    // const {
-    //   id,
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   address,
-    //   password,
-    // } = userData;
+    
     const status = 'available';
 
     try {
