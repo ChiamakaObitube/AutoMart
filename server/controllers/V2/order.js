@@ -1,8 +1,7 @@
 import orderQueries from '../../models/V2/order';
 import db from '../../database/index';
+ft-view-cars-within-price-range-endpoint-db-166735646
 import Helper from '../../middleware/helper';
-
-
 
 
 class orderController {
@@ -26,7 +25,6 @@ class orderController {
         status: 201,
         message: 'Purchase Order created successfully',
         data: rows[0],
-        token,
       });
     } catch (error) {
       return res.status(400).send({
@@ -54,7 +52,6 @@ class orderController {
       return res.status(200).send({
         message: 'All orders retrieved successfully',
         data: rows,
-        token,
         rowCount,
       });
     } catch (error) {
@@ -73,6 +70,7 @@ class orderController {
           message: 'order does not exist',
         });
       }
+     ft-view-cars-within-price-range-endpoint-db-166735646
       const token = Helper.generateToken(rows[0]);
       return res.status(200).send(token, rows[0]);
     } catch (error) {
@@ -98,7 +96,6 @@ class orderController {
       }
       if (updatedOrderPrice.rows[0].status !== 'pending') {
         return res.status(400).send({
-          token,
           message: 'you can only update a pending order.',
         });
       }
@@ -106,7 +103,6 @@ class orderController {
       return res.status(200).send({
         status: 200,
         data: updatedOrderPrice.rows[0],
-        token,
       });
     } catch (error) {
       return res.status(400).send({
