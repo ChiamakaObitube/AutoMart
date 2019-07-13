@@ -33,7 +33,6 @@ class Helper {
       first_name,
       last_name,
       address,
-      password,
       is_admin,
     },
     key, {

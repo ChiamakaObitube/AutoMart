@@ -181,9 +181,8 @@ describe('Test for car routes', () => {
 });
 describe('/GET a car by their id', () => {
   it('it should get a specific car by the given id', (done) => {
-    const id = 1;
     chai.request(app)
-      .get(`/api/v1/car/${id}`)
+      .get('/api/v1/car/:car-id')
       .end((err, res) => {
         expect(res).to.have.status(403);
         res.body.should.have.property('error');
@@ -194,9 +193,8 @@ describe('/GET a car by their id', () => {
 
 describe('/GET /api/v1/car', () => {
   it('it should get a specific car by their id', (done) => {
-    const id = 1;
     chai.request(app)
-      .get(`/api/v1/car/${id}`)
+      .get('/api/v1/car/:car-id')
       .end((err, res) => {
         expect(res).to.have.status(403);
         res.body.should.have.property('error');
@@ -206,9 +204,8 @@ describe('/GET /api/v1/car', () => {
 });
 describe('/PATCH update a car price', () => {
   it('it should update a specific car price', (done) => {
-    const updateUrl = '/api/v1/car/1/price';
     chai.request(app)
-      .patch(updateUrl)
+      .patch('/api/v1/car/:car-id/price')
       .end((err, res) => {
         expect(res).to.have.status(403);
         res.body.should.have.property('error');
@@ -217,7 +214,7 @@ describe('/PATCH update a car price', () => {
   });
   it('it should return error status if car price is undefined', (done) => {
     chai.request(app)
-      .patch('/api/v1/car/:id/price')
+      .patch('/api/v1/car/:car-id/price')
       .send(undefinedPrice)
       .end((err, res) => {
         expect(res).to.have.status(403);
@@ -229,7 +226,7 @@ describe('/PATCH update a car price', () => {
 describe('/PATCH mark car ad as sold', () => {
   it('it should mark car as sold', (done) => {
     chai.request(app)
-      .patch('/api/v1/car/:id/status')
+      .patch('/api/v1/car/:car-id/status')
       .end((err, res) => {
         expect(res).to.have.status(403);
         res.body.should.have.property('error');
@@ -238,7 +235,7 @@ describe('/PATCH mark car ad as sold', () => {
   });
   it('it should return 400 status if car status is undefined', (done) => {
     chai.request(app)
-      .patch('/api/v1/car/:id/status')
+      .patch('/api/v1/car/:car-id/status')
       .send(undefinedStatus)
       .end((err, res) => {
         expect(res).to.have.status(403);
@@ -300,7 +297,7 @@ describe('/GET all available cars within a price range', () => {
 describe('/DELETE a car by their id', () => {
   it('it should delete a car by their id', (done) => {
     chai.request(app)
-      .delete('/api/v1/car/:id')
+      .delete('/api/v1/car/:car-id')
       .set('authorization', token)
       .end((err, res) => {
         expect(res).to.have.status(403);

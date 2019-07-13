@@ -24,7 +24,7 @@ class userController {
     try {
       const { rows } = await db.query(createQuery, values);
       const token = Helper.generateToken(rows[0]);
-
+      console.log(rows[0]);
       return res.status(201).send({
         status: 201,
         message: 'Account created successfully.',
@@ -32,12 +32,16 @@ class userController {
         data: rows[0],
       });
     } catch (error) {
+      console.log(error);
       if (error.routine === '_bt_check_unique') {
         return res.status(400).send({
           message: 'User with that EMAIL already exist',
         });
       }
-      return res.status(400).send('signup failed');
+      return res.status(400).send({
+        error: 400,
+        message: 'signup failed',
+      });
     }
   }
 
@@ -68,7 +72,10 @@ class userController {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).send('Login failed, try again');
+      return res.status(400).send({
+        error: 400,
+        message: 'Login failed, try again',
+      });
     }
   }
 

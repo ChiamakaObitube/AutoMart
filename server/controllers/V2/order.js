@@ -2,7 +2,7 @@ import orderQueries from '../../models/V2/order';
 import db from '../../database/index';
 import Helper from '../../middleware/helper';
 
-const token = Helper.generateToken(rows[0]);
+
 
 
 class orderController {
@@ -21,6 +21,7 @@ class orderController {
       ];
 
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
+      const token = Helper.generateToken(rows[0]);
       return res.status(201).send({
         status: 201,
         message: 'Purchase Order created successfully',
@@ -49,6 +50,7 @@ class orderController {
           error: 'You are not authorized to perform this action',
         });
       }
+      const token = Helper.generateToken(rows[0]);
       return res.status(200).send({
         message: 'All orders retrieved successfully',
         data: rows,
@@ -71,6 +73,7 @@ class orderController {
           message: 'order does not exist',
         });
       }
+      const token = Helper.generateToken(rows[0]);
       return res.status(200).send(token, rows[0]);
     } catch (error) {
       return res.status(400).send({
@@ -99,6 +102,7 @@ class orderController {
           message: 'you can only update a pending order.',
         });
       }
+      const token = Helper.generateToken(rows[0]);
       return res.status(200).send({
         status: 200,
         data: updatedOrderPrice.rows[0],

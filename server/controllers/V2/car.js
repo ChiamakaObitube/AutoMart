@@ -2,11 +2,9 @@ import db from '../../database';
 import carQueries from '../../models/V2/car';
 import Helper from '../../middleware/helper';
 
-const token = Helper.generateToken(rows[0]);
 
 class carController {
   static async createNewAd(req, res) {
-    // const token = Helper.generateToken(rows[0]);
     const status = 'available';
 
     try {
@@ -22,15 +20,16 @@ class carController {
         req.body.model,
         req.body.body_type,
         req.body.image_url,
-
       ];
 
       const { rows } = await db.query(carQueries.createQuery, values);
+      const token = Helper.generateToken(rows[0]);
+
       return res.status(201).send({
         status: 201,
         message: 'Car ad created successfully',
-        data: rows[0],
         token,
+        data: rows[0],
       });
     } catch (error) {
       return res.status(400).send({
@@ -56,10 +55,11 @@ class carController {
           error: 'You are not authorized to perform this action',
         });
       }
+      const token = Helper.generateToken(rows[0]);
       return res.status(200).send({
         message: 'All cars retrieved successfully',
         data: rows,
-token,
+        token,
         rowCount,
       });
     } catch (error) {
@@ -79,6 +79,7 @@ token,
           message: 'car does not exist',
         });
       }
+      const token = Helper.generateToken(rows[0]);
       return res.status(200).send(token, rows[0]);
     } catch (error) {
       return res.status(400).send({
@@ -101,6 +102,7 @@ token,
           message: 'car does not exist',
         });
       }
+      const token = Helper.generateToken(rows[0]);
       const markSold = await db.query(carQueries.markCarAsSoldQuery, values);
       return res.status(200).send({
         status: 200,
@@ -125,7 +127,7 @@ token,
       ];
 
       const updatedCarPrice = await db.query(carQueries.updateCarPriceQuery, values);
-
+      const token = Helper.generateToken(rows[0]);
       if (!rows[0]) {
         return res.status(400).send({
           error: 'car does not exist',
@@ -159,7 +161,7 @@ token,
           message: 'There are no available cars',
         });
       }
-
+      const token = Helper.generateToken(rows[0]);
       return res.status(200).send({
         message: 'Available cars retrieved successfully',
         data: rows,
@@ -214,7 +216,7 @@ token,
           message: 'No results',
         });
       }
-
+      const token = Helper.generateToken(rows[0]);
       return res.status(200).send({
         message: 'new available cars retrieved successfully',
         data: rows,
@@ -238,7 +240,7 @@ token,
           message: 'No results',
         });
       }
-
+      const token = Helper.generateToken(rows[0]);
       return res.status(200).send({
         message: 'used available cars retrieved successfully',
         data: rows,
@@ -267,7 +269,9 @@ token,
           error: 'You are not authorized to perform this action',
         });
       }
-      return res.status(202).send({token,
+      const token = Helper.generateToken(rows[0]);
+      return res.status(202).send({
+        token,
         message: 'Car deleted successfully',
       });
     } catch (error) {
