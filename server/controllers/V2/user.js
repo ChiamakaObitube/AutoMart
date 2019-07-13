@@ -8,15 +8,12 @@ class userController {
       req.body.password = hashedPassword;
       const is_admin = false;
 
-
       const createQuery = `INSERT INTO
 		users("first_name", "last_name", "email", "address", "password", "is_admin")
 	  VALUES($1, $2, $3, $4, $5, $6)
 		returning * `;
 
-
       const values = [
-
         req.body.first_name,
         req.body.last_name,
         (req.body.email).trim().toLowerCase(),
@@ -24,8 +21,7 @@ class userController {
         hashedPassword,
         is_admin,
       ];
-      // };
-      // ];
+
       const { rows } = await db.query(createQuery, values);
       const token = Helper.generateToken(rows[0]);
       const {
@@ -54,7 +50,7 @@ class userController {
           message: 'User with that EMAIL already exist',
         });
       }
-      return res.status(400).send('signup failed');
+      return res.status(400).send({ error: 'signup failed' });
     }
   }
 
@@ -62,6 +58,17 @@ class userController {
     const query = 'SELECT * FROM users WHERE email = $1';
     try {
       const { rows } = await db.query(query, [req.body.email]);
+      const token = Helper.generateToken(rows[0]);
+
+      // Destructuring the user data.
+      const { email, password } = rows[0];
+
+      const loggedinUser = {
+        email,
+        password,
+        token,
+      };
+      console.log('>>>>>>>>>>', loggedinUser);
       if (!rows[0]) {
         return res.status(400).send({
           message: 'The credentials you provided is incorrect',
@@ -69,18 +76,18 @@ class userController {
       }
 
       // Compares user's password with hashed paswword in the database
-      const authenticatedUser = Helper.comparePassword(req.body.password, rows[0].password);
+      //  const authenticatedUser = Helper.comparePassword(req.body.password, rows[0].password);
+      const authenticatedUser = Helper.comparePassword(req.body.password, loggedinUser.password);
       if (!authenticatedUser) {
         return res.status(401).send({
           message: 'Authentication failed',
         });
       }
 
-      const token = Helper.generateToken(rows[0]);
-
+      // console.log(authenticatedUser);
       return res.status(200).send({
         message: 'User logged in successfully',
-        token,
+        data: loggedinUser,
       });
     } catch (error) {
       return res.status(400).send({ error: 'Login failed, try again' });
