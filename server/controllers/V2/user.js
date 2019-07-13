@@ -36,6 +36,7 @@ class userController {
         address,
         is_admin,
         token,
+        error,
       };
       console.log('>>>>>>>>>>', registeredUser);
       return res.status(201).send({
