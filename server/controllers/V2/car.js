@@ -67,7 +67,7 @@ class carController {
     try {
       const { rows, rowCount } = await db.query(carQueries.allCarsQuery);
       const token = Helper.generateToken(rows);
-      const allCars = { rows, rowCount, token };
+      const allCars = { rows, token };
       if (rowCount === 0) {
         return res.status(404).send({
           message: 'There are no cars in this database',
@@ -86,6 +86,7 @@ class carController {
     } catch (error) {
       console.log(error);
       return res.status(400).send({
+        status: 400,
         error: 'Error fetching cars, try again',
       });
     }
@@ -121,19 +122,42 @@ class carController {
         req.params.id,
         'sold',
       ];
+      const updatedCarStatus = await db.query(carQueries.markCarAsSoldQuery, values);
+      const token = Helper.generateToken(updatedCarStatus);
+      const updatedCar = { updatedCarStatus, token };
+
       if (!rows[0]) {
         return res.status(404).send({
-          message: 'car does not exist',
+          status: 404,
+          error: 'car does not exist',
         });
       }
-      const markSold = await db.query(carQueries.markCarAsSoldQuery, values);
+      if (updatedCarStatus.rows[0].status === 'sold') {
+        return res.status(400).send({
+          status: 400,
+          message: 'This car is already sold.',
+        });
+      }
+      // const {
+      //   id,
+      //   status,
+      //   state,
+      //   price,
+      //   manufacturer,
+      //   model,
+      //   body_type,
+      //   image_url,
+      // } = rows[0];
+
       return res.status(200).send({
         status: 200,
         message: 'Car successfully marked as sold',
-        data: markSold.rows[0],
+        data: updatedCar,
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).send({
+        status: 400,
         error: 'Error updating car status, try again',
       });
     }
@@ -142,30 +166,40 @@ class carController {
   static async updateCarAdPrice(req, res) {
     try {
       const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
+
       const values = [
         req.params.id,
         req.body.price,
       ];
 
       const updatedCarPrice = await db.query(carQueries.updateCarPriceQuery, values);
+      const token = Helper.generateToken(updatedCarPrice);
 
       if (!rows[0]) {
         return res.status(400).send({
+          status: 400,
           error: 'car does not exist',
         });
       }
+      const updatedCar = {
+        token,
+        updatedCarPrice,
+
+      };
       // Car ad price can only be updated if car status is available
       if (updatedCarPrice.rows[0].status === 'sold') {
         return res.status(400).send({
+          status: 400,
           message: 'This car is already sold.',
         });
       }
       return res.status(200).send({
         status: 200,
         message: 'Car price updated successfully',
-        data: updatedCarPrice.rows[0],
+        data: updatedCar,
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).send({
         error: 'Error updating car price, try again',
       });
@@ -238,19 +272,27 @@ class carController {
   static async deleteCarAd(req, res) {
     try {
       const { rows } = await db.query(carQueries.deleteCarByIdQuery, [req.params.id]);
+      const token = Helper.generateToken(rows[0]);
+      const car = [
+        rows[0],
+        token,
+      ];
       if (!rows[0]) {
         return res.status(404).send({
+          status: 400,
           message: 'This car does not exist',
         });
       }
-      if (!req.user.is_admin) {
-        return res.status(401).send({
-          status: 401,
-          error: 'You are not authorized to perform this action',
-        });
-      }
+      // if (!req.user.is_admin) {
+      //   return res.status(401).send({
+      //     status: 401,
+      //     error: 'You are not authorized to perform this action',
+      //   });
+      // }
       return res.status(202).send({
+        status: 202,
         message: 'Car deleted successfully',
+        data: car,
       });
     } catch (error) {
       return res.status(400).send({
