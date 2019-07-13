@@ -47,6 +47,7 @@ class carController {
         body_type,
         image_url,
         token,
+        error,
       };
       return res.status(201).send({
         status: 201,
