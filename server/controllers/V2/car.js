@@ -1,14 +1,12 @@
-import Helper from '../../middleware/helper'
+import Helper from '../../middleware/helper';
 import db from '../../database';
 import carQueries from '../../models/V2/car';
 
 
 class carController {
   static async createNewAd(req, res) {
-    
-    const status = 'available';
-
     try {
+      const status = 'available';
       const getUser = await db.query(carQueries.getUserByIdQuery, [req.user.id]);
       const values = [
         req.user.id,
@@ -21,14 +19,39 @@ class carController {
         req.body.model,
         req.body.body_type,
         req.body.image_url,
-
       ];
 
       const { rows } = await db.query(carQueries.createQuery, values);
+      // Destructuring the user data.
+      const {
+        id,
+        owner,
+        email,
+        state,
+        created_on,
+        manufacturer,
+        model,
+        body_type,
+        image_url,
+      } = rows[0];
+      const token = Helper.generateToken(rows[0]);
+      const carData = {
+        id,
+        owner,
+        email,
+        state,
+        status,
+        created_on,
+        manufacturer,
+        model,
+        body_type,
+        image_url,
+        token,
+      };
       return res.status(201).send({
         status: 201,
         message: 'Car ad created successfully',
-        data: rows[0],
+        data: carData,
       });
     } catch (error) {
       return res.status(400).send({
@@ -43,23 +66,25 @@ class carController {
   static async getAllCars(req, res) {
     try {
       const { rows, rowCount } = await db.query(carQueries.allCarsQuery);
+      const token = Helper.generateToken(rows);
+      const allCars = { rows, rowCount, token };
       if (rowCount === 0) {
         return res.status(404).send({
           message: 'There are no cars in this database',
         });
       }
-      if (!req.user.is_admin) {
-        return res.status(401).send({
-          status: 401,
-          error: 'You are not authorized to perform this action',
-        });
-      }
+      // if (!req.user.is_admin) {
+      //   return res.status(401).send({
+      //     status: 401,
+      //     error: 'You are not authorized to perform this action',
+      //   });
+      // }
       return res.status(200).send({
         message: 'All cars retrieved successfully',
-        data: rows,
-        rowCount,
+        data: allCars,
       });
     } catch (error) {
+      console.log(error);
       return res.status(400).send({
         error: 'Error fetching cars, try again',
       });
@@ -69,20 +94,26 @@ class carController {
   static async getSpecificCar(req, res) {
     try {
       const { rows } = await db.query(carQueries.specificCarQuery, [req.params.id]);
+      const token = Helper.generateToken(rows[0]);
+      const car = [
+        rows[0],
+        token,
+      ];
       if (!rows[0]) {
         return res.status(404).send({
           message: 'car does not exist',
         });
       }
-      return res.status(200).send(rows[0]);
+      return res.status(200).send({ status: 200, data: car });
     } catch (error) {
+      console.log(error);
       return res.status(400).send({
         error: 'Error fetching car, try again',
       });
     }
   }
 
-// A user (seller) can update the status of his ad as sold.
+  // A user (seller) can update the status of his ad as sold.
   static async updateCarAdStatus(req, res) {
     try {
       const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
