@@ -3,36 +3,52 @@ import db from '../../database/index';
 
 class userController {
   static async userSignup(req, res) {
-    const hashedPassword = Helper.hashPassword(req.body.password);
-    req.body.password = hashedPassword;
-    const is_admin = false;
+    try {
+      const hashedPassword = Helper.hashPassword(req.body.password);
+      req.body.password = hashedPassword;
+      const is_admin = false;
 
 
-
-    const createQuery = `INSERT INTO
+      const createQuery = `INSERT INTO
 		users("first_name", "last_name", "email", "address", "password", "is_admin")
 	  VALUES($1, $2, $3, $4, $5, $6)
 		returning * `;
 
-    const values = [
-      req.body.first_name,
-      req.body.last_name,
-      (req.body.email).trim().toLowerCase(),
-      req.body.address,
-      hashedPassword,
-      is_admin,
-    ];
-    try {
+
+      const values = [
+
+        req.body.first_name,
+        req.body.last_name,
+        (req.body.email).trim().toLowerCase(),
+        req.body.address,
+        hashedPassword,
+        is_admin,
+      ];
+      // };
+      // ];
       const { rows } = await db.query(createQuery, values);
       const token = Helper.generateToken(rows[0]);
-
+      const {
+        id, email, first_name, last_name, password, address,
+      } = rows[0];
+      const registeredUser = {
+        id,
+        email,
+        first_name,
+        last_name,
+        password,
+        address,
+        is_admin,
+        token,
+      };
+      console.log('>>>>>>>>>>', registeredUser);
       return res.status(201).send({
         status: 201,
         message: 'Account created successfully.',
-        token,
-        data: rows[0],
+        data: registeredUser,
       });
     } catch (error) {
+      console.log(error);
       if (error.routine === '_bt_check_unique') {
         return res.status(400).send({
           message: 'User with that EMAIL already exist',
@@ -67,7 +83,7 @@ class userController {
         token,
       });
     } catch (error) {
-      return res.status(400).send('Login failed, try again');
+      return res.status(400).send({ error: 'Login failed, try again' });
     }
   }
 
@@ -163,7 +179,7 @@ class userController {
         });
       }
       return res.status(202).send({
-        message: 'User updated successfully',  
+        message: 'User updated successfully',
       });
     } catch (error) {
       return res.status(400).send({
