@@ -36,23 +36,23 @@ class userController {
         address,
         is_admin,
         token,
-        error,
       };
       console.log('>>>>>>>>>>', registeredUser);
-      return res.status(201).send({
+      return res.status(201).json({
         status: 201,
         message: 'Account created successfully.',
         data: registeredUser,
+        error,
       });
     } catch (error) {
       console.log(error);
       if (error.routine === '_bt_check_unique') {
-        return res.status(400).send({
+        return res.status(400).json({
           status: 400,
           error: 'User with that EMAIL already exist',
         });
       }
-      return res.status(400).send({ error: 'signup failed' });
+      return res.status(400).send({ status: 400, error: 'signup failed' });
     }
   }
 
