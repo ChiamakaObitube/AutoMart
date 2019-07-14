@@ -86,6 +86,7 @@ class userController {
       };
 
       return res.status(200).send({
+        status: 200,
         message: 'User logged in successfully',
         data: loggedinUser,
       });
