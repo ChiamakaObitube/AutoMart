@@ -149,42 +149,78 @@ class carController {
       });
     } catch (error) {
       return res.status(500).send({
-        status: 'error',
+        status: 500,
         error,
       });
     }
   }
 
   static async updateCarAdPrice(req, res) {
+    // try {
+    //   // const { price } = req.body;
+    //   const { token } = req;
+    //   const values = [
+    //     req.params.id,
+    //     req.body.price,
+    //   ];
+
+    //   const { rows } = await db.query(carQueries.updateCarPriceQuery, values);
+    //   const updatedCarPrice = rows[0];
+
+    //   if (!rows[0]) {
+    //     return res.status(400).send({
+    //       status: 400,
+    //       error: 'car does not exist',
+    //     });
+    //   }
+
+    //   return res.status(200).send({
+    //     status: 200,
+    //     message: 'Car price updated successfully',
+    //     data: token,
+    //     updatedCarPrice,
+
+    //   });
+    // } catch (error) {
+    //   console.log(error);
+    //   return res.status(500).send({
+    //     status: 500,
+    //     error,
+    //   });
+    // }
     try {
-      const { price } = req.body;
-      const { token } = req;
+      // const {
+      //   status
+      // } = req.body;
+      const {
+        token
+      } = req;
       const values = [
         req.params.id,
-        price,
+        req.body.price,
       ];
 
-      const { rows } = await db.query(carQueries.updateCarPriceQuery, values);
-      const updatedCarPrice = rows[0];
+      const {
+        rows
+      } = await db.query(carQueries.updateCarPriceQuery, values);
+      const updatedCar = rows[0];
 
       if (!rows[0]) {
-        return res.status(400).send({
-          status: 400,
+        return res.status(404).send({
+          status: 404,
           error: 'car does not exist',
         });
       }
 
       return res.status(200).send({
         status: 200,
-        message: 'Car price updated successfully',
-        data: token,
-        updatedCarPrice,
-
+        message: 'Car updated successfully',
+        data: updatedCar,
+        token,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
-        status: 'error',
+        status: 500,
         error,
       });
     }
