@@ -37,14 +37,12 @@ class userController {
         address,
         is_admin,
       };
-      console.log('>>>>>>>>>>', registeredUser);
       return res.status(201).json({
         status: 201,
         message: 'Account created successfully.',
         data: registeredUser,
       });
     } catch (error) {
-      console.log(error);
       if (error.routine === '_bt_check_unique') {
         return res.status(400).json({
           status: 400,
