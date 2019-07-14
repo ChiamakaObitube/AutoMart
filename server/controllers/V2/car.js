@@ -157,8 +157,8 @@ class carController {
     } catch (error) {
       console.log(error);
       return res.status(500).send({
-        status: 500,
-        error: 'Error updating car status, try again',
+        status: 'error',
+       error,
       });
     }
   }
@@ -173,7 +173,7 @@ class carController {
       ];
 
       const { rows } = await db.query(carQueries.updateCarPriceQuery, values);
-      const updatedCar = rows[0];
+      const updatedCarPrice = rows[0];
       if (!rows[0]) {
         return res.status(400).send({
           status: 400,
@@ -191,7 +191,7 @@ class carController {
       return res.status(200).send({
         status: 200,
         message: 'Car price updated successfully',
-        data: updatedCar,
+        data: updatedCarPrice,
         token,
       });
     } catch (error) {

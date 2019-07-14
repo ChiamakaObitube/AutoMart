@@ -17,7 +17,7 @@ const router = Router();
 router.post('/car', Authentication, carController.createNewAd);
 router.get('/car', Authentication, carController.getAllCars);
 router.get('/car/:id', Authentication, carController.getSpecificCar);
-router.patch('/car/:id/status', updateAdStatusValidator, Authentication, carController.updateCarAdStatus);
+router.patch('/car/:id/status', Authentication, carController.updateCarAdStatus);
 router.patch('/car/:id/price', Authentication, carController.updateCarAdPrice);
 router.get('/car/status/available', Authentication, carController.availableCars);
 router.get('/car/status/available/new', Authentication, carController.getAllNewAvailableCars);
