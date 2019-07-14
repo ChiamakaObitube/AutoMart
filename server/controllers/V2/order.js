@@ -29,6 +29,7 @@ class orderController {
       } = rows[0];
       const token = Helper.generateToken(rows[0]);
       const orderData = {
+        token,
         id,
         owner,
         car_id,
@@ -36,7 +37,6 @@ class orderController {
         status,
         created_on,
         amount,
-        token,
       };
 
       return res.status(201).send({
@@ -46,8 +46,8 @@ class orderController {
       });
     } catch (error) {
       console.log(error);
-      return res.status(400).send({
-        status: 400,
+      return res.status(500).send({
+        status: 500,
         error: 'Your order could not be  made',
       });
     }
@@ -74,6 +74,7 @@ class orderController {
       });
     } catch (error) {
       return res.status(400).send({
+        status: 500,
         error: 'Error fetching orders, try again',
       });
     }
@@ -90,7 +91,8 @@ class orderController {
       }
       return res.status(200).send(rows[0]);
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
+        status: 500,
         error: 'Error fetching order, try again',
       });
     }
@@ -126,7 +128,8 @@ class orderController {
       });
     } catch (error) {
       console.log(error);
-      return res.status(400).send({
+      return res.status(500).send({
+        status: 500,
         error: 'Error updating purchase order price offered, try again',
       });
     }

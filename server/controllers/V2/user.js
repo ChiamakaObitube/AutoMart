@@ -28,6 +28,7 @@ class userController {
         id, email, first_name, last_name, password, address,
       } = rows[0];
       const registeredUser = {
+        token,
         id,
         email,
         first_name,
@@ -35,14 +36,12 @@ class userController {
         password,
         address,
         is_admin,
-        token,
       };
       console.log('>>>>>>>>>>', registeredUser);
       return res.status(201).json({
         status: 201,
         message: 'Account created successfully.',
         data: registeredUser,
-        error,
       });
     } catch (error) {
       console.log(error);
@@ -52,7 +51,7 @@ class userController {
           error: 'User with that EMAIL already exist',
         });
       }
-      return res.status(400).send({ status: 400, error: 'signup failed' });
+      return res.status(500).send({ status: 500, error: 'signup failed' });
     }
   }
 
@@ -66,9 +65,9 @@ class userController {
       const { email, password } = rows[0];
 
       const loggedinUser = {
+        token,
         email,
         password,
-        token,
       };
       console.log('>>>>>>>>>>', loggedinUser);
       if (!rows[0]) {
@@ -92,7 +91,7 @@ class userController {
         data: loggedinUser,
       });
     } catch (error) {
-      return res.status(400).send({ error: 'Login failed, try again' });
+      return res.status(400).send({ status: 500, error: 'Login failed, try again' });
     }
   }
 
@@ -119,7 +118,7 @@ class userController {
         rowCount,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         error: 'Error fetching users, try again',
       });
     }
@@ -146,7 +145,7 @@ class userController {
         data: rows[0],
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         error: 'Error fetching user, try again',
       });
     }
@@ -172,7 +171,7 @@ class userController {
         message: 'User deleted successfully',
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         error: 'User cannot be deleted now, try again later',
       });
     }
@@ -191,7 +190,7 @@ class userController {
         message: 'User updated successfully',
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         error: 'Error updating user to Admin, try again later',
       });
     }

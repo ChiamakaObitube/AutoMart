@@ -31,26 +31,3 @@ describe('POST /api/v1/flag', () => {
       });
   });
 });
-describe('/GET /api/v1/flag', () => {
-  it('it should get all reported car Ads', (done) => {
-    chai.request(app)
-      .get('/api/v1/flag')
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).be.an('object');
-        done();
-      });
-  });
-});
-describe('/GET /api/v1/flag/<flag:id>', () => {
-  it('it should get a specific flag by their id', (done) => {
-    const id = 1;
-    chai.request(app)
-      .get(`/api/v1/flag/${id}`)
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body).be.an('object');
-        done();
-      });
-  });
-});
