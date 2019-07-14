@@ -95,8 +95,8 @@ class carController {
       });
     } catch (error) {
       return res.status(500).send({
-        status: 400,
-        error: 'Error fetching cars, try again',
+        status: 500,
+        error,
       });
     }
   }
@@ -115,7 +115,7 @@ class carController {
     } catch (error) {
       return res.status(500).send({
         status: 500,
-        error: 'Error fetching car, try again',
+        error,
       });
     }
   }
@@ -233,7 +233,7 @@ class carController {
       });
     } catch (error) {
       return res.status(500).send({
-        error: 'Error fetching available cars, try again',
+        error,
       });
     }
   }
@@ -255,7 +255,7 @@ class carController {
     } catch (error) {
       return res.status(500).send({
         status: 500,
-        error: 'Error fetching available cars, try again',
+        error,
       });
     }
   }
@@ -276,7 +276,7 @@ class carController {
     } catch (error) {
       return res.status(500).send({
         status: 500,
-        error: 'Error fetching used available cars, try again',
+        error,
       });
     }
   }

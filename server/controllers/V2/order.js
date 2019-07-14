@@ -50,7 +50,7 @@ class orderController {
     } catch (error) {
       return res.status(500).send({
         status: 500,
-        error: 'Your order could not be  made',
+        error,
       });
     }
   }
