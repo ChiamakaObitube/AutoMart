@@ -64,11 +64,11 @@ class userController {
       // Destructuring the user data.
       const { email, password } = rows[0];
 
-      const loggedinUser = {
+      const loggedinUser = [
         token,
         email,
         password,
-      };
+      ];
       console.log('>>>>>>>>>>', loggedinUser);
       if (!rows[0]) {
         return res.status(400).send({
@@ -91,7 +91,7 @@ class userController {
         data: loggedinUser,
       });
     } catch (error) {
-      return res.status(400).send({ status: 500, error: 'Login failed, try again' });
+      return res.status(500).send({ status: 500, error: 'Login failed, try again' });
     }
   }
 
