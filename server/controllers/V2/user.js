@@ -64,13 +64,20 @@ class userController {
       // Destructuring the user data.
       const { email, password } = rows[0];
 
-      const loggedinUser = [
+      const loggedinUser = {
         token,
         email,
         password,
-      ];
+        authenticatedUser,
+      };
+      const authenticatedUser = Helper.comparePassword(req.body.password, loggedinUser.password);
+      if (!authenticatedUser) {
+        return res.status(401).send({
+          message: 'Authentication failed',
+        });
+      }
       console.log('>>>>>>>>>>', loggedinUser);
-      if (!rows[0]) {
+      if (!loggedinUser) {
         return res.status(400).send({
           message: 'The credentials you provided is incorrect',
         });
@@ -78,12 +85,7 @@ class userController {
 
       // Compares user's password with hashed paswword in the database
       //  const authenticatedUser = Helper.comparePassword(req.body.password, rows[0].password);
-      const authenticatedUser = Helper.comparePassword(req.body.password, loggedinUser.password);
-      if (!authenticatedUser) {
-        return res.status(401).send({
-          message: 'Authentication failed',
-        });
-      }
+
 
       // console.log(authenticatedUser);
       return res.status(200).send({
