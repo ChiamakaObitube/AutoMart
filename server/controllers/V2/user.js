@@ -6,7 +6,7 @@ class userController {
     try {
       const hashedPassword = Helper.hashPassword(req.body.password);
       req.body.password = hashedPassword;
-      const is_admin = false;
+      const is_admin = true;
 
       const createQuery = `INSERT INTO
 		users("first_name", "last_name", "email", "address", "password", "is_admin")
