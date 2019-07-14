@@ -63,7 +63,10 @@ class carController {
         error: 'Your advert could not be posted',
       });
     } catch (error) {
-      return error;
+      return res.status(500).send({
+        status: 500,
+        error: 'Internal Server Error',
+      });
     }
   }
 
