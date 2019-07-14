@@ -140,12 +140,12 @@ class carController {
           error: 'car does not exist',
         });
       }
-      if (rows[0].status === 'sold') {
-        return res.status(400).send({
-          status: 400,
-          error: 'This car is already sold.',
-        });
-      }
+      // if (rows[0].status === 'sold') {
+      //   return res.status(400).send({
+      //     status: 400,
+      //     error: 'This car is already sold.',
+      //   });
+      // }
 
       return res.status(200).send({
         status: 200,
@@ -182,12 +182,12 @@ class carController {
       }
       
       // Car ad price can only be updated if car status is available
-      if (rows[0].status === 'sold') {
-        return res.status(400).send({
-          status: 400,
-          error: 'This car is already sold.',
-        });
-      }
+      // if (rows[0].status === 'sold') {
+      //   return res.status(400).send({
+      //     status: 400,
+      //     error: 'This car is already sold.',
+      //   });
+      // }
       return res.status(200).send({
         status: 200,
         message: 'Car price updated successfully',
