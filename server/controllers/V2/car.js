@@ -123,7 +123,7 @@ class carController {
   // A user (seller) can update the status of his ad as sold.
   static async updateCarAdStatus(req, res) {
     try {
-      const status = 'sold';
+      const { status } = req.body;
       // const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
       const { token } = req;
       const values = [
@@ -133,7 +133,7 @@ class carController {
       // const updatedCarStatus = await db.query(carQueries.markCarAsSoldQuery, values);
       const { rows } = await db.query(carQueries.markCarAsSoldQuery, values);
 
-      const updatedCar = { rows, token };
+      const updatedCar = rows[0];
 
       if (!rows[0]) {
         return res.status(404).send({
@@ -149,7 +149,6 @@ class carController {
       // }
       // const {
       //   id,
-      //   status,
       //   state,
       //   price,
       //   manufacturer,
@@ -161,8 +160,9 @@ class carController {
       return res.status(200).send({
         status: 200,
         message: 'Car successfully marked as sold',
-        data: 
+        data:
         updatedCar,
+        token,
       });
     } catch (error) {
       console.log(error);
@@ -175,16 +175,15 @@ class carController {
 
   static async updateCarAdPrice(req, res) {
     try {
-      const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
-
+      // const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
+      const { token } = req;
       const values = [
         req.params.id,
         req.body.price,
       ];
 
-      const updatedCarPrice = await db.query(carQueries.updateCarPriceQuery, values);
-      const token = Helper.generateToken(updatedCarPrice);
-
+      const { rows } = await db.query(carQueries.updateCarPriceQuery, values);
+      const updatedCar = rows[0];
       if (!rows[0]) {
         return res.status(400).send({
           status: 400,
@@ -197,22 +196,23 @@ class carController {
 
       // };
       // Car ad price can only be updated if car status is available
-      if (updatedCarPrice.rows[0].status === 'sold') {
-        return res.status(400).send({
-          status: 400,
-          error: 'This car is already sold.',
-        });
-      }
+      // if (updatedCarPrice.rows[0].status === 'sold') {
+      //   return res.status(400).send({
+      //     status: 400,
+      //     error: 'This car is already sold.',
+      //   });
+      // }
       return res.status(200).send({
         status: 200,
         message: 'Car price updated successfully',
-        data: updatedCar,
+        data: updatedCar, 
+token,
       });
     } catch (error) {
       console.log(error);
       return res.status(500).send({
         status: 500,
-        error: 'Error updating car price, try again',
+        error,
       });
     }
   }
