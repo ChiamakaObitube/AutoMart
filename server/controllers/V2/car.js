@@ -55,7 +55,7 @@ class carController {
       });
     } catch (error) {
       return res.status(500).send({
-        status: 500,
+        status: 'error',
         error: 'Your advert could not be posted',
       });
     }
