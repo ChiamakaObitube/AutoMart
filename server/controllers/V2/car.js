@@ -36,6 +36,7 @@ class carController {
       } = rows[0];
       const token = Helper.generateToken(rows[0]);
       const carData = {
+        token,
         id,
         owner,
         email,
@@ -46,7 +47,6 @@ class carController {
         model,
         body_type,
         image_url,
-        token,
       };
       return res.status(201).send({
         status: 201,
@@ -54,8 +54,8 @@ class carController {
         data: carData,
       });
     } catch (error) {
-      return res.status(400).send({
-        status: 400,
+      return res.status(500).send({
+        status: 500,
         error: 'Your advert could not be posted',
       });
     }
@@ -67,7 +67,7 @@ class carController {
     try {
       const { rows, rowCount } = await db.query(carQueries.allCarsQuery);
       const token = Helper.generateToken(rows);
-      const allCars = { rows, token };
+      const allCars = { token, rows };
       if (rowCount === 0) {
         return res.status(404).send({
           message: 'There are no cars in this database',
@@ -85,7 +85,7 @@ class carController {
       });
     } catch (error) {
       console.log(error);
-      return res.status(400).send({
+      return res.status(500).send({
         status: 400,
         error: 'Error fetching cars, try again',
       });
@@ -97,8 +97,8 @@ class carController {
       const { rows } = await db.query(carQueries.specificCarQuery, [req.params.id]);
       const token = Helper.generateToken(rows[0]);
       const car = [
-        rows[0],
         token,
+        rows[0],
       ];
       if (!rows[0]) {
         return res.status(404).send({
@@ -108,7 +108,7 @@ class carController {
       return res.status(200).send({ status: 200, data: car });
     } catch (error) {
       console.log(error);
-      return res.status(400).send({
+      return res.status(500).send({
         error: 'Error fetching car, try again',
       });
     }
@@ -124,7 +124,7 @@ class carController {
       ];
       const updatedCarStatus = await db.query(carQueries.markCarAsSoldQuery, values);
       const token = Helper.generateToken(updatedCarStatus);
-      const updatedCar = { updatedCarStatus, token };
+      const updatedCar = { token, updatedCarStatus };
 
       if (!rows[0]) {
         return res.status(404).send({
@@ -156,8 +156,8 @@ class carController {
       });
     } catch (error) {
       console.log(error);
-      return res.status(400).send({
-        status: 400,
+      return res.status(500).send({
+        status: 500,
         error: 'Error updating car status, try again',
       });
     }
@@ -200,7 +200,8 @@ class carController {
       });
     } catch (error) {
       console.log(error);
-      return res.status(400).send({
+      return res.status(500).send({
+        status: 500,
         error: 'Error updating car price, try again',
       });
     }
@@ -221,7 +222,7 @@ class carController {
         rowCount,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         error: 'Error fetching available cars, try again',
       });
     }
@@ -242,7 +243,8 @@ class carController {
         rowCount,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
+        status: 500,
         error: 'Error fetching available cars, try again',
       });
     }
@@ -263,7 +265,8 @@ class carController {
         rowCount,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
+        status: 500,
         error: 'Error fetching used available cars, try again',
       });
     }
@@ -274,8 +277,8 @@ class carController {
       const { rows } = await db.query(carQueries.deleteCarByIdQuery, [req.params.id]);
       const token = Helper.generateToken(rows[0]);
       const car = [
-        rows[0],
         token,
+        rows[0],
       ];
       if (!rows[0]) {
         return res.status(404).send({
@@ -295,7 +298,8 @@ class carController {
         data: car,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
+        status: 500,
         error: 'Car cannot be deleted now, try again later',
       });
     }

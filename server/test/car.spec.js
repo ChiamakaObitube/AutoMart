@@ -167,16 +167,6 @@ describe('Test for car routes', () => {
           done();
         });
     });
-  // it('it should return 400 status if car image is not uploaded', (done) => {
-  //   chai.request(app)
-  //     .post('/api/v1/car')
-  //     .end((err, res) => {
-  //       expect(res).to.have.status(400);
-  //       expect(res.body).be.an('object');
-  //       expect(res.body.message).to.equal('car image is required');
-  //       done();
-  //     });
-  // });
   });
 });
 describe('/GET a car by their id', () => {
@@ -320,20 +310,9 @@ describe('/GET all new available cars', () => {
       });
   });
 });
-// describe('/GET all new available cars', () => {
-//   it('it should not get all new available cars if user is not authenticated', (done) => {
-//     chai.request(app)
-//       .get('/api/v1/car/status/available/new')
-//       .end((err, res) => {
-//         expect(res).to.have.status(403);
-//         res.body.should.have.property('error');
-//         done();
-//       });
-//   });
-// });
 
 describe('/GET all used available cars', () => {
-  it('it should get all used available cars', (done) => {
+  it('it should not get all unsold cars if user is not authenticated', (done) => {
     chai.request(app)
       .get('/api/v1/car/status/available/used')
       .end((err, res) => {
