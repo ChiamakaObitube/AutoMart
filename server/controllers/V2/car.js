@@ -1,6 +1,7 @@
 import Helper from '../../middleware/helper';
 import db from '../../database';
 import carQueries from '../../models/V2/car';
+// import verifyToken from '../../middleware';
 
 
 class carController {
@@ -20,7 +21,6 @@ class carController {
         req.body.body_type,
         req.body.image_url,
       ];
-
       const { rows } = await db.query(carQueries.createQuery, values);
       // Destructuring the user data.
       const {
@@ -34,7 +34,10 @@ class carController {
         body_type,
         image_url,
       } = rows[0];
-      const token = Helper.generateToken(rows[0]);
+        // const { email } = req.token;
+      const token = Helper.generateToken(email);
+      // const { token } = req;
+      // email = verifyToken(token);
       const carData = {
         token,
         id,
@@ -48,16 +51,19 @@ class carController {
         body_type,
         image_url,
       };
-      return res.status(201).send({
-        status: 201,
-        message: 'Car ad created successfully',
-        data: carData,
-      });
-    } catch (error) {
-      return res.status(500).send({
+      if (carData) {
+        return res.status(201).send({
+          status: 201,
+          message: 'Car ad created successfully',
+          data: carData,
+        });
+      }
+      return res.status(400).send({
         status: 'error',
         error: 'Your advert could not be posted',
       });
+    } catch (error) {
+      return error;
     }
   }
 
