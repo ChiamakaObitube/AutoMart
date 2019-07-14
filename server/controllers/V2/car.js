@@ -7,8 +7,10 @@ import carQueries from '../../models/V2/car';
 class carController {
   static async createNewAd(req, res) {
     try {
+      const { token } = req;
       const status = 'available';
       const getUser = await db.query(carQueries.getUserByIdQuery, [req.user.id]);
+      
       const values = [
         req.user.id,
         getUser.rows[0].email,
@@ -22,7 +24,7 @@ class carController {
         req.body.image_url,
       ];
       const { rows } = await db.query(carQueries.createQuery, values);
-      // Destructuring the user data.
+      // Destructuring the car data.
       const {
         id,
         owner,
@@ -34,10 +36,7 @@ class carController {
         body_type,
         image_url,
       } = rows[0];
-        // const { email } = req.token;
-      // const token = Helper.generateToken(email);
-      const { token } = req;
-      // email = verifyToken(token);
+      
       const carData = {
         token,
         id,
@@ -63,6 +62,7 @@ class carController {
         error: 'Your advert could not be posted',
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).send({
         status: 500,
         error,
