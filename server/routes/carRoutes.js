@@ -1,11 +1,12 @@
 import { Router } from 'express';
 import carController from '../controllers/V2/car';
+/*
 import {
   postAdValidator,
   updateAdPriceValidator,
   updateAdStatusValidator,
   getAvailableCarsWithinPriceRangeValidator,
-} from '../middleware/carValidation';
+} from '../middleware/carValidation'; */
 import upload from '../Config/multerConfig';
 import cloudinaryImage from '../Config/cloudinaryConfig';
 import Authentication from '../middleware/authToken';
