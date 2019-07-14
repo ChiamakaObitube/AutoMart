@@ -77,11 +77,11 @@ class userController {
         });
       }
       console.log('>>>>>>>>>>', loggedinUser);
-      if (!loggedinUser) {
-        return res.status(400).send({
-          message: 'The credentials you provided is incorrect',
-        });
-      }
+      // if (!loggedinUser) {
+      //   return res.status(400).send({
+      //     message: 'The credentials you provided is incorrect',
+      //   });
+      // }
 
       // Compares user's password with hashed paswword in the database
       //  const authenticatedUser = Helper.comparePassword(req.body.password, rows[0].password);
@@ -93,7 +93,7 @@ class userController {
         data: loggedinUser,
       });
     } catch (error) {
-      return res.status(500).send({ status: 500, error: 'Login failed, try again' });
+      return res.status(400).send({ status: 'error', error: 'Login failed, try again' });
     }
   }
 
