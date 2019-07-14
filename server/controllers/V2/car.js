@@ -124,13 +124,12 @@ class carController {
   static async updateCarAdStatus(req, res) {
     try {
       const { status } = req.body;
-      // const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
       const { token } = req;
       const values = [
         req.params.id,
         status,
       ];
-      // const updatedCarStatus = await db.query(carQueries.markCarAsSoldQuery, values);
+
       const { rows } = await db.query(carQueries.markCarAsSoldQuery, values);
       const updatedCar = rows[0];
 
@@ -140,12 +139,6 @@ class carController {
           error: 'car does not exist',
         });
       }
-      // if (rows[0].status === 'sold') {
-      //   return res.status(400).send({
-      //     status: 400,
-      //     error: 'This car is already sold.',
-      //   });
-      // }
 
       return res.status(200).send({
         status: 200,
@@ -155,39 +148,32 @@ class carController {
         token,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
         status: 'error',
-       error,
+        error,
       });
     }
   }
 
   static async updateCarAdPrice(req, res) {
     try {
-      // const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
+      const { price } = req.body;
       const { token } = req;
       const values = [
         req.params.id,
-        req.body.price,
+        price,
       ];
 
       const { rows } = await db.query(carQueries.updateCarPriceQuery, values);
       const updatedCarPrice = rows[0];
+
       if (!rows[0]) {
         return res.status(400).send({
           status: 400,
           error: 'car does not exist',
         });
       }
-      
-      // Car ad price can only be updated if car status is available
-      // if (rows[0].status === 'sold') {
-      //   return res.status(400).send({
-      //     status: 400,
-      //     error: 'This car is already sold.',
-      //   });
-      // }
+
       return res.status(200).send({
         status: 200,
         message: 'Car price updated successfully',
