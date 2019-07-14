@@ -106,8 +106,6 @@ class carController {
       const { rows } = await db.query(carQueries.specificCarQuery, [req.params.id]);
       const { token } = req;
       const car = rows[0];
-    
-      console.log(rows[0]);
       if (!rows[0]) {
         return res.status(404).send({
           message: 'car does not exist',
@@ -115,7 +113,6 @@ class carController {
       }
       return res.status(200).send({ status: 200, data: car, token });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
         status: 500,
         error: 'Error fetching car, try again',
@@ -126,14 +123,17 @@ class carController {
   // A user (seller) can update the status of his ad as sold.
   static async updateCarAdStatus(req, res) {
     try {
-      const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
+      const status = 'sold';
+      // const { rows } = await db.query(carQueries.getCarByIdQuery, [req.params.id]);
+      const { token } = req;
       const values = [
         req.params.id,
-        'sold',
+        status,
       ];
-      const updatedCarStatus = await db.query(carQueries.markCarAsSoldQuery, values);
-      const token = Helper.generateToken(updatedCarStatus);
-      const updatedCar = { token, updatedCarStatus };
+      // const updatedCarStatus = await db.query(carQueries.markCarAsSoldQuery, values);
+      const { rows } = await db.query(carQueries.markCarAsSoldQuery, values);
+
+      const updatedCar = { rows, token };
 
       if (!rows[0]) {
         return res.status(404).send({
@@ -141,12 +141,12 @@ class carController {
           error: 'car does not exist',
         });
       }
-      if (updatedCarStatus.rows[0].status === 'sold') {
-        return res.status(400).send({
-          status: 400,
-          message: 'This car is already sold.',
-        });
-      }
+      // if (updatedCarStatus.rows[0].status === 'sold') {
+      //   return res.status(400).send({
+      //     status: 400,
+      //     error: 'This car is already sold.',
+      //   });
+      // }
       // const {
       //   id,
       //   status,
@@ -161,7 +161,8 @@ class carController {
       return res.status(200).send({
         status: 200,
         message: 'Car successfully marked as sold',
-        data: updatedCar,
+        data: 
+        updatedCar,
       });
     } catch (error) {
       console.log(error);
@@ -190,16 +191,16 @@ class carController {
           error: 'car does not exist',
         });
       }
-      const updatedCar = {
-        token,
-        updatedCarPrice,
+      // const updatedCar = {
+      //   token,
+      //   updatedCarPrice,
 
-      };
+      // };
       // Car ad price can only be updated if car status is available
       if (updatedCarPrice.rows[0].status === 'sold') {
         return res.status(400).send({
           status: 400,
-          message: 'This car is already sold.',
+          error: 'This car is already sold.',
         });
       }
       return res.status(200).send({
