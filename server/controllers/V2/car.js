@@ -35,8 +35,8 @@ class carController {
         image_url,
       } = rows[0];
         // const { email } = req.token;
-      const token = Helper.generateToken(email);
-      // const { token } = req;
+      // const token = Helper.generateToken(email);
+      const { token } = req;
       // email = verifyToken(token);
       const carData = {
         token,
@@ -65,7 +65,7 @@ class carController {
     } catch (error) {
       return res.status(500).send({
         status: 500,
-        error: 'Internal Server Error',
+        error,
       });
     }
   }
