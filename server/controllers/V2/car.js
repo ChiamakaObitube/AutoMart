@@ -177,13 +177,14 @@ class carController {
       return res.status(200).send({
         status: 200,
         message: 'Car price updated successfully',
-        data: updatedCarPrice,
-        token,
+        data: token,
+        updatedCarPrice,
+
       });
     } catch (error) {
       console.log(error);
       return res.status(500).send({
-        status: 500,
+        status: 'error',
         error,
       });
     }
