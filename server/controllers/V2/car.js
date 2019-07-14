@@ -10,7 +10,7 @@ class carController {
       const { token } = req;
       const status = 'available';
       const getUser = await db.query(carQueries.getUserByIdQuery, [req.user.id]);
-      
+
       const values = [
         req.user.id,
         getUser.rows[0].email,
@@ -36,7 +36,7 @@ class carController {
         body_type,
         image_url,
       } = rows[0];
-      
+
       const carData = {
         token,
         id,
@@ -62,7 +62,6 @@ class carController {
         error: 'Your advert could not be posted',
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
         status: 500,
         error,
@@ -74,10 +73,10 @@ class carController {
   // Only admin can view all cars whether available or sold
   static async getAllCars(req, res) {
     try {
-      const { rows, rowCount } = await db.query(carQueries.allCarsQuery);
-      const token = Helper.generateToken(rows);
-      const allCars = { token, rows };
-      if (rowCount === 0) {
+      const { rows } = await db.query(carQueries.allCarsQuery);
+      const { token } = req;
+      const allCars = rows;
+      if (rows === 0) {
         return res.status(404).send({
           message: 'There are no cars in this database',
         });
@@ -89,11 +88,12 @@ class carController {
       //   });
       // }
       return res.status(200).send({
+        status: 200,
+        token,
         message: 'All cars retrieved successfully',
         data: allCars,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
         status: 400,
         error: 'Error fetching cars, try again',
@@ -104,20 +104,20 @@ class carController {
   static async getSpecificCar(req, res) {
     try {
       const { rows } = await db.query(carQueries.specificCarQuery, [req.params.id]);
-      const token = Helper.generateToken(rows[0]);
-      const car = [
-        token,
-        rows[0],
-      ];
+      const { token } = req;
+      const car = rows[0];
+    
+      console.log(rows[0]);
       if (!rows[0]) {
         return res.status(404).send({
           message: 'car does not exist',
         });
       }
-      return res.status(200).send({ status: 200, data: car });
+      return res.status(200).send({ status: 200, data: car, token });
     } catch (error) {
       console.log(error);
       return res.status(500).send({
+        status: 500,
         error: 'Error fetching car, try again',
       });
     }
