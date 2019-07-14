@@ -56,38 +56,35 @@ class userController {
   }
 
   static async loginUser(req, res) {
-    const query = 'SELECT * FROM users WHERE email = $1';
     try {
-      const { rows } = await db.query(query, [req.body.email]);
+      const loginQuery = 'SELECT * FROM users WHERE email = $1';
+
+      const values = [
+        (req.body.email).trim().toLowerCase(),
+      ];
+
+      const { rows } = await db.query(loginQuery, values);
+
+      const { email, password, is_admin } = rows[0];
+
+      // Compares user's password with hashed paswword in the database
+      const loggedInUser = Helper.comparePassword(req.body.password, password);
+      if (!loggedInUser) {
+        return res.status(401).send({
+          message: 'Login unsuccessful',
+        });
+      }
+
       const token = Helper.generateToken(rows[0]);
 
       // Destructuring the user data.
-      const { email, password } = rows[0];
-
       const loggedinUser = {
         token,
         email,
         password,
-        authenticatedUser,
+        is_admin,
       };
-      const authenticatedUser = Helper.comparePassword(req.body.password, loggedinUser.password);
-      if (!authenticatedUser) {
-        return res.status(401).send({
-          message: 'Authentication failed',
-        });
-      }
-      console.log('>>>>>>>>>>', loggedinUser);
-      // if (!loggedinUser) {
-      //   return res.status(400).send({
-      //     message: 'The credentials you provided is incorrect',
-      //   });
-      // }
 
-      // Compares user's password with hashed paswword in the database
-      //  const authenticatedUser = Helper.comparePassword(req.body.password, rows[0].password);
-
-
-      // console.log(authenticatedUser);
       return res.status(200).send({
         message: 'User logged in successfully',
         data: loggedinUser,
