@@ -1,8 +1,5 @@
-import Helper from '../../middleware/helper';
 import db from '../../database';
 import carQueries from '../../models/V2/car';
-// import verifyToken from '../../middleware';
-
 
 class carController {
   static async createNewAd(req, res) {
