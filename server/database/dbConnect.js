@@ -40,7 +40,7 @@ const createTables = () => {
       "manufacturer" VARCHAR(50) NOT NULL,
       "model" VARCHAR(50) NOT NULL,   
       "body_type" VARCHAR(50) NOT NULL,
-      "image_url" VARCHAR(200) UNIQUE NOT NULL,
+      "image_url" VARCHAR(200) UNIQUE ,
       FOREIGN KEY(owner) REFERENCES users(id)
     );
 

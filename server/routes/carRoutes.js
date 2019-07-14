@@ -7,14 +7,14 @@ import {
   updateAdStatusValidator,
   getAvailableCarsWithinPriceRangeValidator,
 } from '../middleware/carValidation'; */
-import upload from '../Config/multerConfig';
-import cloudinaryImage from '../Config/cloudinaryConfig';
+// import upload from '../Config/multerConfig';
+// import cloudinaryImage from '../Config/cloudinaryConfig';
 import Authentication from '../middleware/authToken';
 
 
 const router = Router();
 
-router.post('/car', Authentication, upload.single('image_url'), cloudinaryImage, carController.createNewAd);
+router.post('/car', Authentication, carController.createNewAd);
 router.get('/car', Authentication, carController.getAllCars);
 router.get('/car/:id', Authentication, carController.getSpecificCar);
 router.patch('/car/:id/status', Authentication, carController.updateCarAdStatus);
