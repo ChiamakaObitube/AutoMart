@@ -5,8 +5,8 @@ import Authentication from '../middleware/authToken';
 
 const router = Router();
 
-router.post('/auth/signup', signupValidator, userController.userSignup);
-router.post('/auth/signin', signinValidator, userController.loginUser);
+router.post('/auth/signup', userController.userSignup);
+router.post('/auth/signin', userController.loginUser);
 router.patch('/users/admin', Authentication, makeAdminValidator, userController.makeAdmin);
 router.get('/users', Authentication, userController.getAllUsers);
 router.get('/users/:email', Authentication, userController.getSpecificUser);

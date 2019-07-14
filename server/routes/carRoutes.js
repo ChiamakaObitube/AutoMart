@@ -13,7 +13,7 @@ import Authentication from '../middleware/authToken';
 
 const router = Router();
 
-router.post('/car', Authentication, upload.single('image_url'), cloudinaryImage, postAdValidator, carController.createNewAd);
+router.post('/car', Authentication, upload.single('image_url'), cloudinaryImage, carController.createNewAd);
 router.get('/car', Authentication, carController.getAllCars);
 router.get('/car/:id', Authentication, carController.getSpecificCar);
 router.patch('/car/:id/status', Authentication, updateAdStatusValidator, carController.updateCarAdStatus);
