@@ -1,42 +1,45 @@
 import Helper from '../../middleware/helper';
 import orderQueries from '../../models/V2/order';
+import carQueries from '../../models/V2/car';
 import db from '../../database/index';
 
 
 class orderController {
   static async postOrder(req, res) {
     try {
-      const getUserByIdQuery = 'SELECT email FROM users WHERE id = $1';
-      const getUser = await db.query(getUserByIdQuery, [req.user.id]);
-      const amount = 19000;
+      const {
+        token,
+      } = req;
+
       const values = [
         req.body.car_id,
         req.user.id,
         new Date(),
         req.body.status,
-        amount,
-        // parseFloat(req.body.amount),
-        parseFloat(req.body.price_offered),
+        parseFloat(req.body.amount),
+        req.body.price_offered,
       ];
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
+
       const {
         id,
-        owner,
         car_id,
-        email,
+        buyer,
         status,
         created_on,
+        price: amount,
+        price_offered,
       } = rows[0];
-      const token = Helper.generateToken(rows[0]);
+
       const orderData = {
         token,
         id,
-        owner,
         car_id,
-        email,
+        buyer,
         status,
         created_on,
         amount,
+        price_offered,
       };
 
       return res.status(201).send({
@@ -45,7 +48,6 @@ class orderController {
         data: orderData,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
         status: 500,
         error: 'Your order could not be  made',
