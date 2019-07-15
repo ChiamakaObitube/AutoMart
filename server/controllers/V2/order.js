@@ -7,7 +7,7 @@ class orderController {
   static async postOrder(req, res) {
     try {
       const { token } = req;
-      const status = 'available';
+      const status = 'pending';
 
       const values = [
         req.body.car_id,
@@ -38,7 +38,7 @@ class orderController {
         // created_on,
         // price,
         amount,
-        //price_offered,
+        price_offered,
       };
 
       return res.status(201).send({
