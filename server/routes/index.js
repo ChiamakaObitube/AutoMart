@@ -11,19 +11,5 @@ app.use('/api/v1', OrderRoutes);
 app.use('/api/v1', CarRoutes);
 app.use('/api/v1', FlagRoutes);
 
-// app.use((req, res, next) => {
-//   const error = new Error('4 Oh Not found');
-//   error.status = 404;
-//   next(error);
-// });
 
-
-// app.use((error, req, res) => {
-//   res.status(error.status || 500);
-//   res.json({
-//     error: {
-//       message: error.message,
-//     },
-//   });
-// });
 export default app;

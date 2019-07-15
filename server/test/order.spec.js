@@ -38,7 +38,7 @@ describe('POST /api/v1/order', () => {
         done();
       });
   });
-  
+
 
   it('it should return 400 status if order price offered is undefined', (done) => {
     chai.request(app)
@@ -87,15 +87,4 @@ describe('/PATCH update a order price offered', () => {
       });
   });
 });
-describe('/DELETE a purchase order by their id', () => {
-  it('it should delete a purchase order by their id', (done) => {
-    const id = 1;
-    chai.request(app)
-      .delete(`/api/v1/order/${id}`)
-      .end((err, res) => {
-        expect(res).to.have.status(403);
-        res.body.should.have.property('error');
-        done();
-      });
-  });
-});
+

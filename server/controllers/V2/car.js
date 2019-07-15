@@ -202,11 +202,11 @@ class carController {
         status: 200,
         message: 'Car price updated successfully',
         data:
-        updatedCar, token,
+        updatedCar,
+        token,
 
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
         status: 500,
         error,
@@ -226,7 +226,8 @@ class carController {
 
       return res.status(200).send({
         message: 'Available cars retrieved successfully',
-        data: rows, token,
+        data: rows,
+        token,
       });
     } catch (error) {
       return res.status(500).send({
