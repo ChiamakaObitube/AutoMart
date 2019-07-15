@@ -74,7 +74,8 @@ class orderController {
         id,
         car_id,
         buyer,
-        price
+        price: amount,
+        
       } = rows[0];
       const updatedOrder = {
         token,
@@ -82,8 +83,8 @@ class orderController {
         // car_id,
         // buyer,
        // order_id,
-        price,
-        // new_price_offered,
+        amount,
+        new_price_offered,
       };
 
 
