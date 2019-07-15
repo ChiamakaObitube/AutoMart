@@ -178,7 +178,7 @@ class carController {
         message: 'Car price updated successfully',
         data:
         updatedCarPrice,
-        token,  
+        token,
       });
     } catch (error) {
       return res.status(500).send({
@@ -213,7 +213,9 @@ class carController {
 
   static async getAllNewAvailableCars(req, res) {
     try {
+      const { token } = req;
       const { rows } = await db.query(carQueries.newAvailableCarsQuery);
+
       if (rows === 0) {
         return res.status(404).send({
           message: 'No results',
@@ -221,9 +223,10 @@ class carController {
       }
 
       return res.status(200).send({
+        status: 200,
         message: 'new available cars retrieved successfully',
         data: rows,
-        rowCount,
+        token,
       });
     } catch (error) {
       return res.status(500).send({
@@ -235,7 +238,9 @@ class carController {
 
   static async getAllUsedAvailableCars(req, res) {
     try {
+      const { token } = req;
       const { rows } = await db.query(carQueries.usedAvailableCarsQuery);
+
       if (rows === 0) {
         return res.status(404).send({
           message: 'No results',
@@ -243,8 +248,10 @@ class carController {
       }
 
       return res.status(200).send({
+        status: 200,
         message: 'used available cars retrieved successfully',
-        data: rows,
+        data: token,
+        rows,
       });
     } catch (error) {
       return res.status(500).send({
@@ -283,4 +290,7 @@ class carController {
     }
   }
 }
+
+
 export default carController;
+

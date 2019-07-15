@@ -1,21 +1,19 @@
 import Helper from '../../middleware/helper';
 import orderQueries from '../../models/V2/order';
-import carQueries from '../../models/V2/car';
 import db from '../../database/index';
 
 
 class orderController {
   static async postOrder(req, res) {
     try {
-      const {
-        token,
-      } = req;
+      const { token } = req;
+      const status = 'available';
 
       const values = [
         req.body.car_id,
         req.user.id,
         new Date(),
-        req.body.status,
+        status,
         parseFloat(req.body.amount),
         req.body.price_offered,
       ];
@@ -25,9 +23,9 @@ class orderController {
         id,
         car_id,
         buyer,
-        status,
         created_on,
         price: amount,
+        price,
         price_offered,
       } = rows[0];
 
@@ -36,10 +34,11 @@ class orderController {
         id,
         car_id,
         buyer,
-        status,
-        created_on,
+        // status,
+        // created_on,
+        // price,
         amount,
-        price_offered,
+        //price_offered,
       };
 
       return res.status(201).send({
@@ -48,6 +47,7 @@ class orderController {
         data: orderData,
       });
     } catch (error) {
+      console.log(error)
       return res.status(500).send({
         status: 500,
         error,
