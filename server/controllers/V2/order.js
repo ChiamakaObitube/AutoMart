@@ -64,7 +64,7 @@ class orderController {
         id,
         car_id,
         buyer,
-        price: amount,
+        price: old_price_offered,
         price_offered: new_price_offered,
       } = rows[0];
       const updatedOrder = {
@@ -72,7 +72,7 @@ class orderController {
         id,
         car_id,
         buyer,
-        amount,
+        old_price_offered,
         new_price_offered,
       };
       if (!rows[0]) {
