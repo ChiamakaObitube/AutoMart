@@ -51,30 +51,39 @@ class orderController {
 
   static async updatePurchaseOrderPrice(req, res) {
     try {
-      const { price } = req.body;
       const { token } = req;
       // const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
       const values = [
         req.params.id,
-        parseFloat(price),
+        parseFloat(req.body.new_price_offered),
       ];
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
-      const updatedOrder = rows[0];
-
+      // const updatedOrder = rows[0];
+      const {
+        id,
+        car_id,
+        buyer,
+        price: amount,
+        price_offered: new_price_offered,
+      } = rows[0];
+      const updatedOrder = {
+        token,
+        id,
+        car_id,
+        buyer,
+        amount,
+        new_price_offered,
+      };
       if (!rows[0]) {
         return res.status(404).send({
           message: 'order does not exist',
         });
       }
-      // if (updatedOrderPrice.rows[0].status !== 'pending') {
-      //   return res.status(400).send({
-      //     error: 'you can only update a pending order.',
-      //   });
-      // }
+
       return res.status(200).send({
         status: 200,
-        data: updatedOrder, token,
+        data: updatedOrder,
       });
     } catch (error) {
       return res.status(500).send({
@@ -128,8 +137,6 @@ class orderController {
       });
     }
   }
-
-  
 }
 
 export default orderController;
