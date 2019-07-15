@@ -61,5 +61,5 @@ typings/
 .next
 
 build
-
-uploads
+bash.exe.stackdump
+uploads/

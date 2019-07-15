@@ -5,7 +5,7 @@ dotenv.config();
 const key = process.env.SECRET_KEY;
 
 const verifyToken = (req, res, next) => {
-  const bearerHeader = req.headers.authorization; /* || req.headers.token || req.body.token; */
+  const bearerHeader = req.headers.authorization; 
 
   if (typeof bearerHeader !== 'undefined') {
     const bearer = bearerHeader.split(' ');

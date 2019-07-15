@@ -84,7 +84,6 @@ class orderController {
         data: updatedOrder,
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).send({
         status: 500,
         error: 'Error updating purchase order price offered, try again',
