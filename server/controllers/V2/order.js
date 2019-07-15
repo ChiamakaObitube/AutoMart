@@ -51,7 +51,7 @@ class orderController {
 
   static async updatePurchaseOrderPrice(req, res) {
     try {
-      //  const { new_price_offered } = req.body;
+      const { new_price_offered } = req.body;
       const { token } = req;
      
 
@@ -59,7 +59,7 @@ class orderController {
       // const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
       const values = [
         req.params.id,
-        parseFloat(req.body.new_price_offered),
+        parseFloat(new_price_offered),
       ];
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
