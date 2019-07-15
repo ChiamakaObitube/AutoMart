@@ -55,6 +55,43 @@ class orderController {
     }
   }
 
+  static async updatePurchaseOrderPrice(req, res) {
+    try {
+      const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
+      const values = [
+        req.params.id,
+        req.body.price_offered,
+      ];
+      // Purchase order price offered can only be updated if order status is pending
+      const updatedOrderPrice = await db.query(orderQueries.updateOrderPriceQuery, values);
+      const token = Helper.generateToken(updatedOrderPrice);
+      if (!rows[0]) {
+        return res.status(404).send({
+          message: 'order does not exist',
+        });
+      }
+      const updatedOrder = {
+        token,
+        updatedOrderPrice,
+      };
+      if (updatedOrderPrice.rows[0].status !== 'pending') {
+        return res.status(400).send({
+          error: 'you can only update a pending order.',
+        });
+      }
+      return res.status(200).send({
+        status: 200,
+        data: updatedOrder,
+      });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).send({
+        status: 500,
+        error: 'Error updating purchase order price offered, try again',
+      });
+    }
+  }
+
   static async getAllOrders(req, res) {
     try {
       const { rows, rowCount } = await db.query(orderQueries.allOrdersQuery);
@@ -100,42 +137,7 @@ class orderController {
     }
   }
 
-  static async updatePurchaseOrderPrice(req, res) {
-    try {
-      const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
-      const values = [
-        req.params.id,
-        req.body.price_offered,
-      ];
-      // Purchase order price offered can only be updated if order status is pending
-      const updatedOrderPrice = await db.query(orderQueries.updateOrderPriceQuery, values);
-      const token = Helper.generateToken(updatedOrderPrice);
-      if (!rows[0]) {
-        return res.status(404).send({
-          message: 'order does not exist',
-        });
-      }
-      const updatedOrder = {
-        token,
-        updatedOrderPrice,
-      };
-      if (updatedOrderPrice.rows[0].status !== 'pending') {
-        return res.status(400).send({
-          error: 'you can only update a pending order.',
-        });
-      }
-      return res.status(200).send({
-        status: 200,
-        data: updatedOrder,
-      });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).send({
-        status: 500,
-        error: 'Error updating purchase order price offered, try again',
-      });
-    }
-  }
+  
 }
 
 export default orderController;

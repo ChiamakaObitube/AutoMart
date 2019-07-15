@@ -154,43 +154,43 @@ class carController {
 
   static async updateCarAdPrice(req, res) {
     try {
-      // const { price } = req.body;
+      const { price } = req.body;
       const { token } = req;
       const values = [
         req.params.id,
-        req.body.price,
+        price,
       ];
 
       const { rows } = await db.query(carQueries.updateCarPriceQuery, values);
-      // const updatedCarPrice = rows[0];
-      const {
-        id,
-        owner,
-        email,
-        state,
-        status,
-        price,
-        created_on,
-        manufacturer,
-        model,
-        body_type,
-        image_url,
-      } = rows[0];
+      const updatedCar = rows[0];
 
-      const updatedData = {
-        token,
-        id,
-        owner,
-        email,
-        state,
-        status,
-        price,
-        created_on,
-        manufacturer,
-        model,
-        body_type,
-        image_url,
-      };
+      // const {
+      //   id,
+      //   owner,
+      //   email,
+      //   state,
+      //   status,
+      //   created_on,
+      //   manufacturer,
+      //   model,
+      //   body_type,
+      //   image_url,
+      // } = rows[0];
+
+      // const updatedData = {
+      //   token,
+      //   id,
+      //   owner,
+      //   email,
+      //   state,
+      //   status,
+      //   price,
+      //   created_on,
+      //   manufacturer,
+      //   model,
+      //   body_type,
+      //   image_url,
+      // };
       if (!rows[0]) {
         return res.status(400).send({
           status: 400,
@@ -202,7 +202,7 @@ class carController {
         status: 200,
         message: 'Car price updated successfully',
         data:
-        updatedData,
+        updatedCar, token,
 
       });
     } catch (error) {
