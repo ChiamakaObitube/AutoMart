@@ -15,7 +15,7 @@ class orderController {
         new Date(),
         status,
         parseFloat(req.body.amount),
-        req.body.price_offered,
+        // req.body.price_offered,
       ];
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
 
@@ -38,7 +38,7 @@ class orderController {
         // created_on,
         // price,
         amount,
-        price_offered,
+        // price_offered,
       };
 
       return res.status(201).send({
