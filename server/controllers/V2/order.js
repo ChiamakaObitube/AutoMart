@@ -23,9 +23,7 @@ class orderController {
         id,
         car_id,
         buyer,
-        created_on,
         price: amount,
-        price,
         price_offered,
       } = rows[0];
 
@@ -34,9 +32,6 @@ class orderController {
         id,
         car_id,
         buyer,
-        // status,
-        // created_on,
-        // price,
         amount,
         price_offered,
       };
@@ -47,7 +42,6 @@ class orderController {
         data: orderData,
       });
     } catch (error) {
-      console.log(error)
       return res.status(500).send({
         status: 500,
         error,
@@ -57,31 +51,30 @@ class orderController {
 
   static async updatePurchaseOrderPrice(req, res) {
     try {
-      const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
+      const { price } = req.body;
+      const { token } = req;
+      // const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
       const values = [
         req.params.id,
-        req.body.price_offered,
+        parseFloat(price),
       ];
       // Purchase order price offered can only be updated if order status is pending
-      const updatedOrderPrice = await db.query(orderQueries.updateOrderPriceQuery, values);
-      const token = Helper.generateToken(updatedOrderPrice);
+      const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
+      const updatedOrder = rows[0];
+
       if (!rows[0]) {
         return res.status(404).send({
           message: 'order does not exist',
         });
       }
-      const updatedOrder = {
-        token,
-        updatedOrderPrice,
-      };
-      if (updatedOrderPrice.rows[0].status !== 'pending') {
-        return res.status(400).send({
-          error: 'you can only update a pending order.',
-        });
-      }
+      // if (updatedOrderPrice.rows[0].status !== 'pending') {
+      //   return res.status(400).send({
+      //     error: 'you can only update a pending order.',
+      //   });
+      // }
       return res.status(200).send({
         status: 200,
-        data: updatedOrder,
+        data: updatedOrder, token,
       });
     } catch (error) {
       return res.status(500).send({
