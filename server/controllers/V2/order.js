@@ -24,7 +24,6 @@ class orderController {
         car_id,
         buyer,
         price: amount,
-        price_offered,
       } = rows[0];
 
       const orderData = {
@@ -33,7 +32,7 @@ class orderController {
         car_id,
         buyer,
         amount,
-        price_offered,
+        price,
       };
 
       return res.status(201).send({
@@ -79,7 +78,7 @@ class orderController {
         car_id,
         buyer,
         price,
-        new_price_offered,
+        // new_price_offered,
       };
       if (!rows[0]) {
         return res.status(404).send({
