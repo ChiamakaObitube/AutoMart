@@ -72,9 +72,9 @@ class orderController {
       } = rows[0];
       const updatedOrder = {
         token,
-        id,
-        car_id,
-        buyer,
+        // id,
+        // car_id,
+        // buyer,
         price,
        // new_price_offered,
       };
