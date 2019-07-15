@@ -69,7 +69,6 @@ class orderController {
         car_id,
         buyer,
         price,
-       // price_offered: new_price_offered,
       } = rows[0];
       const updatedOrder = {
         token,
@@ -77,7 +76,7 @@ class orderController {
         car_id,
         buyer,
         price,
-        new_price_offered,
+       // new_price_offered,
       };
       if (!rows[0]) {
         return res.status(404).send({
