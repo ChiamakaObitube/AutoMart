@@ -15,7 +15,7 @@ class orderController {
         new Date(),
         status,
         parseFloat(req.body.amount),
-        prseFloat(areq.body.price_offered),
+        parseFloat(areq.body.price_offered),
       ];
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
 
