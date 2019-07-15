@@ -53,7 +53,8 @@ class orderController {
     try {
       const { new_price_offered } = req.body;
       const { token } = req;
-     
+      // const { id } = req.params;
+
 
 
       // const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
@@ -68,31 +69,34 @@ class orderController {
           message: 'order does not exist',
         });
       }
-      const updatedOrder = rows[0];
-      // const {
-      //   id,
-      //   car_id,
-      //   buyer,
-      //   price,
-      // } = rows[0];
-      // const updatedOrder = {
-      //   token,
-      //   // id,
-      //   // car_id,
-      //   // buyer,
-      //   price,
-      //   //new_price_offered,
-      // };
-      
+      // const updatedOrder = rows[0];
+      const {
+        id,
+        car_id,
+        buyer,
+        price
+      } = rows[0];
+      const updatedOrder = {
+        token,
+        // id,
+        // car_id,
+        // buyer,
+       // order_id,
+        price,
+        // new_price_offered,
+      };
+
 
       return res.status(200).send({
         status: 200,
-        data: updatedOrder, token
+        message: 'Order price updated successfully',
+        data: updatedOrder,
       });
     } catch (error) {
+      console.log(error)
       return res.status(500).send({
         status: 500,
-        error: 'Error updating purchase order price offered, try again',
+        error,
       });
     }
   }
