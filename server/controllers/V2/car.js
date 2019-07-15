@@ -28,6 +28,7 @@ class carController {
         email,
         state,
         created_on,
+        price,
         manufacturer,
         model,
         body_type,
@@ -41,6 +42,7 @@ class carController {
         email,
         state,
         status,
+        price,
         created_on,
         manufacturer,
         model,
@@ -162,35 +164,8 @@ class carController {
       ];
 
       const { rows } = await db.query(carQueries.updateCarPriceQuery, values);
-      const updatedCar = rows[0];
+      const updatedCarPrice = rows[0];
 
-      // const {
-      //   id,
-      //   owner,
-      //   email,
-      //   state,
-      //   status,
-      //   created_on,
-      //   manufacturer,
-      //   model,
-      //   body_type,
-      //   image_url,
-      // } = rows[0];
-
-      // const updatedData = {
-      //   token,
-      //   id,
-      //   owner,
-      //   email,
-      //   state,
-      //   status,
-      //   price,
-      //   created_on,
-      //   manufacturer,
-      //   model,
-      //   body_type,
-      //   image_url,
-      // };
       if (!rows[0]) {
         return res.status(400).send({
           status: 400,
@@ -202,13 +177,13 @@ class carController {
         status: 200,
         message: 'Car price updated successfully',
         data:
-        updatedCar,
-        token,
-
+        updatedCarPrice,
+        token,  
       });
     } catch (error) {
       return res.status(500).send({
         status: 500,
+
         error,
       });
     }
