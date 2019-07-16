@@ -14,7 +14,7 @@ class orderController {
         req.user.id,
         new Date(),
         status,
-        parseFloat(req.body.price),
+        parseFloat(req.body.amount),
         parseFloat(req.body.price_offered),
       ];
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
@@ -65,6 +65,7 @@ class orderController {
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
       if (!rows[0]) {
         return res.status(404).send({
+          status: 404,
           message: 'order does not exist',
         });
       }
