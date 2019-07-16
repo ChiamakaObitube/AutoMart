@@ -110,10 +110,9 @@ class orderController {
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
       console.log(rows[0]);
       // const updatedOrderPrice = rows[0];
-      const {
-        car_id,
-        amount: new_price_offered,
-      } = rows[0];
+      // const {
+      //   car_id,
+      // } = rows[0];
 
       if (!rows[0]) {
         return res.status(400).send({
@@ -121,7 +120,7 @@ class orderController {
           error: 'car does not exist',
         });
       }
-      // const updatedOrder = rows[0];
+       const updatedOrder = rows[0];
       // const updatedOrder = {
       //   token,
       //   car_id,
@@ -134,7 +133,7 @@ class orderController {
       return res.status(200).send({
         status: 200,
         message: 'Order price updated successfully',
-        data: { token, car_id, new_price_offered: amount },
+        data: { token, updatedOrder,  },
       });
     } catch (error) {
       console.log(error);
