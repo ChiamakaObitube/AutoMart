@@ -15,10 +15,10 @@ class orderController {
       ];
       const car = await db.query('SELECT * FROM cars WHERE id = $1', getCar);
       // const car = 'SELECT id FROM cars WHERE id = $1';
-      console.log(car)
+      console.log(car);
 
       const { price } = car.rows[0];
-      console.log(price)
+      console.log(price);
       const values = [
         req.body.car_id,
         req.user.id,
@@ -54,7 +54,7 @@ class orderController {
         },
       });
     } catch (error) {
-            console.log(error);
+      console.log(error);
       return res.status(500).send({
         status: 500,
         error,
@@ -98,7 +98,7 @@ class orderController {
 
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, updatePriceValue);
-        console.log(rows[0]);
+      console.log(rows[0]);
       // const {
       //   // id,
       //   // car_id,
