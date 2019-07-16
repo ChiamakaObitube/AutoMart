@@ -17,6 +17,9 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/documentation', (req, res) => {
+  res.redirect('https://documenter.getpostman.com/view/7769522/SVSKMUY1');
+});
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`AutoMart started on port ${port}`);
