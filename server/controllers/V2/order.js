@@ -1,4 +1,3 @@
-import Helper from '../../middleware/helper';
 import orderQueries from '../../models/V2/order';
 import carQueries from '../../models/V2/car';
 import db from '../../database/index';
@@ -12,32 +11,23 @@ class orderController {
 
       const getCar = [req.body.car_id];
       const { car_id, amount } = req.body;
-      const car = await db.query('SELECT * FROM cars WHERE id = $1', getCar);
-      // const car = 'SELECT id FROM cars WHERE id = $1';
-      // console.log(car);
-
+      const car = await db.query(carQueries.specificCarQuery, getCar);
       const { price } = car.rows[0];
       // const { car_id } = car.rows[0];
-      console.log(price);
-      console.log(getCar);
       const values = [
         car_id,
         req.user.id,
         new Date(),
         status,
         req.body.amount,
-
-
       ];
 
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
       const {
         id,
         buyer,
-        new_price_offered,
-        // new_price_offered: amount,
       } = rows[0];
-      console.log(amount);
+
       const orderData = {
         token,
         id,
@@ -51,16 +41,6 @@ class orderController {
         status: 201,
         message: 'Purchase Order created successfully',
         data: orderData,
-        // {
-        //   token,
-        //   id,
-        //   car_id,
-        //   buyer,
-        //   price,
-        //   amount,
-        // },
-        // price: car.price,
-
       });
     } catch (error) {
       console.log(error);
@@ -73,55 +53,28 @@ class orderController {
 
   static async updatePurchaseOrderPrice(req, res) {
     try {
-      const { new_price_offered } = req.body;
+      const { amount } = req.body;
       const { token } = req;
-      // const { id } = req.params;
-      // const old_price_offered = price;
 
-      // const values = [
-      //   req.params.id,
-      //   // req.body.new_price_offered,
-      // ];
-
-      // const getOrder = await db.query(orderQueries.specificOrderQuery, [req.params.id]);
-
-      // // const { price } = getOrder;
-      // //   console.log(getOrder, price );
-      // if (!getOrder.rows[0]) {
-      //   return res.status(404).send({
-      //     message: 'order does not exist',
-      //   });
-      // }
-
-      // const {
-      //   id,
-      //   car_id,
-      //   buyer,
-      //   price,
-      //   price_offered,
-      // } = getOrder.rows[0];
-
-
-      // Purchase order price offered can only be updated if order status is pending
       const values = [
         req.params.id,
-        new_price_offered,
+        amount,
       ];
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
 
       const {
         car_id,
-
+        new_price_offered,
       } = rows[0];
-      const { amount } = rows[0];
+      // const { amount } = rows[0];
       if (!rows[0]) {
         return res.status(400).send({
           status: 400,
           error: 'car does not exist',
         });
       }
-      // const updatedOrder = rows[0];
+
       const updatedOrder = {
         token,
         car_id,
@@ -147,6 +100,7 @@ class orderController {
 
   static async getAllOrders(req, res) {
     try {
+      const { token } = req;
       const { rows } = await db.query(orderQueries.allOrdersQuery);
       if (!rows) {
         return res.status(404).send({
@@ -161,7 +115,7 @@ class orderController {
       }
       return res.status(200).send({
         message: 'All orders retrieved successfully',
-        data: rows,
+        data: { rows, token },
       });
     } catch (error) {
       return res.status(500).send({
@@ -173,15 +127,20 @@ class orderController {
 
   static async getSpecificOrder(req, res) {
     try {
+      const { token } = req;
       const { rows } = await db.query(orderQueries.specificOrderQuery, [req.params.id]);
-
+      const specificOrder = rows[0];
       if (!rows[0]) {
         return res.status(404).send({
           status: 404,
           message: 'order does not exist',
         });
       }
-      return res.status(200).send(rows[0]);
+      return res.status(200).send({
+        status: 200,
+        message: 'Order retrieved successfully',
+        data: { token, specificOrder },
+      });
     } catch (error) {
       return res.status(500).send({
         status: 500,
