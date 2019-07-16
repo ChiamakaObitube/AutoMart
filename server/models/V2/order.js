@@ -6,7 +6,7 @@ const orderQueries = {
   allOrdersQuery: 'SELECT * FROM orders',
   specificOrderQuery: 'SELECT * FROM orders WHERE id = $1',
   getOrderByIdQuery: 'SELECT id FROM orders WHERE id = $1',
-  updateOrderPriceQuery: 'UPDATE orders SET amount = $2 WHERE id = $1 returning id, car_id, buyer, amount AS new_price_offered, status ',
+  updateOrderPriceQuery: 'UPDATE orders SET amount = $2 WHERE id = $1 returning id, car_id, buyer, amount AS price, status ',
 };
 
 export default orderQueries;
