@@ -55,20 +55,35 @@ class orderController {
       // const { id } = req.params;
       // const old_price_offered = price;
 
-      // const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
-      const values = [
-        req.params.id,
-        req.body.new_price_offered,
+      // const values = [
+      //   req.params.id,
+      //   // req.body.new_price_offered,
+      // ];
 
-      ];
-      // Purchase order price offered can only be updated if order status is pending
-      const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
-      if (!rows[0]) {
+      const getOrder = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
+
+      if (!getOrder.rows[0]) {
         return res.status(404).send({
           message: 'order does not exist',
         });
       }
-      // const updatedOrder = rows[0];
+
+      // const {
+      //   id,
+      //   car_id,
+      //   buyer,
+      //   price,
+      //   price_offered,
+      // } = getOrder.rows[0];
+
+      const updatePriceValue = [
+        req.params.id,
+        req.body.new_price_offered,
+      ];
+
+      // Purchase order price offered can only be updated if order status is pending
+      const { rows } = await db.query(orderQueries.updateOrderPriceQuery, updatePriceValue);
+
       const {
         id,
         car_id,
@@ -76,14 +91,17 @@ class orderController {
         price,
         price_offered,
       } = rows[0];
+
+
+      // const updatedOrder = rows[0];
       const updatedOrder = {
         token,
-        // id,
-        // car_id,
-        // buyer,
+        id,
+        car_id,
+        buyer,
         // order_id,
-        old_price_offered: price_offered,
-        new_price_offered,
+        price,
+        new_price_offered: price_offered,
       };
 
 
