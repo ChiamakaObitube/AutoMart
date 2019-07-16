@@ -14,7 +14,7 @@ class orderController {
         req.user.id,
         new Date(),
         status,
-        parseFloat(req.body.amount),
+        parseFloat(req.body.price),
         parseFloat(req.body.price_offered),
       ];
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
@@ -58,7 +58,7 @@ class orderController {
       // const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
       const values = [
         req.params.id,
-        req.body.new_price_offered,
+        parseFloat(req.body.new_price_offered),
 
       ];
       // Purchase order price offered can only be updated if order status is pending
@@ -73,7 +73,7 @@ class orderController {
         id,
         car_id,
         buyer,
-        price: old_price_offered,
+        price,
         price_offered: new_price_offered,
       } = rows[0];
       const updatedOrder = {
@@ -82,7 +82,7 @@ class orderController {
         // car_id,
         // buyer,
         // order_id,
-        old_price_offered,
+        price,
         new_price_offered,
       };
 
@@ -103,8 +103,8 @@ class orderController {
 
   static async getAllOrders(req, res) {
     try {
-      const { rows, rowCount } = await db.query(orderQueries.allOrdersQuery);
-      if (rowCount === 0) {
+      const { rows } = await db.query(orderQueries.allOrdersQuery);
+      if (!rows) {
         return res.status(404).send({
           message: 'There are no orders in this database',
         });
@@ -118,10 +118,9 @@ class orderController {
       return res.status(200).send({
         message: 'All orders retrieved successfully',
         data: rows,
-        rowCount,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         status: 500,
         error: 'Error fetching orders, try again',
       });
@@ -134,6 +133,7 @@ class orderController {
 
       if (!rows[0]) {
         return res.status(404).send({
+          status: 404,
           message: 'order does not exist',
         });
       }
