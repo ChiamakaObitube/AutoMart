@@ -200,6 +200,7 @@ class carController {
       }
 
       return res.status(200).send({
+        status: 200,
         message: 'Available cars retrieved successfully',
         data: rows,
         token,
