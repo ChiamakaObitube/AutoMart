@@ -101,20 +101,22 @@ class orderController {
       //   price_offered,
       // } = getOrder.rows[0];
 
+
+      // Purchase order price offered can only be updated if order status is pending
       const values = [
         req.params.id,
-        parseFloat(amount),
+        amount,
       ];
-
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
       console.log(rows[0]);
+      const updatedOrderPrice = rows[0];
       // const updatedOrderPrice = rows[0];
       const {
-      
+
         car_id,
-        
-    
+
+
         amount: new_price_offered,
       } = rows[0];
 
@@ -137,7 +139,7 @@ class orderController {
       return res.status(200).send({
         status: 200,
         message: 'Order price updated successfully',
-        data: { token, car_id, amount: new_price_offered },
+        data: { token, updatedOrderPrice },
       });
     } catch (error) {
       console.log(error);
