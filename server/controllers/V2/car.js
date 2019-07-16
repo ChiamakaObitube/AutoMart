@@ -183,8 +183,7 @@ class carController {
     } catch (error) {
       return res.status(500).send({
         status: 500,
-
-        error,
+        error: 'car cannot be updated, try again',
       });
     }
   }
