@@ -51,7 +51,7 @@ const createTables = () => {
       "created_on" TIMESTAMP,
       "status" VARCHAR(10) NOT NULL,
       "price" FLOAT NOT NULL,
-      "price_offered" FLOAT  
+      "new_price_offered" FLOAT  
 			
     );
     CREATE TABLE flagged(
