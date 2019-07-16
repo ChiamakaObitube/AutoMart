@@ -83,13 +83,13 @@ class orderController {
         });
       }
 
-      // const {
-      //   id,
-      //   car_id,
-      //   buyer,
-      //   price,
-      //   price_offered,
-      // } = getOrder.rows[0];
+      const {
+        id,
+        car_id,
+        buyer,
+        price,
+        price_offered,
+      } = getOrder.rows[0];
 
       const updatePriceValue = [
         req.params.id,
@@ -99,13 +99,13 @@ class orderController {
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, updatePriceValue);
         console.log(rows[0]);
-      const {
-        id,
-        car_id,
-        buyer,
-        price,
-        price_offered,
-      } = rows[0];
+      // const {
+      //   // id,
+      //   // car_id,
+      //   buyer,
+      //   price,
+      //   price_offered,
+      // } = rows[0];
 
 
       // const updatedOrder = rows[0];
@@ -116,7 +116,7 @@ class orderController {
         buyer,
         // order_id,
         price,
-        new_price_offered: price_offered,
+        price_offered,
       };
 
 
