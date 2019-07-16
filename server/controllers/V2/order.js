@@ -41,6 +41,7 @@ class orderController {
         status: 201,
         message: 'Purchase Order created successfully',
         data: orderData,
+
       });
     } catch (error) {
       console.log(error);
@@ -53,6 +54,35 @@ class orderController {
 
   static async updatePurchaseOrderPrice(req, res) {
     try {
+      // const { amount } = req.body;
+      // const { token } = req;
+
+      // const values = [
+      //   req.params.id,
+      //   amount,
+      // ];
+      // // Purchase order price offered can only be updated if order status is pending
+      // const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
+
+      // const {
+      //   car_id,
+      //   new_price_offered,
+      // } = rows[0];
+
+      // if (!rows[0]) {
+      //   return res.status(400).send({
+      //     status: 400,
+      //     error: 'car does not exist',
+      //   });
+      // }
+
+      // const updatedOrder = {
+      //   token,
+      //   car_id,
+      //   amount,
+      //   new_price_offered,
+      // };
+      // console.log(new_price_offered);
       const { price } = req.body;
       const { token } = req;
 
@@ -65,8 +95,10 @@ class orderController {
 
       const {
         car_id,
+        amount: old_price_offered,
+        price: new_price_offered,
       } = rows[0];
-      // const { amount } = rows[0];
+
       if (!rows[0]) {
         return res.status(400).send({
           status: 400,
@@ -77,9 +109,11 @@ class orderController {
       const updatedOrder = {
         token,
         car_id,
-        price,
+        old_price_offered,
+        new_price_offered,
       };
-      console.log(price);
+      console.log(new_price_offered);
+
 
       return res.status(200).send({
         status: 200,
