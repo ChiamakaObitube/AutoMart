@@ -13,7 +13,7 @@ class orderController {
       const { car_id, amount } = req.body;
       const car = await db.query(carQueries.specificCarQuery, getCar);
       const { price } = car.rows[0];
-      // const { car_id } = car.rows[0];
+
       const values = [
         car_id,
         req.user.id,
@@ -54,20 +54,49 @@ class orderController {
 
   static async updatePurchaseOrderPrice(req, res) {
     try {
-      const { amount } = req.body;
+      // const { amount } = req.body;
+      // const { token } = req;
+
+      // const values = [
+      //   req.params.id,
+      //   amount,
+      // ];
+      // // Purchase order price offered can only be updated if order status is pending
+      // const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
+
+      // // const {
+      // //   car_id,
+      // //   new_price_offered,
+      // // } = rows[0];
+
+      // if (!rows[0]) {
+      //   return res.status(400).send({
+      //     status: 400,
+      //     error: 'car does not exist',
+      //   });
+      // }
+
+      // const updatedOrder = {
+      //   token,
+      //   car_id,
+      //   price: new_price_offered,
+      // };
+      // console.log(new_price_offered);
+
+      const { price } = req.body;
       const { token } = req;
 
       const values = [
         req.params.id,
-        amount,
+        price,
       ];
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
 
-      const {
-        car_id,
-        new_price_offered,
-      } = rows[0];
+      // const {
+      //   car_id,
+      //   new_price_offered,
+      // } = rows[0];
 
       if (!rows[0]) {
         return res.status(400).send({
@@ -76,19 +105,17 @@ class orderController {
         });
       }
 
-      const updatedOrder = {
-        token,
-        car_id,
-        price: new_price_offered,
-      };
-      console.log(new_price_offered);
-
-
+      // const updatedOrder = {
+      //   token,
+      //   car_id,
+      //   price: new_price_offered,
+      // };
+      const updatedOrder = rows[0];
+      console.log(rows[0].new_price_offered);
       return res.status(200).send({
         status: 200,
         message: 'Order price updated successfully',
-        data:
-        updatedOrder,
+        data: updatedOrder 
       });
     } catch (error) {
       console.log(error);
