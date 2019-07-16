@@ -2,10 +2,10 @@ class OrderValidators {
   static postOrderValidator(req, res, next) {
     const {
       status,
-      price_offered,
+      price,
     } = req.body;
 
-    if (!price_offered) {
+    if (!price) {
       return res.status(400)
         .send({
           status: 400,
@@ -13,7 +13,7 @@ class OrderValidators {
         });
     }
 
-    if (typeof price_offered !== 'number') {
+    if (typeof price !== 'number') {
       return res.status(400)
         .json({
           status: 400,
@@ -26,6 +26,7 @@ class OrderValidators {
         .send({
           status: 400,
           message: 'order status must be pending',
+          error,
         });
     }
     next();
@@ -33,13 +34,14 @@ class OrderValidators {
 
   static updateOrderPriceValidator(req, res, next) {
     const {
-      price_offered,
+      price,
     } = req.body;
-    if (!price_offered) {
+    if (!price) {
       return res.status(400)
         .send({
           status: 400,
-          message: 'order price offered is required',
+          message: 'error',
+          error,
         });
     }
     next();
