@@ -47,6 +47,7 @@ class orderController {
         buyer,
         price,
         amount,
+        new_price_offered,
       };
 
       return res.status(201).send({
