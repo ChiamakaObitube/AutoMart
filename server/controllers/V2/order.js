@@ -25,10 +25,8 @@ class orderController {
         req.user.id,
         new Date(),
         status,
-        price,
-        // parseFloat(req.body.amount),
-        parseFloat(req.body.new_price_offered),
-
+        req.body.amount,
+        
 
       ];
 
@@ -47,7 +45,6 @@ class orderController {
         buyer,
         price,
         amount,
-        new_price_offered,
       };
 
       return res.status(201).send({
@@ -131,7 +128,7 @@ class orderController {
       //   price,
       //   new_price_offered,
       // };
-      console.log(updatedOrderPrice.new_price_offered);
+      // console.log(updatedOrderPrice.new_price_offered);
 
       return res.status(200).send({
         status: 200,
