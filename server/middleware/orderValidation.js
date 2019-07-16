@@ -34,7 +34,7 @@ class OrderValidators {
     next();
   }
 
-  static updateOrderPriceValidator(req, res) {
+  static updateOrderPriceValidator(req, res, next) {
     const {
       price,
     } = req.body;
@@ -45,6 +45,7 @@ class OrderValidators {
           error: 'price is required',
         });
     }
+    next();
   }
 }
 const {
