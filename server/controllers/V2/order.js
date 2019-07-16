@@ -25,7 +25,10 @@ class orderController {
         new Date(),
         status,
         price,
-        parseFloat(req.body.amount),
+        // parseFloat(req.body.amount),
+        parseFloat(req.body.new_price_offered),
+
+
       ];
 
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
@@ -33,9 +36,9 @@ class orderController {
         id,
         car_id,
         buyer,
-        price_offered: amount,
+        new_price_offered: amount,
       } = rows[0];
-
+      console.log(amount);
       const orderData = {
         token,
         id,
@@ -49,8 +52,8 @@ class orderController {
         status: 201,
         message: 'Purchase Order created successfully',
         data: {
-          ...orderData,
-          price: car.price,
+          orderData,
+          // price: car.price,
         },
       });
     } catch (error) {
