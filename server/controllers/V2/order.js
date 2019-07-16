@@ -66,7 +66,6 @@ class orderController {
 
       const {
         car_id,
-        amount,
         price: new_price_offered,
       } = rows[0];
 
@@ -80,7 +79,6 @@ class orderController {
       const updatedOrder = {
         token,
         car_id,
-        amount,
         new_price_offered,
       };
       console.log(new_price_offered);
