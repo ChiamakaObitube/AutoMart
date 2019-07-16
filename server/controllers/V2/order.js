@@ -52,7 +52,7 @@ class orderController {
       return res.status(201).send({
         status: 201,
         message: 'Purchase Order created successfully',
-        data: orderData
+        data: orderData,
         // {
         //   token,
         //   id,
@@ -110,13 +110,14 @@ class orderController {
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
       console.log(rows[0]);
+      const { new_price_offered } = rows[0];
       // const {
       //   // id,
       //   // car_id,
       //   price,
       //   price_offered,
       // } = rows[0];
-console.log(price);
+
 
       // const updatedOrder = rows[0];
       const updatedOrder = {
@@ -126,14 +127,14 @@ console.log(price);
         buyer,
         // order_id,
         price,
-        price_offered,
+        new_price_offered,
       };
-
+console.log(updatedOrder.new_price_offered);
 
       return res.status(200).send({
         status: 200,
         message: 'Order price updated successfully',
-        data: updatedOrder
+        data: updatedOrder,
       });
     } catch (error) {
       console.log(error);
