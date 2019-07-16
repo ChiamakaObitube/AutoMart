@@ -79,8 +79,7 @@ class orderController {
       const updatedOrder = {
         token,
         car_id,
-        amount,
-        new_price_offered,
+        price: new_price_offered,
       };
       console.log(new_price_offered);
 

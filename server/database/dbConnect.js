@@ -50,7 +50,7 @@ const createTables = () => {
       "buyer" INTEGER NOT NULL , 
       "created_on" TIMESTAMP,
       "status" VARCHAR(10) NOT NULL,
-      "amount" FLOAT
+      "amount" VARCHAR(255)
     );
     CREATE TABLE flagged(
      "id" SERIAL NOT NULL PRIMARY KEY,
