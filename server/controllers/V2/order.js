@@ -58,7 +58,7 @@ class orderController {
       // const { rows } = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
       const values = [
         req.params.id,
-        req.body.new_price_offered,
+        parseFloat(req.body.new_price_offered),
 
       ];
       // Purchase order price offered can only be updated if order status is pending
@@ -73,7 +73,7 @@ class orderController {
         id,
         car_id,
         buyer,
-        price: old_price_offered,
+        price,
         price_offered: new_price_offered,
       } = rows[0];
       const updatedOrder = {
@@ -82,7 +82,7 @@ class orderController {
         // car_id,
         // buyer,
         // order_id,
-        old_price_offered,
+        price,
         new_price_offered,
       };
 
