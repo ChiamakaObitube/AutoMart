@@ -34,6 +34,8 @@ class orderController {
       const {
         id,
         buyer,
+        new_price_offered,
+        // new_price_offered: amount,
       } = rows[0];
       console.log(amount);
       const orderData = {
@@ -71,7 +73,7 @@ class orderController {
 
   static async updatePurchaseOrderPrice(req, res) {
     try {
-      //const { amount } = req.body;
+      const { amount } = req.body;
       const { token } = req;
       // const { id } = req.params;
       // const old_price_offered = price;
@@ -101,7 +103,7 @@ class orderController {
 
       const values = [
         req.params.id,
-        parseFloat(req.body.new_price_offered),
+        parseFloat(amount),
       ];
 
       // Purchase order price offered can only be updated if order status is pending
@@ -110,11 +112,7 @@ class orderController {
       // const updatedOrderPrice = rows[0];
       const {
         car_id,
-        buyer,
-        status,
-        created_on,
-        // amount: new_price_offered,
-        amount,
+        amount: new_price_offered,
       } = rows[0];
 
       if (!rows[0]) {
@@ -132,11 +130,11 @@ class orderController {
       //   new_price_offered,
       // };
       // console.log(updatedOrderPrice.new_price_offered);
-console.log(rows[0].new_price_offered)
+
       return res.status(200).send({
         status: 200,
         message: 'Order price updated successfully',
-        data: { token, car_id, buyer, status, created_on, new_price_offered: amount },
+        data: { token, car_id, new_price_offered: amount },
       });
     } catch (error) {
       console.log(error);
