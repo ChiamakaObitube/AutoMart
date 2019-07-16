@@ -10,6 +10,7 @@ class OrderValidators {
         .send({
           status: 400,
           message: 'order price offered is required',
+          error,
         });
     }
 
@@ -18,6 +19,7 @@ class OrderValidators {
         .json({
           status: 400,
           message: 'purchase order price offered must be a number',
+          error,
         });
     }
 
@@ -32,7 +34,7 @@ class OrderValidators {
     next();
   }
 
-  static updateOrderPriceValidator(req, res, next) {
+  static updateOrderPriceValidator(req, res) {
     const {
       price,
     } = req.body;
@@ -40,10 +42,9 @@ class OrderValidators {
       return res.status(400)
         .send({
           status: 400,
-          error,
+          error: 'price is required',
         });
     }
-    next();
   }
 }
 const {

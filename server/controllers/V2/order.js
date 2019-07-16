@@ -102,6 +102,7 @@ class orderController {
         return res.status(400).send({
           status: 400,
           error: 'car does not exist',
+          error,
         });
       }
 
@@ -110,12 +111,12 @@ class orderController {
       //   car_id,
       //   price: new_price_offered,
       // };
-      const updatedOrder = rows[0];
+      
       console.log(rows[0].new_price_offered);
       return res.status(200).send({
         status: 200,
         message: 'Order price updated successfully',
-        data: updatedOrder 
+        data: rows[0],
       });
     } catch (error) {
       return res.status(500).send({
