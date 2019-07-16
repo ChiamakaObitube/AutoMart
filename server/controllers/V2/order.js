@@ -26,7 +26,7 @@ class orderController {
         new Date(),
         status,
         req.body.amount,
-        
+
 
       ];
 
@@ -117,7 +117,12 @@ class orderController {
       //   price_offered,
       // } = rows[0];
 
-
+      if (!rows[0]) {
+        return res.status(400).send({
+          status: 400,
+          error: 'car does not exist',
+        });
+      }
       // const updatedOrder = rows[0];
       // const updatedOrder = {
       //   token,
