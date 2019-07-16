@@ -111,7 +111,7 @@ class orderController {
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, values);
       console.log(rows[0]);
      // const updatedOrderPrice = rows[0];
-      // const updatedOrderPrice = rows[0];
+    
       const {
         car_id,
         amount: new_price_offered,
