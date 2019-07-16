@@ -14,7 +14,7 @@ class orderController {
         req.user.id,
         new Date(),
         status,
-        parseFloat(req.body.amount),
+        parseFloat(req.body.price),
         parseFloat(req.body.price_offered),
       ];
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
@@ -103,8 +103,8 @@ class orderController {
 
   static async getAllOrders(req, res) {
     try {
-      const { rows, rowCount } = await db.query(orderQueries.allOrdersQuery);
-      if (rowCount === 0) {
+      const { rows } = await db.query(orderQueries.allOrdersQuery);
+      if (!rows) {
         return res.status(404).send({
           message: 'There are no orders in this database',
         });
@@ -118,10 +118,9 @@ class orderController {
       return res.status(200).send({
         message: 'All orders retrieved successfully',
         data: rows,
-        rowCount,
       });
     } catch (error) {
-      return res.status(400).send({
+      return res.status(500).send({
         status: 500,
         error: 'Error fetching orders, try again',
       });
@@ -134,6 +133,7 @@ class orderController {
 
       if (!rows[0]) {
         return res.status(404).send({
+          status: 404,
           message: 'order does not exist',
         });
       }
