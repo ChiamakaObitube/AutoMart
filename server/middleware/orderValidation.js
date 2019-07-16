@@ -32,7 +32,7 @@ class OrderValidators {
     next();
   }
 
-  static updateOrderPriceValidator(req, res, next) {
+  static updateOrderPriceValidator(req, res) {
     const {
       price,
     } = req.body;
@@ -40,10 +40,9 @@ class OrderValidators {
       return res.status(400)
         .send({
           status: 400,
-          error,
+          error: 'price is required',
         });
     }
-    next();
   }
 }
 const {
