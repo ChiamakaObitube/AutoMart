@@ -73,8 +73,10 @@ class orderController {
       //   // req.body.new_price_offered,
       // ];
 
-      const getOrder = await db.query(orderQueries.getOrderByIdQuery, [req.params.id]);
+      const getOrder = await db.query(orderQueries.specificOrderQuery, [req.params.id]);
 
+      // const { price } = getOrder;
+      //   console.log(getOrder, price );
       if (!getOrder.rows[0]) {
         return res.status(404).send({
           message: 'order does not exist',
@@ -96,7 +98,7 @@ class orderController {
 
       // Purchase order price offered can only be updated if order status is pending
       const { rows } = await db.query(orderQueries.updateOrderPriceQuery, updatePriceValue);
-
+        console.log(rows[0]);
       const {
         id,
         car_id,
