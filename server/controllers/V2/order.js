@@ -112,7 +112,7 @@ class orderController {
       // const updatedOrderPrice = rows[0];
       const {
         car_id,
-        new_price_offered,
+        amount: new_price_offered,
       } = rows[0];
 
       if (!rows[0]) {
@@ -130,11 +130,11 @@ class orderController {
       //   new_price_offered,
       // };
       // console.log(updatedOrderPrice.new_price_offered);
-
+console.log(new_price_offered)
       return res.status(200).send({
         status: 200,
         message: 'Order price updated successfully',
-        data: { token, car_id, new_price_offered: amount },
+        data: { token, car_id, new_price_offered },
       });
     } catch (error) {
       console.log(error);
