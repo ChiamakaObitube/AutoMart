@@ -1,5 +1,6 @@
 import Helper from '../../middleware/helper';
 import orderQueries from '../../models/V2/order';
+import carQueries from '../../models/V2/car';
 import db from '../../database/index';
 
 
@@ -9,22 +10,30 @@ class orderController {
       const { token } = req;
       const status = 'pending';
 
+      const getCar = [
+        req.body.car_id,
+      ];
+      const car = await db.query('SELECT * FROM cars WHERE id = $1', getCar);
+      // const car = 'SELECT id FROM cars WHERE id = $1';
+      console.log(car)
+
+      const { price } = car.rows[0];
+      console.log(price)
       const values = [
         req.body.car_id,
         req.user.id,
         new Date(),
         status,
+        price,
         parseFloat(req.body.amount),
-        parseFloat(req.body.price_offered),
       ];
-      const { rows } = await db.query(orderQueries.createOrderQuery, values);
 
+      const { rows } = await db.query(orderQueries.createOrderQuery, values);
       const {
         id,
         car_id,
         buyer,
-        price: amount,
-        price_offered,
+        price_offered: amount,
       } = rows[0];
 
       const orderData = {
@@ -32,16 +41,20 @@ class orderController {
         id,
         car_id,
         buyer,
+        price,
         amount,
-        price_offered,
       };
 
       return res.status(201).send({
         status: 201,
         message: 'Purchase Order created successfully',
-        data: orderData,
+        data: {
+          ...orderData,
+          price: car.price,
+        },
       });
     } catch (error) {
+            console.log(error);
       return res.status(500).send({
         status: 500,
         error,
