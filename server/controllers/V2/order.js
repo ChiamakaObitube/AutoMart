@@ -10,17 +10,18 @@ class orderController {
       const { token } = req;
       const status = 'pending';
 
-      const getCar = [
-        req.body.car_id,
-      ];
+      const getCar = [req.body.car_id];
+      const { car_id, amount } = req.body;
       const car = await db.query('SELECT * FROM cars WHERE id = $1', getCar);
       // const car = 'SELECT id FROM cars WHERE id = $1';
-      console.log(car);
+      // console.log(car);
 
       const { price } = car.rows[0];
+      // const { car_id } = car.rows[0];
       console.log(price);
+      console.log(getCar);
       const values = [
-        req.body.car_id,
+        car_id,
         req.user.id,
         new Date(),
         status,
@@ -34,15 +35,15 @@ class orderController {
       const { rows } = await db.query(orderQueries.createOrderQuery, values);
       const {
         id,
-        car_id,
         buyer,
-        new_price_offered: amount,
+        new_price_offered,
+        // new_price_offered: amount,
       } = rows[0];
       console.log(amount);
       const orderData = {
         token,
         id,
-        car_id,
+        // car_id,
         buyer,
         price,
         amount,
@@ -52,9 +53,14 @@ class orderController {
         status: 201,
         message: 'Purchase Order created successfully',
         data: {
-          orderData,
-          // price: car.price,
+          token,
+          car_id,
+          buyer,
+          price,
+          amount,
         },
+        // price: car.price,
+
       });
     } catch (error) {
       console.log(error);
