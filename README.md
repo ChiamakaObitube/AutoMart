@@ -39,7 +39,8 @@ https://chiamakaobitube.github.io/AutoMart/
 This project is managed using the Pivotal Tracker project management tool.
 Link can be found here: https://www.pivotaltracker.com/n/projects/2345935
 
-
+## Dcumentation
+API Documentation of this project can be found here : https://automart-cars.herokuapp.com/documentation
 ## Current State
 Still in Development
 
