@@ -1,11 +1,9 @@
 [![Build Status](https://travis-ci.org/ChiamakaObitube/AutoMart.svg?branch=ch-setup-continuous-integration-166463892)](https://travis-ci.org/ChiamakaObitube/AutoMart)
 [![Coverage Status](https://coveralls.io/repos/github/ChiamakaObitube/AutoMart/badge.svg?branch=ft-view-cars-within-price-range-endpoint-db-166735646)](https://coveralls.io/github/ChiamakaObitube/AutoMart?branch=ft-view-cars-within-price-range-endpoint-db-166735646)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/696a2cbef47607216159/test_coverage)](https://codeclimate.com/github/ChiamakaObitube/AutoMart/test_coverage)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/696a2cbef47607216159/maintainability)](https://codeclimate.com/github/ChiamakaObitube/AutoMart/maintainability)
 
 # Auto-Mart
-Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. Auto Mart users can sell their cars or buy from trusted dealerships or private sellers.
+Auto Mart is an online marketplace for automobiles of diverse makes, model or body type. Auto Mart users can sell their cars or buy from trusted dealerships or private sellers. Automart can be accessed here -- https://automart-cars.herokuapp.com/
 ## Project Features
 * User can sign up
 * User can sign in
