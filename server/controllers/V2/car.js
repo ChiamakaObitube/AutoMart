@@ -80,12 +80,12 @@ class carController {
           message: 'There are no cars in this database',
         });
       }
-      // if (!req.user.is_admin) {
-      //   return res.status(401).send({
-      //     status: 401,
-      //     error: 'You are not authorized to perform this action',
-      //   });
-      // }
+      if (!req.user.is_admin) {
+        return res.status(401).send({
+          status: 401,
+          error: 'You are not authorized to perform this action',
+        });
+      }
       return res.status(200).send({
         status: 200,
         token,

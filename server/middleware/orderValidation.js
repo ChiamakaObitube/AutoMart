@@ -10,7 +10,7 @@ class OrderValidators {
         .send({
           status: 400,
           message: 'order price offered is required',
-          error,
+          // error,
         });
     }
 
