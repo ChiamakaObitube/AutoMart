@@ -63,3 +63,8 @@ typings/
 build
 bash.exe.stackdump
 uploads/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
