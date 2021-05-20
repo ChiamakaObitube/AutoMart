@@ -20,7 +20,7 @@ pipeline {
         sh 'npm test'
       }
     }
-    stage('Building image') {
+    /*stage('Building image') {
       steps{
         script {
           docker.build registry + ":$BUILD_NUMBER"
@@ -41,6 +41,6 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-  
+  */
   }
 }
