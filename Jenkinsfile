@@ -4,9 +4,8 @@ pipeline {
     registryCredential = 'dockerhub'
   }
   agent any
+  tools {nodejs "NodeJS"}
   stages {
-   
-    tools {nodejs "NodeJS"}
     stage('Build') {
        steps {
          sh 'npm install'
