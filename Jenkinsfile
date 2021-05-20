@@ -10,6 +10,16 @@ pipeline {
         git 'https://github.com/ChiamakaObitube/AutoMart.git'
       }
     }
+    stage('Build') {
+       steps {
+         sh 'npm install'
+       }
+    }
+    stage('Test') {
+      steps {
+        sh 'npm test'
+      }
+    }
     stage('Building image') {
       steps{
         script {
