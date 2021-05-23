@@ -5,17 +5,24 @@ pipeline {
   }
   agent any
   tools {nodejs "NodeJS"}
-  stages {
+
+  stages { 
+    stage('Git') {
+      steps {
+        git 'https://github.com/ChiamakaObitube/AutoMart.git'
+      }
+    }
+  
     stage('Build') {
        steps {
          sh 'npm install'
        }
     }
-    stage('Test') {
+    /*stage('Test') {
       steps {
         sh 'npm test'
       }
-    }
+    }*/
     stage('Building image') {
       steps{
         script {
