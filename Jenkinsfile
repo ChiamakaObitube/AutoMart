@@ -4,9 +4,18 @@ pipeline {
     registryCredential = 'dockerhub'
   }
   agent any
+  parameters {
+    gitParameter branchFilter: 'origin/(.*)', defaultValue: 'develop', name: 'BRANCH', type: 'PT_BRANCH'
+  }
+  
   tools {nodejs "NodeJS"}
 
   stages { 
+    stage('Example') {
+      steps {
+        git branch: "${params.BRANCH}", url: 'https://github.com/ChiamakaObitube/AutoMart.git'
+      }
+    }
     stage('Git') {
       steps {
         git 'https://github.com/ChiamakaObitube/AutoMart.git'
@@ -23,7 +32,7 @@ pipeline {
     }
     /*stage('Test') {
       steps {
-        sh 'npm test'
+        sh 'npm run test'
       }
     }
     stage('Building image') {
