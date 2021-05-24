@@ -15,14 +15,17 @@ pipeline {
   
     stage('Build') {
        steps {
-         sh 'npm install'
+         sh '''
+         npm install
+         npm build
+         '''
        }
     }
     /*stage('Test') {
       steps {
         sh 'npm test'
       }
-    }*/
+    }
     stage('Building image') {
       steps{
         script {
@@ -44,5 +47,6 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
+    */
   }
 }
