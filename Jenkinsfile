@@ -16,12 +16,12 @@ pipeline {
         git branch: "${params.BRANCH}", url: 'https://github.com/ChiamakaObitube/AutoMart.git'
       }
     }
-    stage('Git') {
+   /* stage('Git') {
       steps {
         git 'https://github.com/ChiamakaObitube/AutoMart.git'
       }
     }
-  
+  */
     stage('Build') {
        steps {
          sh '''
