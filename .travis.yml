@@ -1,0 +1,23 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=6c8df1c03b7fa63ae4a9ccaf3dd7468e6086494d03de914c52d01051dd309829
+    - CODECLIMATE_REPO_TOKEN=6c8df1c03b7fa63ae4a9ccaf3dd7468e6086494d03de914c52d01051dd309829
+
+language: node_js
+node_js:
+  - "10.15.3"
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+script:
+  - npm install
+
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+after_success:
+  - npm run coverage
+  - npm run coveralls
