@@ -1,7 +1,7 @@
 pipeline {
   environment {
     registry = "chiamakaobitube/node-jenkins"
-    registryCredential = 'dockerhub'
+    registryCredential = 'Docker'
   }
   agent any
   parameters {
