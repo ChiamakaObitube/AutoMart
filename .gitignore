@@ -59,10 +59,9 @@ typings/
 
 # next.js build output
 .next
-<<<<<<< HEAD
+
 
 build
 bash.exe.stackdump
 uploads/
-=======
->>>>>>> 57d65346222eac1bdf094ca5e8aa02d1f124bcdb
+
