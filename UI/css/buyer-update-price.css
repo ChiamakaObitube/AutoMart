@@ -1,0 +1,256 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    margin: 0 !important;
+}
+
+.header-main,
+.footer-main {
+    height: 60px;
+    width: 100%;
+}
+
+.navbar {
+    overflow: hidden;
+    height: 63px;
+    background: #8a1162;
+    width: 100%;
+}
+
+.nav li {
+    float: right;
+}
+
+.nav #logo {
+    float: left;
+    font-size: 2em;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    margin-right: 10px;
+    font-size: 90%;
+    padding-right: 0.5em;
+}
+
+.navbar a:hover {
+    background-color: rgb(14, 2, 2);
+    padding: 0.5em;
+}
+
+li {
+    list-style: none;
+    text-transform: capitalize;
+    font-size: 1.5em;
+}
+
+svg {
+    margin: 1.5em;
+}
+
+.side-nav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    opacity: 0.9;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+.side-nav a {
+    padding: 10px 10px 10px 30px;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: #ccc;
+    display: block;
+    transition: 0.3s;
+}
+
+.side-nav a:hover {
+    color: #fff;
+}
+
+.side-nav a:hover {
+    color: #fff;
+    background: rgb(119, 22, 95);
+}
+
+.side-nav .btn-close {
+    position: absolute;
+    top: 0;
+    right: 1.6em;
+    font-size: 2.5em;
+    margin-left: 3em;
+    margin-right: -1em;
+}
+
+#main {
+    transition: margin-left 0.5s;
+    overflow: hidden;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    position: relative;
+}
+
+main h1 {
+    text-align: center;
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    margin: 1.5em;
+}
+
+.menu-items {
+    display: flex;
+    background: rgb(245, 224, 236);
+    justify-content: center;
+    padding: 10px;
+    margin: 5px;
+    margin-top: 2em;
+    margin-bottom: 1.5em;
+}
+
+#car-name {
+    background: #ccc
+}
+
+.car-details {
+    flex-wrap: nowrap;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #000;
+    background: #fff;
+    text-transform: capitalize;
+    padding-bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+input::-webkit-input-placeholder {
+    color: #c1c1c1;
+    font-size: 1.2em;
+}
+
+.column img {
+    width: 100%;
+}
+
+.menu-button {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.price {
+    margin: 0 auto;
+    font-size: 1.3em;
+    color: #110c0c;
+    font-weight: bold;
+    text-align: center;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.menu-button button {
+    flex-wrap: nowrap;
+    margin: 0em auto;
+    background: #fff;
+    color: #000;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+}
+
+.menu-button button:hover {
+    background: #8a1162;
+}
+
+.footer-main {
+    margin: 0;
+    background: #8a1162;
+}
+
+.footer-main p {
+    margin: 0 auto;
+    color: white;
+    padding: 1em;
+    text-align: center;
+}
+
+@media(max-width: 750px) {
+    .menu {
+        display: none;
+    }
+    .navbar #logo {
+        margin: 0 auto;
+    }
+}
+
+@media(min-width: 750px) {
+    .open-slide {
+        display: none;
+    }
+    .menu-items {
+        width: 25%;
+    }
+    .menu-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .menu-button button {
+        background: #fff;
+        color: #000;
+        padding: 10px;
+        border-radius: 10px;
+        width: 100%;
+        font-weight: bold;
+        font-size: 1.3em
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    li {
+        list-style: none;
+        text-transform: capitalize;
+        font-size: 1.5em;
+    }
+    .menu {
+        border: 1px solid #434348;
+        background: rgb(226, 127, 193);
+        margin: 0.2em;
+        padding-left: 0.5em;
+        padding-top: 0.2em;
+        border-radius: 5px;
+        ;
+    }
+}

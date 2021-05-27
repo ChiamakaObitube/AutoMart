@@ -1,0 +1,43 @@
+const orders = [{
+  id: 1,
+  car_id: 1,
+  buyer: 1,
+  created_on: Date(),
+  status: 'pending',
+  state: 'new',
+  price: 1500000.00,
+  price_offered: 30000000.00,
+  manufacturer: 'Ford',
+  model: '2009',
+  body_type: 'truck',
+
+},
+{
+  id: 2,
+  buyer: 2,
+  car_id: 2,
+  created_on: Date(),
+  status: 'accepted',
+  state: 'new',
+  price: 2500000.00,
+  price_offered: 30000000.00,
+  manufacturer: 'Ford',
+  model: '2009',
+  body_type: 'truck',
+},
+{
+
+  id: 3,
+  buyer: 3,
+  car_id: 2,
+  created_on: Date(),
+  status: 'rejected',
+  state: 'new',
+  price: 2500000.00,
+  price_offered: 30000000.00,
+  manufacturer: 'Ford',
+  model: '2009',
+  body_type: 'truck',
+},
+];
+export default orders;

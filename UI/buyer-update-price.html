@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/buyer-update-price.css">
+    <link href="https://fonts.googleapis.com/css" rel="stylesheet">
+    <title>Update Purchase Price Order</title>
+</head>
+
+<body>
+    <header class="header-main">
+        <nav class="navbar">
+            <span class="open-slide">
+                <a href="#" onclick="openSlideMenu()">
+                    <svg width="30" height="30">
+                        <path d="M0,5 30,5" stroke="#fff" stroke-width="5"/>
+                        <path d="M0,14 30,14" stroke="#fff" stroke-width="5"/>
+                        <path d="M0, 23 30,23" stroke="#fff" stroke-width="5"/>
+                    </svg>
+                </a>
+            </span>
+            <ul class="nav">
+                <li id="logo"><a href="index.html">AutoMart</a></li>
+                <li class='menu'><a href="index.html">Signout</a></li>
+                <li class='menu'><a href="unsold-cars.html">Unsold Cars</a></li>
+                <li class='menu'><a href="purchase-order.html">Order</a></li>
+            </ul>
+        </nav>
+
+        <div id="side-menu" class="side-nav">
+            <a href="#" class="btn-close" onclick="closeSlideMenu()">&times;</a>
+            <a href="purchase-order.html">Order</a>
+            <a href="buyer-update-price.html">Update Price</a>
+            <a href="unsold-cars.html">Unsold Cars</a>
+            <a href="index.html">SignOut</a>
+        </div>
+    </header>
+    <main id="main">
+        <h1>All My Purchase Orders</h1>
+        <div class="menu-container">
+            <div class="menu-items">
+                <div class="column">
+                    <p id="car-name" class="car-details">Range-Rover</p>
+                    <p class="car-details">Year : 2012</p>
+                    <p class="car-details">State : Used</p>
+                    <p class="car-details">#3,000,000</p>
+                    <p class="car-details">Status: Pending</p>
+                    <div class="menu-button">
+                        <input type="number" name="update price" placeholder="Enter new Price">
+                        <button>Update Price</button>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="menu-items">
+                <div class="column">
+                    <p id="car-name" class="car-details">Jeep</p>
+                    <p class="car-details">Year : 2013</p>
+                    <p class="car-details">State : Used</p>
+                    <p class="car-details">#1,000,000.00</p>
+                    <p class="car-details">Status: Pending</p>
+                    <div class="menu-button">
+                        <input type="number" name="update price" placeholder="Enter new price">
+                        <button>Update Price</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-items">
+                <div class="column">
+                    <p id="car-name" class="car-details">Mercedes</p>
+                    <p class="car-details">Year : 2006</p>
+                    <p class="car-details">State : New</p>
+                    <p class="car-details">#5,000,000.00</p>
+                    <p class="car-details">Status: Pending</p>
+                    <div class="menu-button">
+                        <input type="number" name="update price" placeholder="Enter new price">
+                        <button>Update Price</button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-items">
+                <div class="column">
+                    <p id="car-name" class="car-details">Nissan</p>
+                    <p class="car-details">Year : 2015</p>
+                    <p class="car-details">State : New</p>
+                    <p class="car-details">#3,500,000.00</p>
+                    <p class="car-details">Status: Rejected</p>
+                    <div class=" menu-button">
+                        <input type="number" name="update price " placeholder="Enter new price ">
+                        <button>Update Price</button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-items">
+                <div class="column">
+                    <p id="car-name" class="car-details">Hyundai</p>
+                    <p class="car-details">Year : 2009</p>
+                    <p class="car-details">State : Used</p>
+                    <p class="car-details">#2,000,000.00</p>
+                    <p class="car-details">Status: Accepted</p>
+                    <div class=" menu-button">
+                        <input type="number" name="update price" placeholder="Enter new price">
+                        <button>Update Price</button>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-items">
+                <div class="column">
+                    <p id="car-name" class="car-details">Honda Civic</p>
+                    <p class="car-details">Year : 2005</p>
+                    <p class="car-details">State : New</p>
+                    <p class="car-details">#3,000,000.00</p>
+                    <p class="car-details">Status: Rejected</p>
+                    <div class="menu-button">
+                        <input type="number" name="update price " placeholder="Enter new price">
+                        <button>Update Price</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer-main ">
+        <p> &copy; 2019 AutoMart designed by Chiamaka</p>
+    </footer>
+    <script src="js/script.js "></script>
+</body>
+
+</html>
