@@ -16,12 +16,6 @@ pipeline {
         git branch: "${params.BRANCH}", url: 'https://github.com/ChiamakaObitube/AutoMart.git'
       }
     }
-   /* stage('Git') {
-      steps {
-        git 'https://github.com/ChiamakaObitube/AutoMart.git'
-      }
-    }
-  */
     stage('Build') {
        steps {
          sh '''
@@ -59,6 +53,5 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-    */
   }
 }
