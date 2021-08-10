@@ -40,6 +40,9 @@ A user is authenticated during login and only an authenticated user can have acc
 ## Link to GitHub Pages
 https://chiamakaobitube.github.io/AutoMart/
 
+## Docker
+This projedct can be run as a containerized application here - docker pull chiamakaobitube/automart:latest
+
 ## Project Management
 This project is managed using the Pivotal Tracker project management tool.
 Link can be found here: https://www.pivotaltracker.com/n/projects/2345935
