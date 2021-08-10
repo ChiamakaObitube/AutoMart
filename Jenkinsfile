@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "chiamakaobitube/node-jenkins"
+    registry = "chiamakaobitube/automart"
     registryCredential = 'Docker'
     dockerImage = ''
   }
@@ -25,7 +25,7 @@ pipeline {
          '''
        }
     }
-    
+
     /*
    stage('Test') {
     /*stage('Test') {
