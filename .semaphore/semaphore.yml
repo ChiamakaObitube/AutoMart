@@ -30,4 +30,4 @@ blocks:
         commands:
           - checkout
           - sem-version node 12
-          - nyc check-coverage ${NYC_CHECK_COVERAGE}
+          - npm run test:coverage
