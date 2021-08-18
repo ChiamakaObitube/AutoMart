@@ -13,6 +13,7 @@ blocks:
     task:
       prologue:
         commands:
+          - npm install
           - npm ci
       jobs:
       - name: Test
