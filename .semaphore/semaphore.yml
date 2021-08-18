@@ -30,5 +30,4 @@ blocks:
         commands:
           - checkout
           - sem-version node 12
-          - nyc check-coverage --lines 50 --branches 50 --statements 50 --functions 50
           - nyc check-coverage ${NYC_CHECK_COVERAGE}
