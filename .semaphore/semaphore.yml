@@ -11,14 +11,14 @@ blocks:
 
   - name: Test
     task:
-      prologue:
-        commands:
-          - npm install
-          - npm ci
       jobs:
       - name: Test
         commands:
           - checkout
+          - sem-version node 12
+          - cache restore
+          - npm install
+          - cache store
           - npm test
           - nyc check-coverage --lines 50 --branches 50 --statements 50 --functions 50
           - nyc check-coverage ${NYC_CHECK_COVERAGE}
