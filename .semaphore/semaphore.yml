@@ -26,6 +26,7 @@ blocks:
       - name: Test Coverage
         priority: 
         - value: 45
+          when: true
         commands:
           - checkout
           - sem-version node 12
