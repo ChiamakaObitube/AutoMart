@@ -1,5 +1,7 @@
 version: v1.0
+
 name: Build Pipeline
+
 agent:
   machine:
     type: e1-standard-2
@@ -19,5 +21,3 @@ blocks:
           - npm test
           - nyc check-coverage --lines 50 --branches 50 --statements 50 --functions 50
           - nyc check-coverage ${NYC_CHECK_COVERAGE}
-
-  
