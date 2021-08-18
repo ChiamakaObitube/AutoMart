@@ -1,0 +1,23 @@
+version: v1.0
+name: Build Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+
+blocks:
+
+  - name: Test
+    task:
+      prologue:
+        commands:
+          - npm ci
+      jobs:
+      - name: Test
+        commands:
+          - checkout
+          - npm test
+          - nyc check-coverage --lines 50 --branches 50 --statements 50 --functions 50
+          - nyc check-coverage ${NYC_CHECK_COVERAGE}
+
+  
