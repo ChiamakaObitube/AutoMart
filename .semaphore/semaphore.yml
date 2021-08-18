@@ -28,6 +28,5 @@ blocks:
         - value: 45
           when: true
         commands:
-          - checkout
-          - sem-version node 12
+          - npm i -D nyc
           - npm run test:coverage
