@@ -24,6 +24,7 @@ blocks:
           - npm test
           
       - name: Test Coverage
+        dependencies: ["Test"]
         commands:
           - checkout
           - sem-version node 12
