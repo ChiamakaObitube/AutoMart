@@ -65,3 +65,4 @@ build
 bash.exe.stackdump
 uploads/
 
+test.sh
