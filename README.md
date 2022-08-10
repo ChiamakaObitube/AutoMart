@@ -61,3 +61,4 @@ Special thanks to the Andela Learning community and Developer Circle, Lagos.
 ## Developer's Notes
 This is a work in progress. Reviews and comments are highly appreciated.
 
+## Closing remarks
